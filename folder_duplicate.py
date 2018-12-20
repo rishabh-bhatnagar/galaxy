@@ -72,17 +72,11 @@ for i in range(len(all_counts)):
         for j in range(count_opf):
             to_csv.append([folder_name, all_opf_links[opf_link_count]])
             opf_link_count += 1
-
-try:
-    with open(output_csv_location, 'w', newline='') as op_file:
-        writer = csv.writer(op_file)
-        writer.writerows(to_csv)
-    print("File write successful")
-except Exception as a:
-    print(a)
-    print("file  write unsuccessful")
-
-from pandas.io.excel import ExcelWriter
-
-with ExcelWriter('output.xlsx') as ew:
-        pd.read_csv(output_csv_location).to_excel(ew, sheet_name=csv_file)
+to_csv += ['folder name', 'opf link']
+from xlsxwriter.workbook import Workbook
+workbook = Workbook('output.xlsx')
+worksheet = workbook.add_worksheet()
+for i, row in enumerate(to_csv):
+    for j, col in enumerate(row):
+        worksheet.write_string(i, j, col)
+workbook.close()
