@@ -14,8 +14,7 @@ def list_like_to_list(string):
     for i in string.split(","):
         yield i.strip()
 
-df = pd.read_csv(sheet_location)
-df.columns = df.iloc[0]
+df = pd.read_csv(sheet_location, delimiter =':/:')
 df = df.T
 df.columns = df.iloc[0]
 
