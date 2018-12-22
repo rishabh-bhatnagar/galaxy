@@ -88,3 +88,4 @@ def main(pdf_name):
 
 
 if __name__ == '__main__':
+    main('pdf (2).pdf')
