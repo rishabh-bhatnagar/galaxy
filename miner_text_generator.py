@@ -1,5 +1,9 @@
 import io
 import re
+import csv
+import glob
+import os
+from collections import OrderedDict
 from tabula import read_pdf
 from pandas import DataFrame as DF
 from pdfminer.converter import TextConverter
@@ -72,6 +76,8 @@ def strip(string, weeds) -> list:
         i1 += 1
     while string[i2] in weeds[::-1]:
         i2 += 1
+    else:
+        i2 -= 1
     i2 = len(string) - i2 + 2
     return string[i1:i2]
 
@@ -138,7 +144,7 @@ def get_loose_data(name_of_pdf, all_fields) -> dict:
             found_fields.append(f)
     field_values = self_re_split(found_fields, t_text)
     field_values = [strip(fv, ':, .') for fv in field_values]
-    return dict(zip(fields, field_values))
+    return dict(zip(found_fields, field_values))
 
 
 def merge_compliment_tables(t1, t2) -> DF:
@@ -238,11 +244,12 @@ def transpose_table_list(table) -> list:
     return table_list
 
 
-def extract_address(vtable):
+def extract_address(vtable, id):
     result = {}
+    id = str(id)
     table = transpose_table_list(vtable)[0]
-    result['which_address'] = table.pop(0)
-    result['company'] = table.pop(0)
+    result['which_address' + id] = table.pop(0)
+    result['company' + id] = table.pop(0)
     address = []
 
     # This for loop appends string to address
@@ -255,13 +262,13 @@ def extract_address(vtable):
         address.append(i.strip(','))
 
     # Hard coded list of rules to extract data from the data obtained.
-    result['state'] = strip(re.split("state", i, flags=re.IGNORECASE)[1], ': ')
-    result[result['which_address']] = ', '.join(address)
-    result['contact_person'] = get_attr(table[idx + 1], 'contact person', ':')
-    result['tel'] = get_attr(table[idx + 2], "tel", ': #')
-    result['email'] = get_attr(table[idx + 3], "email", ': #-')
-    result['gstn no'] = get_attr(table[idx + 4], 'gstn no', ' #:-')
-    result['pan no'] = get_attr(table[idx + 5], 'pan no', ' #:-')
+    result['state' + id] = strip(re.split("state", i, flags=re.IGNORECASE)[1], ': ')
+    result[result['which_address' + id]] = ', '.join(address)
+    result['contact_person' + id] = get_attr(table[index + 1], 'contact person', ':')
+    result['tel' + id] = get_attr(table[index + 2], "tel", ': #')
+    result['email' + id] = get_attr(table[index + 3], "email", ': #-')
+    result['gstn no' + id] = get_attr(table[index + 4], 'gstn no', ' #:-')
+    result['pan no' + id] = get_attr(table[index + 5], 'pan no', ' #:-')
 
     return result
 
@@ -292,12 +299,12 @@ def get_first_table_data(name_of_pdf):
         raise ParseError("OPF Tables cannot be parsed")
     else:
         return [
-            extract_address(tables[0][1]),
-            extract_address(tables[0][0])
+            extract_address(tables[0][1], 1),
+            extract_address(tables[0][0], 0)
         ]
 
 
-def combine_dicts(dictionaries) -> dict:
+def combine_dicts(*dictionaries) -> dict:
     """
     :param dictionaries: list of dictionaries to combine
     :return: Single combined dictionary
@@ -308,28 +315,84 @@ def combine_dicts(dictionaries) -> dict:
     return d
 
 
-if __name__ == '__main__':
-    pdf_name = 'pdf (3).pdf'
+def check_header_exists(file_path) -> bool:
+    """
+    :param file_path: path of the csv file
+    :return: True if header(any data) is present and vice-versa.
+    """
+    try:
+        with open(file_path, 'r') as file:
+            data = file.readline()
+            if data:
+                print(data, 'data')
+                return True
+            else:
+                return False
+    except FileNotFoundError as error:
+        # File is not created and hence no chance of header being present
+        return False
+
+
+def write_to_csv(data_dict: object, path: object) -> object:
+    header_exists = check_header_exists(path)
+    print(header_exists, 'header_exists')
+    dict_fields = OrderedDict(list(data_dict.items()))
+    with open(path, 'a', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=dict_fields)
+        if not header_exists:
+            print('Writing header')
+            writer.writeheader()
+        writer.writerow(data_dict)
+
+
+def get_data_pdf(pdf_name):
     fields = ['sales person', 'pot id', 'goapl opf no', 'opf date', 'customer name', 'Galaxy Billing from (Location)',
               'purchase order no', 'purchase date']
 
-    print('Loose Data:')
-    print_dict(
-        get_loose_data(
-            name_of_pdf=pdf_name,
-            all_fields=fields
-        )
+    loose_data = get_loose_data(
+        name_of_pdf=pdf_name,
+        all_fields=fields
     )
-    print("\n", end='')
 
-    for idx, dictionary in enumerate(
-            get_first_table_data(
-                name_of_pdf=pdf_name
-            )
-    ):
+    # loose data is the unstructured data that is not bound by any table or any lines.
+    try:
+        first_table_data = get_first_table_data(name_of_pdf=pdf_name)
+    except ParseError:
+        first_table_data = [{}, {}]
+
+    for idx, dictionary in enumerate(first_table_data):
         print("Table {}:".format(idx))
         if dictionary is not None:
             print_dict(dictionary)
         else:
             print(dictionary)
         print('\n', end='\n')
+
+    all_data = combine_dicts(*first_table_data, loose_data)
+    return all_data
+
+
+@gen_to_list
+def get_all_file_paths(dir_path, extension):
+    """
+    Returns the name of all the files which have given extension.
+    :param dir_path: Path of dir from where media is to be extracted.
+    :param extension: the type of files whose paths are to be found out.
+    :return: list of paths of extension type.
+    """
+    os.chdir(dir_path)
+    for path in glob.glob('*.{}'.format(extension)):
+        yield path
+
+
+if __name__ == '__main__':
+    csv_path = './try_out.csv'
+    paths_of_media = './'
+    media_extension = 'pdf'
+    all_media_paths = get_all_file_paths(paths_of_media, media_extension)
+    for media_path in all_media_paths:
+        try:
+            all_data = get_data_pdf(media_path)
+            write_to_csv(all_data, csv_path)
+        except:
+            print('Skipping {}'.format(media_path))
