@@ -1,6 +1,7 @@
 import io
 import re
-
+from tabula import read_pdf
+from pandas import DataFrame as df
 from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
@@ -72,6 +73,7 @@ def self_re(present_fields, filtered_text):
     # res = [strip(i, ':,. ').strip() for i in re.split("|".join(found_fields), ttext, flags=re.IGNORECASE) if i]
     return result
 
+
 def main(pdf_name):
     fields = ['sales person', 'pot id', 'goapl opf no', 'opf date', 'customer name', 'Galaxy Billing from (Location)',
               'purchase order no', 'purchase date']
@@ -87,5 +89,76 @@ def main(pdf_name):
         print(f, ':', fv)
 
 
+def merge_compliment_tables(t1, t2):
+    """
+    :param t1: table 1
+    :param t2: complement of table1
+    :return: merged table
+
+    Example of compliment table:
+
+    0 ColumnA     0 ColumnB
+    1     NaN     1       q
+    2     NaN     2       w
+    3     NaN     3       e
+    4     NaN     4       r
+    5       a     5     NaN
+    6       b     6     NaN
+    7       c     7     NaN
+    """
+    table = []
+    for i, j in zip(t1, t2):
+        if str(i) != 'nan':
+            table.append(i)
+        else:
+            table.append(j)
+    return df(table)
+
+
+def bypass_occurence(string, l):
+    for i in l:
+        string = string.replace(i, '')
+    return string
+
+def get_attr(string, field_name, weeds):
+    if len(re.split(field_name, string, flags=re.IGNORECASE)) < 2:
+        return None
+    return bypass_occurence(re.split(field_name, string, flags=re.IGNORECASE)[1], weeds).strip()
+
+def extract_address(vtable):
+    result = {}
+    table = vtable.T.values.tolist()[0]
+    result['which_address'] = table.pop(0)
+    address = []
+    for idx, i in enumerate(table):
+        if i.strip().lower().startswith('state'):
+            break
+        address.append(i.strip(','))
+    result['state'] = strip(re.split("state", i, flags=re.IGNORECASE)[1], ': ')
+    address = ', '.join(address)
+    result[result['which_address']] = address
+    idx += 1
+    result['contact_person'] = get_attr(table[idx], 'contact person', ':')
+    result['tel'] = get_attr(table[idx+1], "tel", ': #')
+    result['email'] = get_attr(table[idx + 2], "email", ': #-')
+    result['gstn no'] = get_attr(table[idx+3], 'gstn no', ' #:-')
+    result['pan no'] = get_attr(table[idx+4], 'pan no', ' #:-')
+    return result
+
 if __name__ == '__main__':
-    main('pdf (2).pdf')
+    pdf_name = 'pdf (2).pdf'
+    main(pdf_name)
+    tables = read_pdf(pdf_name, multiple_tables=True)
+    final_tables = []
+
+    table_0 = tables[0]
+    temp_table_0 = list()
+    temp_table_0.append(merge_compliment_tables(table_0[0], table_0[1]))
+    temp_table_0.append(merge_compliment_tables(table_0[2], table_0[3]))
+    tables[0] = temp_table_0
+    if len(list(tables[0][0].T)) < 7:
+        print("OPF Tables cannot be parsed")
+    else:
+        address = extract_address(tables[0][1])
+        for key, value in address.items():
+            print("{} : {}".format(key, value))
