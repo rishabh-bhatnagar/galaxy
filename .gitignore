@@ -5,5 +5,4 @@
 .idea
 __pycache__
 *.pyd
-venv/*
 venv

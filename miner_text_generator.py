@@ -82,14 +82,14 @@ def strip(string, weeds) -> list:
     return string[i1:i2]
 
 
-def gen_to_list(f) -> list:
+def gen_to_list(f) -> tuple:  # Todo: add a hint for this function
     """
     Decorator to convert iterable to list.
     :param f: function to be decorated.
     :return: wrapper function.
     """
 
-    def wrapper(*args):
+    def wrapper(*args) -> list:
         """
         :param args: All the args of function being wrapped.
         :return: list of the output after running f with given args.
@@ -333,7 +333,7 @@ def check_header_exists(file_path) -> bool:
         return False
 
 
-def write_to_csv(data_dict: object, path: object) -> object:
+def write_to_csv(data_dict: dict, path: str) -> None:
     header_exists = check_header_exists(path)
     print(header_exists, 'header_exists')
     dict_fields = OrderedDict(list(data_dict.items()))
