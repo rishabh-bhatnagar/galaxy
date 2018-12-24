@@ -103,18 +103,21 @@ for i, ele in enumerate(wt_elements):
             print('d', delivery[-1].text)
         j += 1
 
+res = []
 
-def recursive_iterate(root, history, res):
+
+def recursive_iterate(root, history):
     if root is not None:
         if root.text is not None:
-            res += [history]
+            res.append(root)
+            print(root.text)
         a = list(root)
         for i in range(len(a)):
-            recursive_iterate(root[i], '{}[{}]'.format(history, i), res)
-    return root
+            recursive_iterate(root[i], '{}[{}]'.format(history, i))
+    return res
 
 
-for i in recursive_iterate(e.getroot(), '', []):
+for i in recursive_iterate(e.getroot(), ''):
     print(i)
 
 
