@@ -1,0 +1,9 @@
+*.png
+*.apng
+*.csv
+*.rpae
+.idea
+__pycache__
+*.pyd
+venv/*
+venv
