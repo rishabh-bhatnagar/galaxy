@@ -353,6 +353,7 @@ def get_data_pdf(pdf_name):
         name_of_pdf=pdf_name,
         all_fields=fields
     )
+    print(loose_data)
 
     # loose data is the unstructured data that is not bound by any table or any lines.
     try:
@@ -387,12 +388,13 @@ def get_all_file_paths(dir_path, extension):
 
 if __name__ == '__main__':
     csv_path = './try_out.csv'
-    paths_of_media = './'
+    paths_of_media = '../all_opf/all_pdfs'
     media_extension = 'pdf'
     all_media_paths = get_all_file_paths(paths_of_media, media_extension)
     for media_path in all_media_paths:
         try:
             all_data = get_data_pdf(media_path)
             write_to_csv(all_data, csv_path)
-        except:
+        except Exception as e:
             print('Skipping {}'.format(media_path))
+            print(e)
