@@ -106,21 +106,58 @@ for i, ele in enumerate(wt_elements):
 res = []
 
 
+def get_node_value(e, l):
+    return eval('e.getroot(){}.text'.format(''.join(['[{}]'.format(i) for i in l])))
+
+
+def hamming_diff_list(l1, l2):
+    return len(set([i-j for i, j in zip(l1, l2)]))-1
+
+
 def recursive_iterate(root, history):
     if root is not None:
         if root.text is not None:
-            res.append(root)
-            print(root.text)
+            res.append(history)
         a = list(root)
         for i in range(len(a)):
-            recursive_iterate(root[i], '{}[{}]'.format(history, i))
+            recursive_iterate(root[i], '{}, {}'.format(history, i))
     return res
 
 
-for i in recursive_iterate(e.getroot(), ''):
-    print(i)
+def merge_lists(lt):
+    if len(lt) == 1:
+        return lt
+    a = lt[0]
+    a[0][-2] = sum([i[0][-2] for i in lt])/len(lt)
+    a[1] = '::'.join([i[1] for i in lt])
+    return a
 
 
-print(e.getroot()[2][0][0][0][8][2][1][1][1][1].text)
+def merge_similar_fields(ele):
+    i = 0
+    temp = [ele[i]]
+    eleres = []
+    while i<len(ele)-1:
+        if len(ele[i][0]) == len(ele[i+1][0]) and hamming_diff_list(ele[i][0], ele[i+1][0]) == 1 and absfrom cv(ele[i+1][0][-2]-ele[i][0][-2]) == 1:
+            temp.append(ele[i+1])
+        else:
+            eleres.append(temp)
+            temp = [ele[i+1]]
+        i += 1
+    for i in range(len(eleres)):
+        eleres[i] = merge_lists(eleres[i])
+    return eleres
 
-# /package[2]/part[0]/xmlData[0]/document[0]/body[8]/tbl[2]/tr[1]/tc[1]/p[1]/r[1]
+
+res = recursive_iterate(e.getroot(), '')
+res =[[int(i) for i in string[1:].split(', ')] for string in res]
+res = sorted(res)
+
+res1 = [[i, get_node_value(e, i)] for i in res]
+
+res2 = merge_similar_fields(res1)
+for i, ele in enumerate(res2):
+    if len(ele) == 1:
+        res2[i] = res2[i][0]
+for i in res2:
+    print('#', i)
