@@ -1,4 +1,6 @@
 import xml.etree.ElementTree
+import csv
+
 e = xml.etree.ElementTree.parse('file.xml')
 namespaces = {'w':"http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
@@ -182,7 +184,7 @@ def get_field(all_fields, identifier, split_by):
             return field[1].split(split_by)[-1].strip()
 
 
-def parse_sales_details(block, dict_prefix):
+def parse_address_details(block, dict_prefix):
     if 'address' in [i.lower() for i in block[0][1].split(' ')]:
         block.pop(0)
     for j, i in enumerate(block):
@@ -214,8 +216,52 @@ def parse_sales_details(block, dict_prefix):
     }
 
 
-res = recursive_iterate(e.getroot(), '')
+def get_index_by_substr(block, substr):
+    for i in block:
+        if substr in " ".join([u for u in i[1].split(' ') if u]).lower():
+            return block.index(i)
 
+
+def print_table(table_data):
+    widths = [max(map(len, col)) for col in zip(*table_data)]
+    for row in table_data:
+        print("  ".join((val.ljust(width) for val, width in zip(row, widths))))
+
+
+def create_table(elements):
+    row_min = min(elements, key=lambda x:x[0][0])[0][0]
+    col_min = min(elements, key=lambda x:x[0][1])[0][1]
+    elements = [[i[0]-row_min, i[1]-col_min, string] for i, string in elements]
+    row_max = max(elements, key= lambda x: x[0])[0]+1
+    col_max = max(elements, key=lambda x: x[1])[1]+1
+    table = [['' for i in range(col_max+1)] for j in range(row_max+1)]
+    for i in elements:
+        table[i[0]][i[1]] = i[2]
+    # table = [[str(i) for i in range(col_max)]] + table
+    # print_table(table)
+    return table
+
+
+def parse_sales_table(table):
+    number_of_products = len([i for i in table if i[0]])-1
+    result_dict = {}
+    for i in range(1, number_of_products+1):
+        row = table[i]
+        result_dict['desc'+str(i)] = row[1]
+        result_dict['qty' + str(i)] = row[2]
+        result_dict['unit_price' + str(i)] = row[2]
+        result_dict['total_price' + str(i)] = row[2]
+    remaining_table = table[(number_of_products+1):]
+    result_dict['sub_total'] = remaining_table[0][4]
+    result_dict['cgst'] = remaining_table[1][4]
+    result_dict['sgst'] = remaining_table[2][4]
+    result_dict['igst'] = remaining_table[3][4]
+    result_dict['freight'] = remaining_table[4][4]
+    result_dict['grand total'] = remaining_table[1][4]
+    return result_dict
+
+
+res = recursive_iterate(e.getroot(), '')
 res = [[int(i) for i in string[1:].split(', ')] for string in res]
 res = sorted(res)
 res1 = [[i, get_node_value(e, i)] for i in res]
@@ -234,16 +280,36 @@ rest.extend(_)
 two, _ = split_by_word(two, 'pan no')
 rest.extend(_)
 
-bad = parse_sales_details(one, 'bad')
-dad = parse_sales_details(two, 'dad')
-
-for i, j in dad.items():
-    print(i, j, sep='::')
-
-
-
-
-
+loose_fields = loose_fields
+bad = parse_address_details(one, 'bad')
+dad = parse_address_details(two, 'dad')
+final_result.update(bad)
+final_result.update(dad)
 
 rest = [[list(i[0]), i[1]] for i in sorted(rest)]
 rest = merge_similar_fields(rest, 3)
+i1 = get_index_by_substr(rest, 'sales detail')+1
+i2 = get_index_by_substr(rest, 'grand total')+2
+current_block = rest[i1:i2]
+rest = rest[i2:]
+
+table1 = create_table([[list(i[0][5:7]), i[1]] for i in current_block])
+sales_details = parse_sales_table(table1)
+final_result.update(sales_details)
+
+header_present = False
+try:
+    with open('dict.csv', 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        for data in reader:
+            if len(data)>1:
+                header_present = True
+                break
+except FileNotFoundError:
+    header_present = False
+
+with open('dict.csv', 'a') as csv_file:
+    writer = csv.DictWriter(csv_file, fieldnames=final_result.keys())
+    if not header_present:
+        writer.writeheader()
+        writer.writerow(final_result)
