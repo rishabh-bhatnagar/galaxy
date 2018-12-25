@@ -21,11 +21,6 @@ def max_match(string):
 
 
 def adj_substr(identifier, split_by):
-    if identifier != 'Galaxy Billing from (Location)':
-        print = lambda *x:None
-    else:
-        print = __import__('builtins').print
-
     start_idx = idx = wt_elements.index(max_match(identifier))
     min_identifier = "".join(identifier.split())
     heap_identifier = ""
@@ -33,12 +28,9 @@ def adj_substr(identifier, split_by):
         heap_identifier += wt_elements[idx].text
         idx += 1
     for i in range(idx-start_idx):
-        print('popping ', wt_elements.pop(start_idx).text)
+        wt_elements.pop(start_idx).text
     probable_field = heap_identifier.split(min_identifier)[-1].strip()
-    print(probable_field)
     if heap_identifier.split(min_identifier)[-1].strip().replace(',', '').replace(':', '').replace('.', '') and (set(heap_identifier.replace(' ', ''))-set(min_identifier.replace(' ', ''))):
-        print((set(heap_identifier)-set(min_identifier)))
-        print('returning from else')
         return probable_field
     else:
         while not wt_elements[start_idx].text.replace(split_by, "").strip():
@@ -48,11 +40,6 @@ def adj_substr(identifier, split_by):
 
 
 def get_element(identifier, split_by):
-    if identifier != 'Galaxy Billing from (Location)':
-        print = lambda *x:None
-    else:
-        print = __import__('builtins').print
-
     tag_elements = [ele.text for ele in wt_elements if identifier in ele.text]
     if not tag_elements:
         return adj_substr(identifier, split_by)
@@ -87,22 +74,10 @@ a=''
 while a != 'delivery address':
     a = " ".join(wt_elements.pop(0).text.strip().split()).lower()
 
-billing = []
-delivery = []
 j = 0
 for i, ele in enumerate(wt_elements):
     if 'GSTN NO' in ele.text:
-        print(ele.text, 'breaking')
         break
-    else:
-        if j%2==0:
-            billing.append(wt_elements.pop(0))
-            print('b', billing[-1].text)
-        else:
-            delivery.append(wt_elements.pop(0))
-            print('d', delivery[-1].text)
-        j += 1
-
 res = []
 
 
@@ -129,16 +104,16 @@ def merge_lists(lt):
         return lt
     a = lt[0]
     a[0][-2] = sum([i[0][-2] for i in lt])/len(lt)
-    a[1] = '::'.join([i[1] for i in lt])
+    a[1] = ' '.join([i[1] for i in lt])
     return a
 
 
-def merge_similar_fields(ele):
+def merge_similar_fields(ele, k=2):
     i = 0
     temp = [ele[i]]
     eleres = []
     while i<len(ele)-1:
-        if len(ele[i][0]) == len(ele[i+1][0]) and hamming_diff_list(ele[i][0], ele[i+1][0]) == 1 and absfrom cv(ele[i+1][0][-2]-ele[i][0][-2]) == 1:
+        if len(ele[i][0]) == len(ele[i+1][0]) and hamming_diff_list(ele[i][0], ele[i+1][0]) == 1 and abs(ele[i+1][0][-k]-ele[i][0][-k]) == 1:
             temp.append(ele[i+1])
         else:
             eleres.append(temp)
@@ -146,18 +121,129 @@ def merge_similar_fields(ele):
         i += 1
     for i in range(len(eleres)):
         eleres[i] = merge_lists(eleres[i])
-    return eleres
+
+    for i, ele in enumerate(eleres):
+        if len(ele) == 1:
+            eleres[i] = eleres[i][0]
+
+    eleres2 = []
+    i = 0
+    while i < len(eleres)-1:
+        a = eleres[i]
+        b = eleres[i+1]
+        if a[0][:-2] == b[0][:-2] and b[0][-2]-a[0][-2] == 1 and a[0][-1]-b[0][-1] == 1:
+            a[0][-1] = (a[0][-1]+b[0][-1])/2
+            a[0][-2] = (b[0][-2] + a[0][-2])/2
+            a[1] = a[1]+ ''+b[1]
+            eleres2.append(a)
+            i += 1
+        else:
+            eleres2.append(a)
+        i += 1
+    return eleres2
+
+
+def get_4_similar_2_dont_care(idx, l):
+    a = l[idx]
+    for i, elem in enumerate(l[idx:]):
+        if i != idx:
+            if len(a[0]) == len(elem[0]):
+                if a[0][:-4] == elem[0][:-4]:
+                    if a[0][-1] == elem[0][-1]:
+                        if a[0][-3] == elem[0][-3]:
+                            return [i for i in l if i not in [a, elem]], a, elem
+
+
+def split_list_pair(array):
+    one = []
+    two = []
+    rest = []
+    array = [[tuple(tuple(i[0])), i[1]] for i in array]
+    while array:
+        similar_elements = get_4_similar_2_dont_care(0, array)
+        if similar_elements is not None:
+            array = similar_elements[0]
+            one.append(similar_elements[1])
+            two.append(similar_elements[2])
+        else:
+            rest.append(array.pop(0))
+    return one, two, rest
+
+
+def split_by_word(lis, word):
+    for i, ele in enumerate(lis):
+        if word in ' '.join(ele[1].replace(":", "").replace(',', '').split(" ")).lower():
+            return lis[:(i+1)], lis[(i+1):]
+
+
+def get_field(all_fields, identifier, split_by):
+    for field in all_fields:
+        if identifier in ' '.join([i for i in field[1].split(' ') if i]).lower():
+            return field[1].split(split_by)[-1].strip()
+
+
+def parse_sales_details(block, dict_prefix):
+    if 'address' in [i.lower() for i in block[0][1].split(' ')]:
+        block.pop(0)
+    for j, i in enumerate(block):
+        if 'state' in [i.lower() for i in i[1].split(' ')]:
+            break
+
+    address = ', '.join([u[1] for u in block[:j]])
+    block.pop(0)
+    state = get_field(block, 'state', ':')
+    contact_person = get_field(block, 'person', ':')
+    block.pop(0)
+    tel = get_field(block, 'tel', ':')
+    block.pop(0)
+    email = get_field(block, 'email', ':')
+    block.pop(0)
+    gstn = get_field(block, 'gstn', ':')
+    block.pop(0)
+    pan = get_field(block, 'pan', ':')
+    block.pop(0)
+
+    return {
+        dict_prefix+'address':address,
+        dict_prefix+'state':state,
+        dict_prefix+'contact_person':contact_person,
+        dict_prefix+'tel':tel,
+        dict_prefix+'email':email,
+        dict_prefix+'gstn':gstn,
+        dict_prefix+'pan':pan
+    }
 
 
 res = recursive_iterate(e.getroot(), '')
-res =[[int(i) for i in string[1:].split(', ')] for string in res]
-res = sorted(res)
 
+res = [[int(i) for i in string[1:].split(', ')] for string in res]
+res = sorted(res)
 res1 = [[i, get_node_value(e, i)] for i in res]
 
 res2 = merge_similar_fields(res1)
-for i, ele in enumerate(res2):
-    if len(ele) == 1:
-        res2[i] = res2[i][0]
-for i in res2:
-    print('#', i)
+res2 = [i for i in res2 if i[1].strip()!='']
+
+loose_fields, rest = split_by_word(res2, 'billing address')
+rest = [loose_fields.pop()]+rest
+all_fields = [('sales person', ':'), ('id', ':'), ('opf no', "."), ('customer name', ':'), ('galaxy billing from (location)', ':'), ('purchase order no', '.'), ('purchase date', ':')]
+final_result = {field[0]:get_field(loose_fields,  *field) for field in all_fields}
+
+one, two, rest = split_list_pair(rest)
+one, _ = split_by_word(one, 'pan no')
+rest.extend(_)
+two, _ = split_by_word(two, 'pan no')
+rest.extend(_)
+
+bad = parse_sales_details(one, 'bad')
+dad = parse_sales_details(two, 'dad')
+
+for i, j in dad.items():
+    print(i, j, sep='::')
+
+
+
+
+
+
+rest = [[list(i[0]), i[1]] for i in sorted(rest)]
+rest = merge_similar_fields(rest, 3)
