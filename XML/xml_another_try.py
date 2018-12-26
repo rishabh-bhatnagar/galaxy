@@ -206,11 +206,6 @@ def get_loose_data(res):
             if i not in group_0_1:
                 group.append([[group[0][0][0], i], ''])
         group = sorted(group, key=lambda x:x[0][1])
-        a = group[0][1]
-        while not a:
-            group.pop(0)
-            a = group[0][1]
-        print()
         string = " ".join([i[1] for i in group])
         n_spaces = 1
         while " "*n_spaces in string:
