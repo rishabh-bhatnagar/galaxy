@@ -34,6 +34,7 @@ def re_replace(replacee, replacer, string):
 def parse_address_table(res1212):
     def create_address_table(res1212):
         table2 = []
+        temp = 8
         for i in res1212:
             if 'billing' in i[1].lower() and 'address' in i[1].lower():
                 temp = i[0][0]
@@ -57,31 +58,48 @@ def parse_address_table(res1212):
         address_table = create_table(table21)
         address_table = list(zip(*address_table))
         return address_table
+    def hard_code_field_find(block, field):
+        for i, b in enumerate(block):
+            if field.lower() in b.lower():
+                return i
+    def without_state_parse(block, dict_prefix):
+        block = list(block)
+        which_address = block.pop(0)
+        fields = ['contact', 'email', 'gst']
+        indexes = [get_index_by_substr([[-1, i] for i in block], f) for f in fields]
+        min_index = min([i for i in indexes if i is not None])
+        address = ', '.join(block[:min_index])
+        block = block[min_index:]
+        contact_person_idx = hard_code_field_find(block, 'person')
+        return dict(address=address)
+
     def parse_address_block(block, dict_prefix):
-        for i in block:
-            print(i)
-        state_idx = -1
-        for i, ele in enumerate(block):
-            if 'state' in ele.lower():
-                state_idx = i
-        address = '; '.join(block[1:state_idx])
-        state = re.split('state\s:', block[state_idx], flags=re.IGNORECASE)[1]
-        contact_person = re_replace('contact person', '', block[state_idx + 1])
-        tel = re_replace('tel', '', block[state_idx + 2])
-        email = re_replace('email', '', block[state_idx + 3])
-        gstn, pan = block[state_idx + 4].split(', ')
-        gstn = re_replace('gstn no', '', gstn)
-        pan = re_replace('pan no', '', pan)
-        f1212 = {
-            dict_prefix + 'address': address,
-            dict_prefix + 'state': state,
-            dict_prefix + 'contact_person': contact_person,
-            dict_prefix + "tel": tel,
-            dict_prefix + "email": email,
-            dict_prefix + "gstn": gstn,
-            dict_prefix + 'pan': pan
-        }
-        return f1212
+        try:
+            state_idx = -1
+            for i, ele in enumerate(block):
+                if 'state' in ele.lower():
+                    state_idx = i
+            address = '; '.join(block[1:state_idx])
+            state = re.split('state\s:', block[state_idx], flags=re.IGNORECASE)[1]
+            contact_person = re_replace('contact person', '', block[state_idx + 1]).replace(':', '').strip()
+            tel = re_replace('tel', '', block[state_idx + 2]).replace('#', '')
+            email = re_replace('email', '', block[state_idx + 3]).strip("#").strip(":-")
+            gstn, pan = block[state_idx + 4].split(', ')
+            gstn = re_replace('gst', '', gstn).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(":").strip().replace('NO', '').replace(':', '')
+            pan = re_replace('pan', '', pan).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(":").strip().replace('NO', '').replace(':', '').strip('=-')
+            f1212 = {
+                dict_prefix + 'address': address,
+                dict_prefix + 'state': state,
+                dict_prefix + 'contact_person': contact_person,
+                dict_prefix + "tel": tel,
+                dict_prefix + "email": email,
+                dict_prefix + "gstn": gstn,
+                dict_prefix + 'pan': pan
+            }
+            return f1212
+        except IndexError:
+            return without_state_parse(block, dict_prefix)
+
     address_table = create_address_table(res1212)
     a = parse_address_block(address_table[0], 'bad')
     b = parse_address_block(address_table[1], 'dad')
@@ -151,6 +169,19 @@ def parse_sales_table(res):
     else:
         result_dict['grand total'] = remaining_table[5][4]
     return result_dict
+def get_field(all_fields, identifier, split_by):
+    for field in all_fields:
+        if identifier in ' '.join([i for i in field[1].split(' ') if i]).lower():
+            return field[1].split(split_by)[-1].strip()
+def get_loose_data(block):
+    block = [i for i in block if i[0] and len(i[0]) == 3 and 1<=i[0][0]<10]
+    return dict(
+        sales_person=get_field(block, 'sales person', ":"),
+        pot_id = get_field(block, 'pot id', ":"),
+        opf_no = get_field(block, 'goapl opf no', "."),
+        order_no = get_field(block, 'purchase order no', "."),
+        purchase_date = get_field(block, 'purchase date', ":")
+    )
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
     wt_elements = []
@@ -158,10 +189,14 @@ def write_to_csv(file_name):
     for element in e.iter():
         if element.tag.split('}')[-1] == 't':
             wt_elements.append(element)
-    res = [[i[0][4:], i[1]] for i in [[i, get_node_value(e, i)] for i in sorted([[int(i) for i in string[1:].split(', ')] for string in recursive_iterate(e.getroot(), '', True)])] if i[1]]
+    res = [[i[0][4:], i[1].strip()] for i in [[i, get_node_value(e, i)] for i in sorted([[int(i) for i in string[1:].split(', ')] for string in recursive_iterate(e.getroot(), '', True)])] if i[1]]
+    res = [i for i in res if i[1]]
+    loose_data = get_loose_data(res.copy())
     address_details = parse_address_table(res.copy())
     sales_details = parse_sales_table(res.copy())
-    all_details = address_details.copy()
+
+    all_details = loose_data.copy()
+    all_details.update(address_details)
     all_details.update(sales_details.copy())
 
     header_present = False
@@ -180,10 +215,6 @@ def write_to_csv(file_name):
         if not header_present:
             writer.writeheader()
         writer.writerow(all_details)
-
-
-write_to_csv('Sungard OPF.xml')
-'''
 import traceback
 for file_name in listdir():
     try:
@@ -192,4 +223,3 @@ for file_name in listdir():
         print('error in', file_name)
         traceback.print_exc()
         print('\n\n\n')
-'''

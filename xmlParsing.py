@@ -1,19 +1,8 @@
 import xml.etree.ElementTree
 import csv
 
-e = xml.etree.ElementTree.parse('file.xml')
-namespaces = {'w':"http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
-wt_elements = []
-
-result = {}
-
-for element in e.iter():
-    if element.tag.split('}')[-1] == 't':
-        wt_elements.append(element)
-
-
-def max_match(string):
+def max_match(string, wt_elements):
     probable = []
     for idx, ele in enumerate(wt_elements):
         curr_str = wt_elements[idx].text
@@ -22,7 +11,7 @@ def max_match(string):
     return max(probable, key=lambda x:x.text)
 
 
-def adj_substr(identifier, split_by):
+def adj_substr(identifier, split_by, wt_elements):
     start_idx = idx = wt_elements.index(max_match(identifier))
     min_identifier = "".join(identifier.split())
     heap_identifier = ""
@@ -41,7 +30,7 @@ def adj_substr(identifier, split_by):
         return res.replace(split_by, '').strip()
 
 
-def get_element(identifier, split_by):
+def get_element(identifier, split_by, wt_elements):
     tag_elements = [ele.text for ele in wt_elements if identifier in ele.text]
     if not tag_elements:
         return adj_substr(identifier, split_by)
@@ -58,29 +47,6 @@ def get_element(identifier, split_by):
     else:
         wt_elements.pop(wt_elements.index([ele for ele in wt_elements if ele.text==tag_ele][0]))
         return res
-
-
-for i, element in enumerate(wt_elements):
-    wt_elements[i].text = element.text.strip()
-
-result['sales_person'] = get_element('Sales Person:', ':')
-result['opf_no'] = get_element('GOAPL OPF No', '.')
-result['opf_date'] = get_element('OPF Date', ':')
-result['billing_location'] = get_element('Galaxy Billing from (Location)', ':')
-result['customer_name'] = get_element('Customer Name', ':')
-result['pon'] = get_element('Purchase Order No', '.')
-result['purch_date'] = get_element('Purchase Date', ':')
-result['pot_id'] = get_element('POT ID', ':')
-
-a=''
-while a != 'delivery address':
-    a = " ".join(wt_elements.pop(0).text.strip().split()).lower()
-
-j = 0
-for i, ele in enumerate(wt_elements):
-    if 'GSTN NO' in ele.text:
-        break
-res = []
 
 
 def get_node_value(e, l):
@@ -261,55 +227,88 @@ def parse_sales_table(table):
     return result_dict
 
 
-res = recursive_iterate(e.getroot(), '')
-res = [[int(i) for i in string[1:].split(', ')] for string in res]
-res = sorted(res)
-res1 = [[i, get_node_value(e, i)] for i in res]
+from os import listdir
+for file_name in listdir('C:\\Users\\rishabh\\Desktop\\rpa projects\\rpae_project\\19thDecember\\Docs\\XML\\'):
+    e = xml.etree.ElementTree.parse('file.xml')
+    namespaces = {'w': "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+    wt_elements = []
+    result = {}
 
-res2 = merge_similar_fields(res1)
-res2 = [i for i in res2 if i[1].strip()!='']
+    for element in e.iter():
+        if element.tag.split('}')[-1] == 't':
+            wt_elements.append(element)
 
-loose_fields, rest = split_by_word(res2, 'billing address')
-rest = [loose_fields.pop()]+rest
-all_fields = [('sales person', ':'), ('id', ':'), ('opf no', "."), ('customer name', ':'), ('galaxy billing from (location)', ':'), ('purchase order no', '.'), ('purchase date', ':')]
-final_result = {field[0]:get_field(loose_fields,  *field) for field in all_fields}
+    for i, element in enumerate(wt_elements):
+        wt_elements[i].text = element.text.strip()
 
-one, two, rest = split_list_pair(rest)
-one, _ = split_by_word(one, 'pan no')
-rest.extend(_)
-two, _ = split_by_word(two, 'pan no')
-rest.extend(_)
+    result['sales_person'] = get_element('Sales Person:', ':')
+    result['opf_no'] = get_element('GOAPL OPF No', '.')
+    result['opf_date'] = get_element('OPF Date', ':')
+    result['billing_location'] = get_element('Galaxy Billing from (Location)', ':')
+    result['customer_name'] = get_element('Customer Name', ':')
+    result['pon'] = get_element('Purchase Order No', '.')
+    result['purch_date'] = get_element('Purchase Date', ':')
+    result['pot_id'] = get_element('POT ID', ':')
 
-loose_fields = loose_fields
-bad = parse_address_details(one, 'bad')
-dad = parse_address_details(two, 'dad')
-final_result.update(bad)
-final_result.update(dad)
+    a = ''
+    while a != 'delivery address':
+        a = " ".join(wt_elements.pop(0).text.strip().split()).lower()
 
-rest = [[list(i[0]), i[1]] for i in sorted(rest)]
-rest = merge_similar_fields(rest, 3)
-i1 = get_index_by_substr(rest, 'sales detail')+1
-i2 = get_index_by_substr(rest, 'grand total')+2
-current_block = rest[i1:i2]
-rest = rest[i2:]
+    j = 0
+    for i, ele in enumerate(wt_elements):
+        if 'GSTN NO' in ele.text:
+            break
+    res = []
 
-table1 = create_table([[list(i[0][5:7]), i[1]] for i in current_block])
-sales_details = parse_sales_table(table1)
-final_result.update(sales_details)
+    res = recursive_iterate(e.getroot(), '')
+    res = [[int(i) for i in string[1:].split(', ')] for string in res]
+    res = sorted(res)
+    res1 = [[i, get_node_value(e, i)] for i in res]
 
-header_present = False
-try:
-    with open('dict.csv', 'r') as csv_file:
-        reader = csv.reader(csv_file)
-        for data in reader:
-            if len(data)>1:
-                header_present = True
-                break
-except FileNotFoundError:
+    res2 = merge_similar_fields(res1)
+    res2 = [i for i in res2 if i[1].strip()!='']
+
+    loose_fields, rest = split_by_word(res2, 'billing address')
+    rest = [loose_fields.pop()]+rest
+    all_fields = [('sales person', ':'), ('id', ':'), ('opf no', "."), ('customer name', ':'), ('galaxy billing from (location)', ':'), ('purchase order no', '.'), ('purchase date', ':')]
+    final_result = {field[0]:get_field(loose_fields,  *field) for field in all_fields}
+
+    one, two, rest = split_list_pair(rest)
+    one, _ = split_by_word(one, 'pan no')
+    rest.extend(_)
+    two, _ = split_by_word(two, 'pan no')
+    rest.extend(_)
+
+    loose_fields = loose_fields
+    bad = parse_address_details(one, 'bad')
+    dad = parse_address_details(two, 'dad')
+    final_result.update(bad)
+    final_result.update(dad)
+
+    rest = [[list(i[0]), i[1]] for i in sorted(rest)]
+    rest = merge_similar_fields(rest, 3)
+    i1 = get_index_by_substr(rest, 'sales detail')+1
+    i2 = get_index_by_substr(rest, 'grand total')+2
+    current_block = rest[i1:i2]
+    rest = rest[i2:]
+
+    table1 = create_table([[list(i[0][5:7]), i[1]] for i in current_block])
+    sales_details = parse_sales_table(table1)
+    final_result.update(sales_details)
+
     header_present = False
+    try:
+        with open('dict.csv', 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            for data in reader:
+                if len(data)>1:
+                    header_present = True
+                    break
+    except FileNotFoundError:
+        header_present = False
 
-with open('dict.csv', 'a') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=final_result.keys())
-    if not header_present:
-        writer.writeheader()
-        writer.writerow(final_result)
+    with open('dict.csv', 'a') as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=final_result.keys())
+        if not header_present:
+            writer.writeheader()
+            writer.writerow(final_result)

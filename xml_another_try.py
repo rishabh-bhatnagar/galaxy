@@ -1,5 +1,5 @@
 import xml.etree.ElementTree
-import re
+import re, os
 from itertools import groupby
 import csv
 
@@ -145,6 +145,48 @@ def parse_sales_table(res):
         result_dict['grand total'] = remaining_table[5][4]
     return result_dict
 
+def max_match(string, wt_elements):
+    probable = []
+    for idx, ele in enumerate(wt_elements):
+        curr_str = wt_elements[idx].text
+        if curr_str.startswith(string) or string.startswith(curr_str):
+            probable.append(ele)
+    return max(probable, key=lambda x:x.text)
+
+def adj_substr(identifier, split_by, wt_elements):
+    start_idx = idx = wt_elements.index(max_match(identifier))
+    min_identifier = "".join(identifier.split())
+    heap_identifier = ""
+    while heap_identifier+wt_elements[idx].text.strip() != wt_elements and len(heap_identifier)<len(min_identifier):
+        heap_identifier += wt_elements[idx].text
+        idx += 1
+    for i in range(idx-start_idx):
+        wt_elements.pop(start_idx).text
+    probable_field = heap_identifier.split(min_identifier)[-1].strip()
+    if heap_identifier.split(min_identifier)[-1].strip().replace(',', '').replace(':', '').replace('.', '') and (set(heap_identifier.replace(' ', ''))-set(min_identifier.replace(' ', ''))):
+        return probable_field
+    else:
+        while not wt_elements[start_idx].text.replace(split_by, "").strip():
+            wt_elements.pop(start_idx)
+        res = wt_elements.pop(start_idx).text
+        return res.replace(split_by, '').strip()
+def get_element(identifier, split_by, wt_elements):
+    tag_elements = [ele.text for ele in wt_elements if identifier in ele.text]
+    if not tag_elements:
+        return adj_substr(identifier, split_by)
+    tag_ele = tag_elements.pop(0)
+    res = tag_ele.split(split_by)[-1].strip()
+    if not res:
+        idx = wt_elements.index([ele for ele in wt_elements if identifier in ele.text][0])
+        a=wt_elements.pop(idx)
+        probable = wt_elements.pop(idx)
+        while not probable.text.strip():
+            probable = wt_elements.pop(idx)
+        return probable.text.strip()
+    else:
+        wt_elements.pop(wt_elements.index([ele for ele in wt_elements if ele.text==tag_ele][0]))
+        return res
+
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
     wt_elements = []
@@ -154,28 +196,28 @@ def write_to_csv(file_name):
             wt_elements.append(element)
     res = [[i[0][4:], i[1]] for i in [[i, get_node_value(e, i)] for i in sorted([[int(i) for i in string[1:].split(', ')] for string in recursive_iterate(e.getroot(), '', True)])] if i[1]]
 
+
+
+
+    result = {}
+    result['sales_person'] = get_element('Sales Person:', ':')
+    result['opf_no'] = get_element('GOAPL OPF No', '.')
+    result['opf_date'] = get_element('OPF Date', ':')
+    result['billing_location'] = get_element('Galaxy Billing from (Location)', ':')
+    result['customer_name'] = get_element('Customer Name', ':')
+    result['pon'] = get_element('Purchase Order No', '.')
+    result['purch_date'] = get_element('Purchase Date', ':')
+    result['pot_id'] = get_element('POT ID', ':')
+
     address_details = parse_address_table(res)
     sales_details = parse_sales_table(res)
-    all_details = address_details.copy()
+    all_details = result.copy()
     all_details.update(sales_details)
-
-    header_present = False
-    try:
-        with open('output.csv', 'r') as csv_file:
-            reader = csv.reader(csv_file)
-            for data in reader:
-                if len(data)>1:
-                    header_present = True
-                    break
-    except FileNotFoundError:
-        header_present = False
+    all_details.update(address_details)
 
     with open('output.csv', 'a', newline='') as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=all_details.keys())
-        if not header_present:
-            writer.writeheader()
-            print('writing header')
-        writer.writerow(all_details)
+        writer = csv.writer(csv_file)
+        writer.writerow(all_details.values())
 
 from os import listdir
 for file_name in listdir('C:\\Users\\rishabh\\Desktop\\rpa projects\\rpae_project\\19thDecember\Docs\XML'):
