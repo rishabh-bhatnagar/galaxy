@@ -195,19 +195,29 @@ def get_loose_data(res):
     while len(a[0]) == 3:
         block.append(a)
         a = res.pop(i+1)
-    for i in block:
-        print(i)
+    block = [i for i in block if i[1]]
     pairs = []
-    for k, v in groupby(block, key=lambda x: [x[0][0], x[0][2]]):
+    for k, v in groupby(block, key=lambda x: x[0][0]):
         group = []
         for i in v:
             group.append([i[0][:-1], i[1]])
+        group_0_1 = sorted([i[0][1] for i in group])
+        for i in range(max(group, key=lambda x:x[0][1])[0][1]):
+            if i not in group_0_1:
+                group.append([[group[0][0][0], i], ''])
+        group = sorted(group, key=lambda x:x[0][1])
+        a = group[0][1]
+        while not a:
+            group.pop(0)
+            a = group[0][1]
+        print()
         string = " ".join([i[1] for i in group])
         n_spaces = 1
         while " "*n_spaces in string:
             n_spaces += 1
         n_spaces = max(2, n_spaces)
         pairs.extend(string.split(" "*(n_spaces-1)))
+
     pairs, sales_person = get_closest(pairs, 'sales person', ':')
     pairs, opf_no = get_closest(pairs, 'opf no', '.')
     pairs, customer_name = get_closest(pairs, 'customer name', ':')
@@ -248,7 +258,7 @@ def write_to_csv(file_name):
         if not header_present:
             writer.writeheader()
         writer.writerow(all_details)
-write_to_csv('OPF 002.xml')
+write_to_csv('OPF- TK-024.xml')
 '''
 import traceback
 for file_name in listdir():
