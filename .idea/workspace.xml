@@ -2,12 +2,152 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Docs/XML/output.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/XML/output.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/XML/xml_another_try.py" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/XML/xml_another_try.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/XML/~$F- TK-NW-001.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/XML/~$ngard OPF.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xmlParsing.py" beforeDir="false" afterPath="$PROJECT_DIR$/xmlParsing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xml_another_try.py" beforeDir="false" afterPath="$PROJECT_DIR$/xml_another_try.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/CFO Insight OPF.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 002.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 003.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 011-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 016 (Bharti Airtel)- Tablet Qty 03.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 018.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 01Boehringer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 023.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 025.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 026.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 029.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 056.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 068.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 069.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 072 Advance IQ HDD.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 073 Capgemini Rental Storage-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 073 Capgemini Rental Storage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 074 (Bharti Airtel)- Tablet Qty 25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 076 (Bharti Airtel)- Tablet Qty 140.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 076.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 077 (Bharti Airtel)- Tablet Qty 77.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 078 (Bharti Airtel) tab warranty- Tablet Qty 78.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 085.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 088.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 089.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 092.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 095.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 096 Actavis Pharama develop - M710s-10-8-2018.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 102 (Bharti Airtel)- Tablet Qty 09.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 103 (Bharti Airtel)- Tablet Qty 11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 103.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 113 Bluezone Desktop &amp; Laptop.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 124.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 126.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 132-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 132.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 134.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 135.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 159 (Bharti Airtel)- Tablet Qty 09.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 161 (Bharti Airtel) tab warranty- Tablet Qty 204.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 169 - bluezone - LT.DT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 210.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 214.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 230.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 247.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 258.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 259.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 261-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 280.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 308.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 309-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 322.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 324.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 327.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 328.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 339 Advance IQ Antivirus Renewal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 364.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 406.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 438.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 453.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 455.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 456.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 466.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 467.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 469.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 478.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 483.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 493.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 494.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 495.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 502.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 512.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 530.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 531-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 541.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 565.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 586 Capgemini Mobile Device.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 589 Capgemini Apple iPad.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 591 Capgemini Apple iPhone.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 603 Capgemini Apple Devices.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 605 Capgemini Apple Accessories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 619 Advance IQ Lenovo Ram.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 633 Advance IQ HP Printer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 634 Advance IQ Epson Printer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 644.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 650.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 655.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 660.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 673 Capgemini Rental Storage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 699 Advance IQ Server HDD.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 701 Advance IQ Lenovo Desktop.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 757 Advance IQ Lenovo TFT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 766 Capgemini Memory.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 816 Advance IQ Lenovo Laptop.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF 860 Advance IQ Renewal Antivirous.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 004.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 005.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 006.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 007.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 008.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF PV 009.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF TK-D-012.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-0006-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-010.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-011.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-024.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-077.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-078.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-D-004-.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-0003.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-0004-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-001-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-001.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-003-2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-009.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-012.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-013.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-014.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-015.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK-NW-016.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK002.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF- TK007.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-001.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-002.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-003.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-004.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-005.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-AC-D-006.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-Bharti Airtel (NJ-I-013).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-Bharti Airtel (NJ-I-016).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-Bharti Airtel (NJ-I-018).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-Bharti Airtel (NJ-I-019).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-Bharti Airtel (NJ-I-022).xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-March'18.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-RB-036.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-RB-037.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-RB-051.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-RB-NW-033.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/OPF-VG-D-155.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/PAS Mobility Contract Extension OPF-1-1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/PAS Mobility Sales OPF.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/Sungard OPF.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/output.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/XML/xml_another_try.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +156,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1545807893112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
+    <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1545814777691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
+    <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1545825491955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
@@ -25,43 +166,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Docs/XML/xml_another_try.py">
+        <entry file="file://$PROJECT_DIR$/XML/xml_another_try.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="193" column="43" selection-start-line="193" selection-start-column="43" selection-end-line="193" selection-end-column="43" />
-              <folding>
-                <element signature="e#134#214#0" />
-                <element signature="e#272#552#0" />
-                <element signature="e#578#732#0" />
-                <element signature="e#781#912#0" />
-                <element signature="e#953#4282#0" />
-                <element signature="e#4327#4450#0" />
-                <element signature="e#5247#7035#0" />
-                <element signature="e#7089#7251#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xmlParsing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="150" lean-forward="true" selection-start-line="146" selection-end-line="150" />
+            <state relative-caret-position="240">
+              <caret line="231" column="36" selection-start-line="231" selection-start-column="36" selection-end-line="231" selection-end-column="36" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/miner_text_generator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="351" column="4" selection-start-line="351" selection-start-column="4" selection-end-line="354" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,13 +194,23 @@
       <find>def get_element</find>
       <find>def adj</find>
       <find>header</find>
-      <find>loose</find>
       <find>get_data</find>
       <find>print`</find>
-      <find>print</find>
       <find>get_fiel</find>
       <find>get</find>
       <find>get_loose</find>
+      <find>xml</find>
+      <find>billing_add</find>
+      <find>create</find>
+      <find>table</find>
+      <find>parse_address</find>
+      <find>create_address_table</find>
+      <find>min_</find>
+      <find>print</find>
+      <find>exit(0)</find>
+      <find>n_s</find>
+      <find>n_spa</find>
+      <find>loose</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,10 +223,12 @@
         <option value="$PROJECT_DIR$/xmlParsing.py" />
         <option value="$PROJECT_DIR$/xml_another_try.py" />
         <option value="$PROJECT_DIR$/Docs/XML/xml_another_try.py" />
+        <option value="$PROJECT_DIR$/Docs/XML/delete.py" />
+        <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="20" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -117,7 +239,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -129,11 +250,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Docs/XML/xml_another_try.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/XML/xml_another_try.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -151,6 +273,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.xml_another_try">
+    <configuration name="delete" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="19thDecember" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\rishabh\AppData\Local\Programs\Python\Python37-32\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Docs/XML" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Docs/XML/delete.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="doc_to_xml" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="19thDecember" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,12 +325,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\rishabh\AppData\Local\Programs\Python\Python37-32\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Docs/XML" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/XML" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Docs/XML/xml_another_try.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/XML/xml_another_try.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,6 +342,7 @@
     <list>
       <item itemvalue="Python.doc_to_xml" />
       <item itemvalue="Python.xml_another_try" />
+      <item itemvalue="Python.delete" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -216,28 +361,30 @@
       <workItem from="1545797991187" duration="105000" />
       <workItem from="1545798769156" duration="819000" />
       <workItem from="1545799617681" duration="8095000" />
+      <workItem from="1545814390528" duration="2304000" />
+      <workItem from="1545821030304" duration="4458000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10892000" />
+    <option name="totallyTimeSpent" value="17654000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49584487" visible="true" weight="0.2629683" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49448124" visible="true" weight="0.27161384" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.25864553" />
+      <window_info id="Favorites" order="2" sideWeight="0.50551873" side_tool="true" visible="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.58864266" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37257618" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32963988" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32963988" />
@@ -292,7 +439,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/miner_text_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="5440">
           <caret line="351" column="4" selection-start-line="351" selection-start-column="4" selection-end-line="354" selection-end-column="5" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -300,20 +447,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xmlParsing.py">
+    <entry file="file://$PROJECT_DIR$/Docs/XML/delete.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="150" lean-forward="true" selection-start-line="146" selection-end-line="150" />
+        <state relative-caret-position="128">
+          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Docs/XML/xml_another_try.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="193" column="43" selection-start-line="193" selection-start-column="43" selection-end-line="193" selection-end-column="43" />
+        <state relative-caret-position="816">
+          <caret line="197" column="35" lean-forward="true" selection-start-line="197" selection-start-column="35" selection-end-line="197" selection-end-column="35" />
           <folding>
             <element signature="e#134#214#0" />
             <element signature="e#272#552#0" />
@@ -323,6 +470,26 @@
             <element signature="e#4327#4450#0" />
             <element signature="e#5247#7035#0" />
             <element signature="e#7089#7251#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xmlParsing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XML/xml_another_try.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="231" column="36" selection-start-line="231" selection-start-column="36" selection-end-line="231" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

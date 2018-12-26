@@ -101,10 +101,11 @@ def parse_address_table(res1212):
             return without_state_parse(block, dict_prefix)
 
     address_table = create_address_table(res1212)
-    a = parse_address_block(address_table[0], 'bad')
-    b = parse_address_block(address_table[1], 'dad')
-    a.update(b)
-    return a
+    return dict(
+        billing_address="\n".join(address_table[0][1:]),
+        delivery_address="\n".join(address_table[1][1:])
+    )
+
 def get_index_by_substr(block, substr):
     for i in block:
         if substr in " ".join([u for u in i[1].split(' ') if u]).lower():
@@ -173,32 +174,64 @@ def get_field(all_fields, identifier, split_by):
     for field in all_fields:
         if identifier in ' '.join([i for i in field[1].split(' ') if i]).lower():
             return field[1].split(split_by)[-1].strip()
-def get_loose_data(block):
-    block = [i for i in block if i[0] and len(i[0]) == 3 and 1<=i[0][0]<10]
-    return dict(
-        sales_person=get_field(block, 'sales person', ":"),
-        pot_id = get_field(block, 'pot id', ":"),
-        opf_no = get_field(block, 'goapl opf no', "."),
-        order_no = get_field(block, 'purchase order no', "."),
-        purchase_date = get_field(block, 'purchase date', ":")
-    )
+def get_max_difference_idx(row):
+    diffs = []
+    row = sorted(row, key=lambda x:x[0][1])
+    for i in range(len(row)-1):
+        diffs.append(row[i+1][0][1]-row[i][0][1])
+    return diffs.index(max(diffs))
+def get_closest(block, field, split_by):
+    for i, ele in enumerate(block):
+        if field in " ".join([i for i in ele.lower().split() if i]):
+            block.pop(i)
+            return block, ele.split(split_by)[-1]
+    return block, None
+def get_loose_data(res):
+    for i, ele in enumerate(res):
+        if len(ele[0]) == 3:
+            break
+    block = []
+    a = res[i]
+    while len(a[0]) == 3:
+        block.append(a)
+        a = res.pop(i+1)
+    for i in block:
+        print(i)
+    pairs = []
+    for k, v in groupby(block, key=lambda x: [x[0][0], x[0][2]]):
+        group = []
+        for i in v:
+            group.append([i[0][:-1], i[1]])
+        string = " ".join([i[1] for i in group])
+        n_spaces = 1
+        while " "*n_spaces in string:
+            n_spaces += 1
+        n_spaces = max(2, n_spaces)
+        pairs.extend(string.split(" "*(n_spaces-1)))
+    pairs, sales_person = get_closest(pairs, 'sales person', ':')
+    pairs, opf_no = get_closest(pairs, 'opf no', '.')
+    pairs, customer_name = get_closest(pairs, 'customer name', ':')
+    pairs, date = get_closest(pairs, 'date', ':')
+    pairs, purch_order_no = get_closest(pairs, 'order no', ':')
+    pairs, pot_id = get_closest(pairs, 'pot id', ':')
+    return dict(sales_person=sales_person, opf_no=opf_no, customer_name=customer_name, date=date, purch_order_no=purch_order_no, pot_id=pot_id)
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
     wt_elements = []
-
     for element in e.iter():
         if element.tag.split('}')[-1] == 't':
             wt_elements.append(element)
     res = [[i[0][4:], i[1].strip()] for i in [[i, get_node_value(e, i)] for i in sorted([[int(i) for i in string[1:].split(', ')] for string in recursive_iterate(e.getroot(), '', True)])] if i[1]]
-    res = [i for i in res if i[1]]
     loose_data = get_loose_data(res.copy())
+
+    res = [i for i in res if i[1]]
     address_details = parse_address_table(res.copy())
     sales_details = parse_sales_table(res.copy())
 
     all_details = loose_data.copy()
     all_details.update(address_details)
     all_details.update(sales_details.copy())
-
+    all_details[file_name]=file_name
     header_present = False
     try:
         with open('output.csv', 'r') as csv_file:
@@ -215,6 +248,8 @@ def write_to_csv(file_name):
         if not header_present:
             writer.writeheader()
         writer.writerow(all_details)
+write_to_csv('OPF 002.xml')
+'''
 import traceback
 for file_name in listdir():
     try:
@@ -223,3 +258,4 @@ for file_name in listdir():
         print('error in', file_name)
         traceback.print_exc()
         print('\n\n\n')
+'''
