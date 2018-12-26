@@ -4,7 +4,8 @@ output = PdfFileWriter()
 input1 = PdfFileReader(file("document1.pdf", "rb"))
 
 # print the title of document1.pdf
-print "title = %s" % (input1.getDocumentInfo().title)
+print "title = %s" % (input1.getDo
+                      cumentInfo().title)
 
 # add page 1 from input1 to output document, unchanged
 output.addPage(input1.getPage(0))

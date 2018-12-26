@@ -2,6 +2,7 @@ import xml.etree.ElementTree
 import re
 from itertools import groupby
 import csv
+from os import listdir
 
 def get_node_value(e, l):
     return eval('e.getroot(){}.text'.format(''.join(['[{}]'.format(i) for i in l])))
@@ -28,10 +29,15 @@ def re_replace(replacee, replacer, string):
     import re
     insensitive_hippo = re.compile(re.escape(replacee), re.IGNORECASE)
     return insensitive_hippo.sub(replacer, string)
+
+
 def parse_address_table(res1212):
     def create_address_table(res1212):
         table2 = []
-        table_2 = [[i[0][1:-1], i[1]] for i in res1212 if i and i[0] and i[0][0] == 9]
+        for i in res1212:
+            if 'billing' in i[1].lower() and 'address' in i[1].lower():
+                temp = i[0][0]
+        table_2 = [[i[0][1:-1], i[1]] for i in res1212 if i and i[0] and i[0][0] == temp]
         for k, v in groupby(table_2, lambda x: x[0][:-1]):
             groups = []
             for i in v:
@@ -52,7 +58,8 @@ def parse_address_table(res1212):
         address_table = list(zip(*address_table))
         return address_table
     def parse_address_block(block, dict_prefix):
-        f1212 = {}
+        for i in block:
+            print(i)
         state_idx = -1
         for i, ele in enumerate(block):
             if 'state' in ele.lower():
@@ -144,7 +151,6 @@ def parse_sales_table(res):
     else:
         result_dict['grand total'] = remaining_table[5][4]
     return result_dict
-
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
     wt_elements = []
@@ -153,11 +159,10 @@ def write_to_csv(file_name):
         if element.tag.split('}')[-1] == 't':
             wt_elements.append(element)
     res = [[i[0][4:], i[1]] for i in [[i, get_node_value(e, i)] for i in sorted([[int(i) for i in string[1:].split(', ')] for string in recursive_iterate(e.getroot(), '', True)])] if i[1]]
-
-    address_details = parse_address_table(res)
-    sales_details = parse_sales_table(res)
+    address_details = parse_address_table(res.copy())
+    sales_details = parse_sales_table(res.copy())
     all_details = address_details.copy()
-    all_details.update(sales_details)
+    all_details.update(sales_details.copy())
 
     header_present = False
     try:
@@ -174,9 +179,17 @@ def write_to_csv(file_name):
         writer = csv.DictWriter(csv_file, fieldnames=all_details.keys())
         if not header_present:
             writer.writeheader()
-            print('writing header')
         writer.writerow(all_details)
 
-from os import listdir
-for file_name in listdir('C:\\Users\\rishabh\\Desktop\\rpa projects\\rpae_project\\19thDecember\Docs\XML'):
-    write_to_csv(file_name)
+
+write_to_csv('Sungard OPF.xml')
+'''
+import traceback
+for file_name in listdir():
+    try:
+        write_to_csv(file_name)
+    except Exception as e:
+        print('error in', file_name)
+        traceback.print_exc()
+        print('\n\n\n')
+'''
