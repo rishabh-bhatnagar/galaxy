@@ -1,12 +1,13 @@
 import pandas as pd
+import csv
 from xlsxwriter.workbook import Workbook
 
 orig_sheet_location = "execution-result.log.csv"
 sheet_location = 'temp.csv'
 output_csv_location = 'output.csv'
-var_all_counts = 'all_opf_count'
-var_all_folder_name = 'folder_links_list'
-var_opf_links = 'all_opf_links'
+var_all_counts = 'n_opf_in_total'
+var_all_folder_name = 'folder_names'
+var_opf_links = 'opf_files_names_list'
 
 
 def replace_all_commas():
@@ -71,13 +72,11 @@ for i in range(len(all_counts)):
         to_csv.append([folder_name, 'unavailable'])
     else:
         for j in range(count_opf):
-            to_csv.append([folder_name, all_opf_links[opf_link_count]])
+            to_csv.append([folder_name, all_opf_links[opf_link_count].split(".")[0]])
             opf_link_count += 1
 to_csv = [['folder name', 'opf link']] + to_csv
 
-workbook = Workbook('output.xlsx')
-worksheet = workbook.add_worksheet()
-for i, row in enumerate(to_csv):
-    for j, col in enumerate(row):
-        worksheet.write_string(i, j, col)
-workbook.close()
+
+with open('op.csv', 'w', newline='') as op_file:
+    writer = csv.writer(op_file)
+    writer.writerows(to_csv)

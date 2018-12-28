@@ -1,10 +1,11 @@
-import csv
+import folder_duplicate
 import re
 import xml.etree.ElementTree
 from itertools import groupby
 from os import listdir
 from pandas import DataFrame
-
+from pandas import merge
+from pandas import read_csv
 def get_node_value(e, l):
     return eval('e.getroot(){}.text'.format(''.join(['[{}]'.format(i) for i in l])))
 
@@ -244,12 +245,17 @@ def get_loose_data(res):
     pairs, sales_person = get_closest(pairs, 'sales person', ':')
     pairs, opf_no = get_closest(pairs, 'opf no', '.')
     pairs, customer_name = get_closest(pairs, 'customer name', ':')
+    if customer_name :
+        if 'ACC' not in customer_name:
+            customer_name = " ".join(re.sub( r"([A-Z])", r" \1", customer_name).split())
     pairs, date = get_closest(pairs, 'date', ':')
     pairs, purch_order_no = get_closest(pairs, 'order no', ':')
     pairs, pot_id = get_closest(pairs, 'pot id', ':')
     return dict(sales_person=sales_person, opf_no=opf_no, customer_name=customer_name, date=date,
                 purch_order_no=purch_order_no, pot_id=pot_id)
 
+def bring_to_front(df, *col_names):
+    return df[col_names+[i for i in df.columns.str.tolist() if i not in  col_names]]
 
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
@@ -268,6 +274,7 @@ def write_to_csv(file_name):
     all_details = loose_data.copy()
     all_details.update(address_details)
     all_details.update(sales_details.copy())
+    all_details['opf link'] = file_name.split('.')[0]
     return all_details
 
 
@@ -281,6 +288,25 @@ for file_name in listdir():
         print('error in', file_name)
         traceback.print_exc()
         print('\n\n\n')
-result = DataFrame(dicts)
-print(result)
-result.to_excel('output.xlsx')
+df1 = DataFrame(dicts)
+df2 = read_csv('op.csv')
+print(list(df1))
+print(list(df2))
+final_df = merge(df1, df2, on='opf link')
+final_df.columns = final_df.columns.str.replace('opf link', 'opf name')
+cols = final_df.columns.tolist()
+cols.pop(cols.index('opf name'))
+cols.pop(cols.index('folder name'))
+cols = ['folder name', 'opf name']+cols
+
+desc_col = sorted([i for i in cols if 'desc' in i], key=lambda x:int(x[4:]))
+qty_col = sorted([i for i in cols if 'qty' in i], key=lambda x:int(x[3:]))
+total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x:int(x[11:]))
+unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x:int(x[10:]))
+cols = [i for i in cols if i not in desc_col+qty_col+total_price+unit_price]
+for i in list(zip(desc_col, qty_col, unit_price, total_price)):
+    cols.extend(i)
+
+
+final_df = final_df[cols]
+final_df.to_excel('final_output.xlsx')
