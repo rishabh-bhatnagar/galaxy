@@ -1,4 +1,3 @@
-import folder_duplicate
 import re
 import xml.etree.ElementTree
 from itertools import groupby
@@ -6,7 +5,15 @@ from os import listdir
 from pandas import DataFrame
 from pandas import merge
 from pandas import read_csv
+import folder_duplicate
+
+
 def get_node_value(e, l):
+    """
+    :param e: e is the iterative root's tree.
+    :param l: l is the history of hierarchies of parent position or the relative position wrt ultimate parent.
+    :return: The value of the element who's history is given.
+    """
     return eval('e.getroot(){}.text'.format(''.join(['[{}]'.format(i) for i in l])))
 
 
@@ -14,6 +21,12 @@ res = []
 
 
 def recursive_iterate(root, history, init):
+    '''
+    :param root: ultimate parent of xml tree.
+    :param history: the absolute path taken to reach this root node.
+    :param init: first param of history given to distinguish it from other parse trees.
+    :return: list of history and elements.
+    '''
     if init:
         global res
         res = []
@@ -25,18 +38,30 @@ def recursive_iterate(root, history, init):
             recursive_iterate(root[i], '{}, {}'.format(history, i), False)
     return res
 
-
-def merge_lists(lt):
-    if len(lt) == 1:
-        return lt
-    a = lt[0]
-    a[0][-2] = sum([i[0][-2] for i in lt]) / len(lt)
-    a[1] = ' '.join([i[1] for i in lt])
-    return a
+#
+# def merge_lists(lt):
+#     """
+#     Merge all the list elements based on second last element of the list
+#     :param lt: list of lists to merge
+#     :return: unpacked first list having following structure:
+#                [list(*), str]
+#     """
+#     if len(lt) == 1:
+#         return lt
+#     a = lt[0]
+#     a[0][-2] = sum([i[0][-2] for i in lt]) / len(lt)
+#     a[1] = ' '.join([i[1] for i in lt])
+#     return a
 
 
 def re_replace(replacee, replacer, string):
-    import re
+    """
+    Re replace for case insensitive replacing of string.
+    :param replacee: the string which is to be replaced
+    :param replacer: the string with which replacee has to be replaced
+    :param string: the victim string on which replacement operation has to be performed.
+    :return: the replaced string.
+    """
     insensitive_hippo = re.compile(re.escape(replacee), re.IGNORECASE)
     return insensitive_hippo.sub(replacer, string)
 
@@ -84,56 +109,76 @@ def parse_address_table(res1212):
         block = block[min_index:]
         contact_person_idx = hard_code_field_find(block, 'person')
         return dict(address=address)
-
-    def parse_address_block(block, dict_prefix):
-        try:
-            state_idx = -1
-            for i, ele in enumerate(block):
-                if 'state' in ele.lower():
-                    state_idx = i
-            address = '; '.join(block[1:state_idx])
-            state = re.split('state\s:', block[state_idx], flags=re.IGNORECASE)[1]
-            contact_person = re_replace('contact person', '', block[state_idx + 1]).replace(':', '').strip()
-            tel = re_replace('tel', '', block[state_idx + 2]).replace('#', '')
-            email = re_replace('email', '', block[state_idx + 3]).strip("#").strip(":-")
-            gstn, pan = block[state_idx + 4].split(', ')
-            gstn = re_replace('gst', '', gstn).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(
-                ":").strip().replace('NO', '').replace(':', '')
-            pan = re_replace('pan', '', pan).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(
-                ":").strip().replace('NO', '').replace(':', '').strip('=-')
-            f1212 = {
-                dict_prefix + 'address': address,
-                dict_prefix + 'state': state,
-                dict_prefix + 'contact_person': contact_person,
-                dict_prefix + "tel": tel,
-                dict_prefix + "email": email,
-                dict_prefix + "gstn": gstn,
-                dict_prefix + 'pan': pan
-            }
-            return f1212
-        except IndexError:
-            return without_state_parse(block, dict_prefix)
-
-    address_table = create_address_table(res1212)
-    return dict(
-        billing_address="\n".join(address_table[0][1:]),
-        delivery_address="\n".join(address_table[1][1:])
-    )
+    #
+    # def parse_address_block(block, dict_prefix):
+    #     try:
+    #         state_idx = -1
+    #         for i, ele in enumerate(block):
+    #             if 'state' in ele.lower():
+    #                 state_idx = i
+    #         address = '; '.join(block[1:state_idx])
+    #         state = re.split('state\s:', block[state_idx], flags=re.IGNORECASE)[1]
+    #         contact_person = re_replace('contact person', '', block[state_idx + 1]).replace(':', '').strip()
+    #         tel = re_replace('tel', '', block[state_idx + 2]).replace('#', '')
+    #         email = re_replace('email', '', block[state_idx + 3]).strip("#").strip(":-")
+    #         gstn, pan = block[state_idx + 4].split(', ')
+    #         gstn = re_replace('gst', '', gstn).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(
+    #             ":").strip().replace('NO', '').replace(':', '')
+    #         pan = re_replace('pan', '', pan).strip().strip('N').strip('n').strip('NO').strip('no').strip().strip(
+    #             ":").strip().replace('NO', '').replace(':', '').strip('=-')
+    #         f1212 = {
+    #             dict_prefix + 'address': address,
+    #             dict_prefix + 'state': state,
+    #             dict_prefix + 'contact_person': contact_person,
+    #             dict_prefix + "tel": tel,
+    #             dict_prefix + "email": email,
+    #             dict_prefix + "gstn": gstn,
+    #             dict_prefix + 'pan': pan
+    #         }
+    #         return f1212
+    #     except IndexError:
+    #         return without_state_parse(block, dict_prefix)
+    #
+    # address_table = create_address_table(res1212)
+    # return dict(
+    #     billing_address="\n".join(address_table[0][1:]),
+    #     delivery_address="\n".join(address_table[1][1:])
+    # )
 
 
 def get_index_by_substr(block, substr):
-    for i in block:
+    """
+    Getting the index of string which has substr present in it.
+    :param block: the list in which strings has to be searched for.
+                # Note: the structure of block should be [list(*), str]
+    :param substr: string which is to be found out in the block[$i][1].
+    :return: the index in which element was found.
+    ToDo: Instead of first occurence of substr, return max_match by substr.
+    """
+    for index, i in enumerate(block):
         if substr in " ".join([u for u in i[1].split(' ') if u]).lower():
-            return block.index(i)
+            return index
 
 
-def print_table(table_data):
+def print_table(table_data: list) -> None:
+    """
+    Prints the table_data with auto formatted text widths based on each column.
+    :param table_data: table to be printed
+    :return: None
+    """
     widths = [max(map(len, col)) for col in zip(*table_data)]
     for row in table_data:
         print("  ".join((val.ljust(width) for val, width in zip(row, widths))))
 
 
 def create_table(elements):
+    """
+    The given elements is a list of elements having a list and a text.
+    This list is first normalised based on the least value of rows and columns
+    and then seperated wrt normalised columns and rows.
+    :param elements:
+    :return: List of List of m*n dimension
+    """
     row_min = min(elements, key=lambda x: x[0][0])[0][0]
     col_min = min(elements, key=lambda x: x[0][1])[0][1]
     elements = [[i[0] - row_min, i[1] - col_min, string] for i, string in elements]
@@ -142,8 +187,6 @@ def create_table(elements):
     table = [['' for i in range(col_max + 1)] for j in range(row_max + 1)]
     for i in elements:
         table[i[0]][i[1]] = i[2]
-    # table = [[str(i) for i in range(col_max)]] + table
-    # print_table(table)
     return table
 
 
@@ -245,17 +288,19 @@ def get_loose_data(res):
     pairs, sales_person = get_closest(pairs, 'sales person', ':')
     pairs, opf_no = get_closest(pairs, 'opf no', '.')
     pairs, customer_name = get_closest(pairs, 'customer name', ':')
-    if customer_name :
+    if customer_name:
         if 'ACC' not in customer_name:
-            customer_name = " ".join(re.sub( r"([A-Z])", r" \1", customer_name).split())
+            customer_name = " ".join(re.sub(r"([A-Z])", r" \1", customer_name).split())
     pairs, date = get_closest(pairs, 'date', ':')
     pairs, purch_order_no = get_closest(pairs, 'order no', ':')
     pairs, pot_id = get_closest(pairs, 'pot id', ':')
     return dict(sales_person=sales_person, opf_no=opf_no, customer_name=customer_name, date=date,
                 purch_order_no=purch_order_no, pot_id=pot_id)
 
+
 def bring_to_front(df, *col_names):
-    return df[col_names+[i for i in df.columns.str.tolist() if i not in  col_names]]
+    return df[col_names + (i for i in df.columns.str.tolist() if i not in col_names)]
+
 
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
@@ -278,43 +323,43 @@ def write_to_csv(file_name):
     return all_details
 
 
-if __name__=='__main__':
-    import traceback
+import traceback
 
-    dicts = []
-    for file_name in listdir():
-        try:
-            raise ValueError('sdf')
-            result_dict = write_to_csv(file_name)
-            dicts.append(result_dict)
-        except Exception as e:
-            # print('error in', file_name)
-            # traceback.print_exc()
-            # print('\n\n\n')
-            pass
+dicts = []
+for file_name in listdir():
+    try:
+        result_dict = write_to_csv(file_name)
+        dicts.append(result_dict)
+        print(file_name)
+    except Exception as e:
+        print(e)
+        pass
+        # print('error in', file_name)
+        traceback.print_exc()
+        # print('\n\n\n')
+for i in dicts:
+    print(i)
+df1 = DataFrame(dicts)
+df2 = read_csv('op.csv')
+print(list(df1))
+print(list(df2))
+final_df = merge(df1, df2, on='opf link')
+final_df.columns = final_df.columns.str.replace('opf link', 'opf name')
+cols = final_df.columns.tolist()
+cols.pop(cols.index('opf name'))
+cols.pop(cols.index('folder name'))
+cols = ['folder name', 'opf name'] + cols
 
-    dicts = [write_to_csv('self.xml')]
-    sets = []
-    for i in dicts:
-        sets.extend(list(i.keys()))
-    colsr = list(set(sets))
-    df1 = DataFrame(dicts)
+desc_col = sorted([i for i in cols if 'desc' in i], key=lambda x: int(x[4:]))
+qty_col = sorted([i for i in cols if 'qty' in i], key=lambda x: int(x[3:]))
+total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x: int(x[11:]))
+unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x: int(x[10:]))
+cols = [i for i in cols if i not in desc_col + qty_col + total_price + unit_price]
+for i in list(zip(desc_col, qty_col, unit_price, total_price)):
+    cols.extend(i)
 
-    df2 = read_csv('op.csv')
-    final_df = merge(df1, df2, on='opf link')
-    final_df.columns = final_df.columns.str.replace('opf link', 'opf name')
-    cols = final_df.columns.tolist()
-    cols.pop(cols.index('opf name'))
-    cols.pop(cols.index('folder name'))
-    cols = ['folder name', 'opf name']+cols
+final_df = final_df[cols]
+final_df.to_excel('final_output.xlsx')
 
-    desc_col = sorted([i for i in cols if 'desc' in i], key=lambda x:int(x[4:]))
-    qty_col = sorted([i for i in cols if 'qty' in i], key=lambda x:int(x[3:]))
-    total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x:int(x[11:]))
-    unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x:int(x[10:]))
-    cols = [i for i in cols if i not in desc_col+qty_col+total_price+unit_price]
-    for i in list(zip(desc_col, qty_col, unit_price, total_price)):
-        cols.extend(i)
-    print(colsr)
-    final_df = DataFrame([write_to_csv('self.xml')])[colsr]
-    final_df.to_excel('final_output.xlsx')
+req = [write_to_csv, recursive_iterate, get_loose_data, parse_address_table, parse_sales_table]
+req_nest = [get_closest, create_table, get_index_by_substr]
