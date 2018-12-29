@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XML/final_output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/XML/final_output.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/OPF 002.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/OPF.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/~$OPF.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546068037686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546068416978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1545814777691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1546067126164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -27,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="348">
+              <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -237,12 +236,12 @@
       <workItem from="1545969245457" duration="59000" />
       <workItem from="1545977137317" duration="554000" />
       <workItem from="1545994439399" duration="4612000" />
-      <workItem from="1546055263716" duration="12423000" />
+      <workItem from="1546055263716" duration="12897000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46697000" />
+    <option name="totallyTimeSpent" value="47171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
@@ -367,8 +366,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        <state relative-caret-position="348">
+          <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
         </state>
       </provider>
     </entry>
