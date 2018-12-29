@@ -144,7 +144,6 @@ def parse_sales_table(res):
     else:
         result_dict['grand total'] = remaining_table[5][4]
     return result_dict
-
 def max_match(string, wt_elements):
     probable = []
     for idx, ele in enumerate(wt_elements):
@@ -152,7 +151,6 @@ def max_match(string, wt_elements):
         if curr_str.startswith(string) or string.startswith(curr_str):
             probable.append(ele)
     return max(probable, key=lambda x:x.text)
-
 def adj_substr(identifier, split_by, wt_elements):
     start_idx = idx = wt_elements.index(max_match(identifier))
     min_identifier = "".join(identifier.split())
@@ -186,7 +184,6 @@ def get_element(identifier, split_by, wt_elements):
     else:
         wt_elements.pop(wt_elements.index([ele for ele in wt_elements if ele.text==tag_ele][0]))
         return res
-
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
     wt_elements = []
@@ -218,6 +215,7 @@ def write_to_csv(file_name):
     with open('output.csv', 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(all_details.values())
+
 
 from os import listdir
 for file_name in listdir('C:\\Users\\rishabh\\Desktop\\rpa projects\\rpae_project\\19thDecember\Docs\XML'):

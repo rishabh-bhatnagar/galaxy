@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pwd/OPF.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/OPF.doc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/~$OPF.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xml_another_try.py" beforeDir="false" afterPath="$PROJECT_DIR$/xml_another_try.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546068416978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546080887885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1545814777691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1546067126164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -23,11 +23,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+            <state relative-caret-position="453">
+              <caret line="170" column="19" lean-forward="true" selection-start-line="170" selection-start-column="19" selection-end-line="170" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#583#751#0" />
+                <element signature="e#1757#1937#0" />
+                <element signature="e#1867#1929#0" />
+                <element signature="e#2294#2466#0" />
+                <element signature="e#2522#2883#0" />
+                <element signature="e#2819#2909#0" />
+                <element signature="e#2847#2909#0" />
+                <element signature="e#3112#3334#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/xml_another_try.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="200" column="54" lean-forward="true" selection-start-line="200" selection-start-column="54" selection-end-line="200" selection-end-column="54" />
+              <folding>
+                <element signature="e#115#195#0" />
+                <element signature="e#253#533#0" />
+                <element signature="e#270#297#0" />
+                <element signature="e#331#518#0" />
+                <element signature="e#559#713#0" />
+                <element signature="e#762#893#0" />
+                <element signature="e#932#2998#0" />
+                <element signature="e#3043#3166#0" />
+                <element signature="e#3067#3166#0" />
+                <element signature="e#3200#3364#0" />
+                <element signature="e#3397#3930#0" />
+                <element signature="e#3836#3888#0" />
+                <element signature="e#3963#5751#0" />
+                <element signature="e#5793#6041#0" />
+                <element signature="e#5859#5995#0" />
+                <element signature="e#6098#7000#0" />
+                <element signature="e#7057#7710#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,7 +95,6 @@
       <find>get_node</find>
       <find>Acc limite</find>
       <find>opf link</find>
-      <find>print</find>
       <find>debug</find>
       <find>purch_</find>
       <find>billing_address</find>
@@ -73,6 +111,7 @@
       <find>date</find>
       <find>list</find>
       <find>listd</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -83,11 +122,11 @@
       <list>
         <option value="$PROJECT_DIR$/doc_to_xml.py" />
         <option value="$PROJECT_DIR$/xmlParsing.py" />
-        <option value="$PROJECT_DIR$/xml_another_try.py" />
         <option value="$PROJECT_DIR$/Docs/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/Docs/XML/delete.py" />
         <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/pwd/doc_to_xml.py" />
+        <option value="$PROJECT_DIR$/xml_another_try.py" />
       </list>
     </option>
   </component>
@@ -109,11 +148,6 @@
             <path>
               <item name="19thDecember" type="b2602c69:ProjectViewProjectNode" />
               <item name="19thDecember" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="19thDecember" type="b2602c69:ProjectViewProjectNode" />
-              <item name="19thDecember" type="462c0819:PsiDirectoryNode" />
-              <item name="pwd" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -236,12 +270,12 @@
       <workItem from="1545969245457" duration="59000" />
       <workItem from="1545977137317" duration="554000" />
       <workItem from="1545994439399" duration="4612000" />
-      <workItem from="1546055263716" duration="12897000" />
+      <workItem from="1546055263716" duration="23633000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47171000" />
+    <option name="totallyTimeSpent" value="57907000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
@@ -252,8 +286,8 @@
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3933518" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18144044" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -278,26 +312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="597" selection-start-line="597" selection-end-line="597" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xml_another_try.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="219" column="44" selection-start-line="219" selection-start-column="44" selection-end-line="219" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#249#529#0" />
-            <element signature="e#266#293#0" />
-            <element signature="e#555#709#0" />
-            <element signature="e#758#889#0" />
-            <element signature="e#928#2994#0" />
-            <element signature="e#3039#3162#0" />
-            <element signature="e#3196#3360#0" />
-            <element signature="e#3393#3926#0" />
-            <element signature="e#3959#5747#0" />
-            <element signature="e#5804#6458#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -366,8 +380,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="39" column="35" lean-forward="true" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+        <state relative-caret-position="453">
+          <caret line="170" column="19" lean-forward="true" selection-start-line="170" selection-start-column="19" selection-end-line="170" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#583#751#0" />
+            <element signature="e#1757#1937#0" />
+            <element signature="e#1867#1929#0" />
+            <element signature="e#2294#2466#0" />
+            <element signature="e#2522#2883#0" />
+            <element signature="e#2819#2909#0" />
+            <element signature="e#2847#2909#0" />
+            <element signature="e#3112#3334#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xml_another_try.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="200" column="54" lean-forward="true" selection-start-line="200" selection-start-column="54" selection-end-line="200" selection-end-column="54" />
+          <folding>
+            <element signature="e#115#195#0" />
+            <element signature="e#253#533#0" />
+            <element signature="e#270#297#0" />
+            <element signature="e#331#518#0" />
+            <element signature="e#559#713#0" />
+            <element signature="e#762#893#0" />
+            <element signature="e#932#2998#0" />
+            <element signature="e#3043#3166#0" />
+            <element signature="e#3067#3166#0" />
+            <element signature="e#3200#3364#0" />
+            <element signature="e#3397#3930#0" />
+            <element signature="e#3836#3888#0" />
+            <element signature="e#3963#5751#0" />
+            <element signature="e#5793#6041#0" />
+            <element signature="e#5859#5995#0" />
+            <element signature="e#6098#7000#0" />
+            <element signature="e#7057#7710#0" />
+          </folding>
         </state>
       </provider>
     </entry>
