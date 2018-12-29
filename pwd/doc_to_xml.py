@@ -29,6 +29,7 @@ class OPF():
             self.path = self.save_as_docx()
             self.move_file(file_path=prev_path, to_path=docs_folder_name)
         self.move_file(to_path=docx_folder_name)
+
     def save_as_docx(self):
         # Code credits: https://stackoverflow.com/questions/38468442/multiple-doc-to-docx-file-conversion-using-python
         # Opening Microsoft word application.
@@ -46,15 +47,18 @@ class OPF():
         )
         doc.Close(False)
         return new_file_abs
+
     def move_file(self, to_path, file_path=None):
         if file_path is None:
             file_path = self.path
         if not os.path.exists(to_path):
             os.makedirs(to_path)
         shutil.move(file_path, to_path)
+
     def get_tables(self):
-        document = Document(self.path)
-        return document.tables
+        self.document = Document(self.path)
+        return self.document.tables
+
     @staticmethod
     def create_table(docx_table):
         table_primitive = []
@@ -64,24 +68,31 @@ class OPF():
                 table_row.append(cell.text.strip('\n').strip(' ').replace('\n', ' '))
             table_primitive.append(table_row)
         return table_primitive
+
     @staticmethod
     def print_table(table_data):
         widths = [max(map(len, col)) for col in zip(*table_data)]
         for row in table_data:
             print(" # ".join((val.ljust(width) for val, width in zip(row, widths))))
+
     def extract_data(self):
         tables = self.get_tables()
         address_table = self.create_table(tables[0])
         sales_table = self.create_table(tables[1])
         address_data = self.parse_address_tables(address_table)
         sales_data = self.parse_sales_data(sales_table)
+        loose_fields = self.get_loose_fields()
         final_result = address_data.copy()
         final_result.update(sales_data)
+        final_result.update(loose_fields)
         return final_result
+
     def get_element_from_block(self, block: list, identifier: str, split_by: str) -> str:
+        identifier = identifier.replace(" ", '\s')
         for i in block:
-            if identifier in i:
+            if re.search(identifier, i, re.IGNORECASE):
                 return i.split(split_by)[-1]
+
     def parse_address_tables(self, address_table):
         def parse_address_block(block):
             which_address = block.pop(0)
@@ -128,20 +139,21 @@ class OPF():
             )
 
         address_table = [list(i) for i in zip(*address_table)]
-        billing_address = {'bad'+k:v for k, v in parse_address_block(address_table[0]).items()}
+        billing_address = {'bad' + k: v for k, v in parse_address_block(address_table[0]).items()}
         delivery_address = {'dad' + k: v for k, v in parse_address_block(address_table[0]).items()}
         billing_address.update(delivery_address)
         return billing_address
+
     def parse_sales_data(self, sales_table):
         header = sales_table.pop(0)
         result = {}
         while True:
             sr_no = sales_table[0][0]
             if not [i for i in sr_no if i.isdigit()]: break
-            result.update({'desc_'+sr_no:sales_table[0][1]})
-            result.update({'qty_'+sr_no:sales_table[0][2]})
-            result.update({'unit_price_'+sr_no:sales_table[0][3]})
-            result.update({'total_price_'+sr_no:sales_table[0][1]})
+            result.update({'desc_' + sr_no: sales_table[0][1]})
+            result.update({'qty_' + sr_no: sales_table[0][2]})
+            result.update({'unit_price_' + sr_no: sales_table[0][3]})
+            result.update({'total_price_' + sr_no: sales_table[0][1]})
             sales_table.pop(0)
         for i in sales_table:
             for j in i:
@@ -153,6 +165,29 @@ class OPF():
                     result.update(igst_percentage="".join([k for k in j if k.isdigit()]))
         return result
 
+    def get_loose_fields(self):
+        try:
+            self.document
+        except:
+            self.document = Document(self.path)
+        paragraphs = self.document.paragraphs
+        lines = []
+        for paragraph in paragraphs:
+            for run in paragraph.runs:
+                if '\t' in run.text:
+                    lines.append(paragraph)
+                    break
+        texts = [element for nest in
+                 [k for k in [[i for i in "".join([i.text for i in j.runs]).split('\t') if i.strip()] for j in lines] if
+                  k] for element in nest]
+        return dict(
+            sales_person=self.get_element_from_block(texts, 'Sales Person', ":"),
+            pot_id=self.get_element_from_block(texts, 'POT ID', ":"),
+            opf_no=self.get_element_from_block(texts, 'OPF No.', "."),
+            opf_date=self.get_element_from_block(texts, 'OPF Date', ":"),
+            opf_location=self.get_element_from_block(texts, 'Galaxy Billing from (Location)', ":"),
+            purch_order_no=self.get_element_from_block(texts, 'Purchase Order No', ".")
+        )
 
 
 if __name__ == '__main__':
@@ -163,12 +198,13 @@ if __name__ == '__main__':
     os.chdir(abspath(docx_folder_name))
     result_dict_list = []
     opf = OPF('OPF-March\'18.docx').extract_data()
-    for i, docx_path in enumerate(listdir()):
-        print(docx_path)
-        opf = OPF(docx_path)
-        result_dict_list.append(opf.extract_data())
+
+    for i, file_name in enumerate(listdir()):
+        if '.docx' in file_name:
+            opf = OPF(file_name)
+            data_dict = opf.extract_data()
+            data_dict.update({'opf link': file_name.split('.')[0]})
+            result_dict_list.append(data_dict)
+
     df = DF(result_dict_list)
-    df = df['state']
     df.to_excel('final_output.xlsx')
-
-
