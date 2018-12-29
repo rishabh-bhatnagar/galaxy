@@ -65,6 +65,7 @@ def parse_address_table(res1212):
             groups[0][-1] = ", ".join([i[-1] for i in groups])
             groups[0][0] = groups[0][0][:-1]
             table21.append(groups[0])
+
         address_table = create_table(table21)
         address_table = list(zip(*address_table))
         return address_table
@@ -115,9 +116,63 @@ def parse_address_table(res1212):
             return without_state_parse(block, dict_prefix)
 
     address_table = create_address_table(res1212)
+    state=''
+    address_table = [list(address_table[0]), list(address_table[1])]
+    gst_no1 = ''
+    for index, i in enumerate(address_table[0]):
+        if 'State' in i:
+            state = address_table[0].pop(index).replace('State', "").replace(':', "").strip()
+        elif 'tel' in i.lower():
+            if len(i.strip())  < 10:
+                address_table[0][index] = ''
+        elif 'email' in i.lower():
+            if len(address_table[0][index].strip())  < 10:
+                address_table[0][index] = ''
+        elif 'gst' in i.lower():
+            address_table[0][index] = ''
+            if 'pan' in i.lower():
+                gstn = i.split('PAN')[0]
+            else:
+                gstn = i
+            gst_no1 = re_replace('gstn', '', gstn)
+            gst_no1 = re_replace('gst', '', gst_no1)
+            gst_no1 = re_replace('no', '', gst_no1)
+            gst_no1 = re_replace(':', '', gst_no1)
+            gst_no1 = gst_no1.strip()
+    address_table[0] = [i for i in address_table[0] if i]
+    gst_no2 = ''
+    for index, i in enumerate(address_table[1]):
+        if 'State' in i:
+            state = address_table[1].pop(index).replace('State', "").replace(':', "").strip()
+        elif 'tel' in i.lower():
+            if len(i.strip()) < 10:
+                address_table[1][index] = ''
+        elif 'email' in i.lower():
+            if len(address_table[1][index].strip()) < 10:
+                address_table[1][index] = ''
+        elif 'gst' in i.lower():
+            address_table[1][index] = ''
+            if 'pan' in i.lower():
+                gstn = i.split('PAN')[0]
+            else:
+                gstn = i
+            gst_no2 = re_replace('gstn', '', gstn)
+            gst_no2 = re_replace('gst', '', gst_no2)
+            gst_no2 = re_replace('no', '', gst_no2)
+            gst_no2 = re_replace(':', '', gst_no2)
+            gst_no2 = gst_no2.strip()
+        if 'declaration' in i.lower() and 'customer' in i.lower():
+            address_table[1][index] = ''
+    address_table[1] = [i for i in address_table[1] if i]
+
     return dict(
-        billing_address="\n".join(address_table[0][1:]),
-        delivery_address="\n".join(address_table[1][1:])
+        billing_address="\n".join(address_table[0][2:]),
+        delivery_address="\n".join(address_table[1][2:]),
+        consignee_name=address_table[1][1],
+        buyer_name=address_table[0][1],
+        state=state,
+        gst_no_delivery=gst_no2,
+        gst_no_billing=gst_no1
     )
 
 
@@ -244,15 +299,24 @@ def get_loose_data(res):
 
     pairs, sales_person = get_closest(pairs, 'sales person', ':')
     pairs, opf_no = get_closest(pairs, 'opf no', '.')
+    if opf_no is not None: opf_no=opf_no.replace(' ', '')
     pairs, customer_name = get_closest(pairs, 'customer name', ':')
-    if customer_name :
-        if 'ACC' not in customer_name:
-            customer_name = " ".join(re.sub( r"([A-Z])", r" \1", customer_name).split())
+    if customer_name and'ACC' not in customer_name: customer_name = " ".join(re.sub( r"([A-Z])", r" \1", customer_name).split())
     pairs, date = get_closest(pairs, 'date', ':')
+    if date is not None: date = date.replace(' ', '')
     pairs, purch_order_no = get_closest(pairs, 'order no', ':')
+    purch_order_no = re_replace('purchase', '', purch_order_no)
+    purch_order_no = re_replace('order no', '', purch_order_no)
+    purch_order_no = re_replace('.', '', purch_order_no).strip()
     pairs, pot_id = get_closest(pairs, 'pot id', ':')
-    return dict(sales_person=sales_person, opf_no=opf_no, customer_name=customer_name, date=date,
-                purch_order_no=purch_order_no, pot_id=pot_id)
+    return dict(
+        sales_person=sales_person,
+        opf_no=opf_no,
+        customer_name=customer_name,
+        date=date,
+        purch_order_no=purch_order_no,
+        pot_id=pot_id
+    )
 
 def bring_to_front(df, *col_names):
     return df[col_names+[i for i in df.columns.str.tolist() if i not in  col_names]]
@@ -283,25 +347,42 @@ if __name__=='__main__':
 
     dicts = []
     for file_name in listdir():
+        if '.xml' not in file_name:
+            continue
         try:
-            raise ValueError('sdf')
             result_dict = write_to_csv(file_name)
             dicts.append(result_dict)
         except Exception as e:
-            # print('error in', file_name)
-            # traceback.print_exc()
-            # print('\n\n\n')
-            pass
-
-    dicts = [write_to_csv('self.xml')]
+            print('error in', file_name)
+            traceback.print_exc()
+            print('\n\n\n')
     sets = []
     for i in dicts:
         sets.extend(list(i.keys()))
     colsr = list(set(sets))
+
+
+
+
+    colsr = [
+                colsr.pop(colsr.index('state')),
+                colsr.pop(colsr.index('opf_no')),
+                colsr.pop(colsr.index('customer_name')),
+                colsr.pop(colsr.index('purch_order_no')),
+                colsr.pop(colsr.index('date')),
+                colsr.pop(colsr.index('consignee_name')),
+                colsr.pop(colsr.index('delivery_address')),
+                colsr.pop(colsr.index('gst_no_delivery')),
+                colsr.pop(colsr.index('buyer_name')),
+                colsr.pop(colsr.index('billing_address')),
+                colsr.pop(colsr.index('gst_no_billing'))
+            ]+colsr
+    colsr[colsr.index('opf link')] = 'opf name'
     df1 = DataFrame(dicts)
 
     df2 = read_csv('op.csv')
     final_df = merge(df1, df2, on='opf link')
+    print(final_df, 'debug')
     final_df.columns = final_df.columns.str.replace('opf link', 'opf name')
     cols = final_df.columns.tolist()
     cols.pop(cols.index('opf name'))
@@ -313,8 +394,9 @@ if __name__=='__main__':
     total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x:int(x[11:]))
     unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x:int(x[10:]))
     cols = [i for i in cols if i not in desc_col+qty_col+total_price+unit_price]
+
     for i in list(zip(desc_col, qty_col, unit_price, total_price)):
         cols.extend(i)
     print(colsr)
-    final_df = DataFrame([write_to_csv('self.xml')])[colsr]
+    final_df = final_df[colsr]
     final_df.to_excel('final_output.xlsx')
