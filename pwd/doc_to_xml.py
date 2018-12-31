@@ -142,7 +142,6 @@ class OPF():
                     # print('setting state as Maharashtra')
                 # print('state not found')
             if state:
-                print(state)
                 res_state = state_mapping.get(state.lower())
                 state = res_state if res_state else state
             contact_person = self.get_element_from_block(block, 'Contact Person', ':')
@@ -276,6 +275,7 @@ if __name__ == '__main__':
     # result_dict_list = sorted(result_dict_list, key=lambda x:x['badstate'] if x['badstate'] is not None else '')
     df = DF(result_dict_list)
     all_keys = list(df.keys())
+
     header = [
                  all_keys.pop(all_keys.index('state_to_dc_state')),
                  all_keys.pop(all_keys.index('dadstate')),
@@ -292,13 +292,15 @@ if __name__ == '__main__':
                  all_keys.pop(all_keys.index('badgstn')),
                  all_keys.pop(all_keys.index('number_of_products')),
              ]
+
     desc = sorted([i for i in all_keys if 'desc' in i], key=lambda x: int("".join([i for i in x[5:] if i.isdigit()])))
     qty = sorted([i for i in all_keys if 'qty' in i], key=lambda x: int("".join([i for i in x[4:] if i.isdigit()])))
     unit_price = sorted([i for i in all_keys if 'unit_price' in i], key=lambda x: int("".join([i for i in x[11:] if i.isdigit()])))
+
     all_keys = [i for i in all_keys if i not in desc+unit_price+qty]
-    rest_fields = all_keys.pop()
     unpacked_tuples = []
-    for i in zip(desc, qty, unit_price):
-        unpacked_tuples += i
+    for desc__qty__unit_price in zip(desc, qty, unit_price):
+        unpacked_tuples += desc__qty__unit_price
+
     df = df[header+unpacked_tuples]
     df.to_excel('../final_output.xlsx')  # saving out of docx folder.
