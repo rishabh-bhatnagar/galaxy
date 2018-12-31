@@ -88,10 +88,15 @@ class OPF():
         return final_result
 
     def get_element_from_block(self, block: list, identifier: str, split_by: str) -> str:
-        identifier = identifier.replace(" ", '\s')
+        if identifier == 'Galaxy Billing from (Location)':
+            identifier = identifier.replace('(', '\(').replace(')', '\)')
+        identifier = identifier.replace(" ", '\s*')+'\s*'
         for i in block:
-            if re.search(identifier, i, re.IGNORECASE):
-                return i.split(split_by)[-1]
+            if re.search(identifier, i, flags=re.IGNORECASE):
+                probable_result = split_by.join(i.split(split_by)[1:])
+                if not probable_result.strip():
+                    probable_result = ":".join(i.split(':')[1:])
+                return probable_result.strip("-").strip(":").strip(":").strip("-").strip('_').strip()
 
     def parse_address_tables(self, address_table):
         def parse_address_block(block):
@@ -110,10 +115,22 @@ class OPF():
                     break
             if first_field_index is None:
                 return {}  # an empty dict suggesting failure in parsing all fields.
-
+            name = block[0]
+            for i in block:
+                print(i)
+            print('-'*300)
             address = "\n".join(block[:first_field_index])
             block = block[first_field_index:]
             state = self.get_element_from_block(block, 'State', ':')
+            if state:
+                if re.search('Mumbai', state, flags=re.IGNORECASE):
+                    # print('state is Mumbai??')
+                    state = 'Maharashtra'
+            if not state:
+                if re.search('Mumbai', address, flags=re.IGNORECASE):
+                    state = 'Maharashtra'
+                    # print('setting state as Maharashtra')
+                # print('state not found')
             contact_person = self.get_element_from_block(block, 'Contact Person', ':')
             email = self.get_element_from_block(block, 'Email', '#')
             tel = self.get_element_from_block(block, 'tel', '#')
@@ -128,7 +145,10 @@ class OPF():
                     gstn, pan = i, ''
                 gstn = gstn.split(':')[-1]
                 pan = pan.split(":-")[-1]
+            else:
+                gstn = pan = ''
             return dict(
+                name=name,
                 address=address,
                 pan=pan,
                 gstn=gstn,
@@ -139,8 +159,12 @@ class OPF():
             )
 
         address_table = [list(i) for i in zip(*address_table)]
+        print('@'*300)
+        for i in address_table:
+            print(i)
+        print('@' * 300)
         billing_address = {'bad' + k: v for k, v in parse_address_block(address_table[0]).items()}
-        delivery_address = {'dad' + k: v for k, v in parse_address_block(address_table[0]).items()}
+        delivery_address = {'dad' + k: v for k, v in parse_address_block(address_table[1]).items()}
         billing_address.update(delivery_address)
         return billing_address
 
@@ -174,19 +198,47 @@ class OPF():
         lines = []
         for paragraph in paragraphs:
             for run in paragraph.runs:
-                if '\t' in run.text:
+                if '\t' in run.text or ' '*4 in run.text:
                     lines.append(paragraph)
                     break
+        line_texts = list()  # strings of all the
+        texts = list()
+        for line in lines:
+            line_texts.append(line.text.replace('\t', '    ').strip())
+        line_texts = [i for i in line_texts if i]
+        for text in line_texts:
+            count_space = 1
+            while ' '*count_space in text:
+                count_space += 1
+            else:
+                count_space -= 1
+            count_space = max([count_space, 1])
+            texts.extend(text.split(count_space*' '))
+        '''
         texts = [element for nest in
-                 [k for k in [[i for i in "".join([i.text for i in j.runs]).split('\t') if i.strip()] for j in lines] if
-                  k] for element in nest]
+                 [k for k in
+                  [
+                      [
+                          i for i in "".join([i.text for i in j.runs]).split('\t') if i.strip()
+                      ] for j in lines
+                  ] if k
+                  ] for element in nest
+                 ]
+        '''
+        payment_terms = ''
+        for i in paragraphs:
+            if re.search('PAYMENT TERMS', i.text, flags=re.IGNORECASE):
+                payment_terms = self.get_element_from_block([i.text], 'PAYMENT TERMS', ":")
+
         return dict(
             sales_person=self.get_element_from_block(texts, 'Sales Person', ":"),
             pot_id=self.get_element_from_block(texts, 'POT ID', ":"),
             opf_no=self.get_element_from_block(texts, 'OPF No.', "."),
+            customer_name=self.get_element_from_block(texts, 'Customer Name', ":"),
             opf_date=self.get_element_from_block(texts, 'OPF Date', ":"),
             opf_location=self.get_element_from_block(texts, 'Galaxy Billing from (Location)', ":"),
-            purch_order_no=self.get_element_from_block(texts, 'Purchase Order No', ".")
+            purch_order_no=self.get_element_from_block(texts, 'Purchase Order', "."),
+            payment_terms=payment_terms
         )
 
 
@@ -197,14 +249,35 @@ if __name__ == '__main__':
             OPF(abspath(path)).seperate_doc()
     os.chdir(abspath(docx_folder_name))
     result_dict_list = []
-    opf = OPF('OPF-March\'18.docx').extract_data()
-
+    # opf = OPF('OPF 169 - bluezone - LT.DT.docx').extract_data()
     for i, file_name in enumerate(listdir()):
         if '.docx' in file_name:
+            print(file_name)
             opf = OPF(file_name)
             data_dict = opf.extract_data()
             data_dict.update({'opf link': file_name.split('.')[0]})
             result_dict_list.append(data_dict)
-
+    # result_dict_list = [i for i in result_dict_list if i['badstate']]
+    # result_dict_list = sorted(result_dict_list, key=lambda x:x['badstate'] if x['badstate'] is not None else '')
     df = DF(result_dict_list)
-    df.to_excel('final_output.xlsx')
+    all_keys = list(df.keys())
+
+
+    df = df[
+        [
+            all_keys.pop(all_keys.index('dadstate')),
+            all_keys.pop(all_keys.index('opf_no')),
+            all_keys.pop(all_keys.index('customer_name')),
+            all_keys.pop(all_keys.index('purch_order_no')),
+            all_keys.pop(all_keys.index('opf_date')),
+            all_keys.pop(all_keys.index('payment_terms')),
+            all_keys.pop(all_keys.index('dadname')),
+            all_keys.pop(all_keys.index('dadaddress')),
+            all_keys.pop(all_keys.index('dadgstn')),
+
+            all_keys.pop(all_keys.index('opf link')),
+            all_keys.pop(all_keys.index('opf_location')),
+            all_keys.pop(all_keys.index('pot_id'))
+        ]
+    ]
+    df.to_excel('../final_output.xlsx')  # saving out of docx folder.
