@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recorder:ActionFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:recorder="http://www.workfusion.com/recorder/v2.0.3" ignoreDelays="false">
+  <variables>
+    <variable name="doc_files" type="LIST" value="[]"/>
+    <variable name="image_found_edit" type="BOOLEAN" value="false"/>
+  </variables>
+  <actions xsi:type="recorder:FileListFolderAction" active="true" actionDetails="('C:\Users\Shruti\Desktop\Docs' to ${doc_files})" delay="0" targetVariable="doc_files" path="C:\Users\Shruti\Desktop\Docs" type="FILES" includeSubFolders="false" filterBySize="false" filterByDates="false" dateFilterType="FIXED" dateFormat="yyyy-MM-dd HH:mm:ss" unit="DAYS" filterByPattern="false" pattern=""/>
+  <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (doc_files)" delay="0" varName="doc_files" pointerName="element">
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Win+r)" delay="0" modifiers="4" text="r" rawCode="82" keyCode="19" keyChar="114" keyLocation="1" type="HOT_KEY_PRESS"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'element')" delay="0" varName="element" type="TEXT_FROM_VAR"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(200 ms)" delay="0" imageName="1545794609167-anchor.apng" fullImageName="1545794609092.png" waitTimeout="200"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({F12})" delay="0" text="{F12}" rawCode="123" keyCode="88" keyLocation="1"/>
+    <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(2000 ms)" delay="0" imageName="1545798048865-anchor.apng" fullImageName="1545798048851.png" varName="image_found_edit" waitTimeout="2000"/>
+    <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(image_found_edit = &quot;true&quot;)" delay="0" leftOperand="${image_found_edit}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
+      <ifBlock active="true">
+        <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545798148435-anchor-1545798148440.apng" fullImageName="1545798148435.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+      </ifBlock>
+      <elseBlock active="true"/>
+    </actions>
+    <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(100 ms)" delay="0" imageName="1545795454385-anchor.apng" fullImageName="1545795454380.png" varName="image_found_edit" waitTimeout="100"/>
+    <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(image_found_edit = &quot;true&quot;)" delay="0" leftOperand="${image_found_edit}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
+      <ifBlock active="true">
+        <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545795454380-anchor-1545795612470.apng" fullImageName="1545795454380.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+      </ifBlock>
+      <elseBlock active="false">
+        <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545794954758-anchor-1545794954766.apng" fullImageName="1545794954758.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+      </elseBlock>
+    </actions>
+    <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545794981846-anchor-1545794981854.apng" fullImageName="1545794981846.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 1000 ms" delay="1000"/>
+    <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545795322700-anchor-1545795322706.apng" fullImageName="1545795322700.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+  </actions>
+</recorder:ActionFlow>
