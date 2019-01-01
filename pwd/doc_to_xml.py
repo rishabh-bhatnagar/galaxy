@@ -1,9 +1,6 @@
-import os
-import os.path
+from os import path, listdir, makedirs
 import re
 import shutil
-from os import listdir
-from os.path import abspath
 
 import win32com.client as win32
 from docx import Document
@@ -11,6 +8,7 @@ from pandas import DataFrame as DF
 from win32com.client import constants
 
 state_mapping = dict({
+    'mumbai': 'maharashtra',
     "bangalore": "Karnataka",
     'tamil nadu': 'tamilnadu',
     'hyderabad': 'andhra pradesh'
@@ -32,9 +30,15 @@ state_mapping.setdefault(None, '')
 
 class OPF:
     def __init__(self, path):
+        # path is the path or the filename of the file.
         self.path = path
+
+        # document is set to None and not to a document object because,
+        # we don't know the extension of the file which is saved.
+        # if that file is a doc file, it should be converted to docx and then it's document object should be stored.
         self.document = None
         # <editor-fold desc="Getting file name from path">
+        # following code can be easily replaced by one of the os functions related to path.
         if '/' in self.path:
             self.file_name = self.path.split('/')[-1]
         else:
@@ -67,7 +71,7 @@ class OPF:
         doc.Activate()
         # </editor-fold>
         # <editor-fold desc="Rename path with .docx">
-        new_file_abs = os.path.abspath(path)
+        new_file_abs = path.abspath(path)
         new_file_abs = re.sub(r'\.\w+$', '.docx', new_file_abs)
         # </editor-fold>
         # <editor-fold desc="Save and Close">
@@ -84,9 +88,13 @@ class OPF:
         if file_path is None:
             # File path is none means that, user want to move file whose location is stored in the object instance.
             file_path = self.path
-        if not os.path.exists(to_path):
-            os.makedirs(to_path)
+        if not path.exists(to_path):
+            # using makedirs instead of makedir to enable making of nested directories.
+            # That is, enabling making of child directory even if parent directory is not present at the moment
+            # in which child directory was being created by making all the directories recursively.
+            makedirs(to_path)
         # </editor-fold>
+        # moving the file stored with path given by file_path to path given by to_path.
         shutil.move(file_path, to_path)
 
     def get_tables(self):
@@ -145,8 +153,8 @@ class OPF:
         cbs = (final_result['badstate'] if final_result['badstate'] else '').lower()
         gbs = billing_location_mapping.get(
             (final_result['opf_location'] if final_result['opf_location']
-                                          else ''                        # to prevent performing operations on NoneType
-            ).replace('/', '').lower()                                     # one case in which / was present in the field.
+             else ''  # to prevent performing operations on NoneType
+             ).replace('/', '').lower()  # one case in which / was present in the field.
         )
         # </editor-fold>
         # <editor-fold desc="Algorithmic switch case.">
@@ -228,9 +236,10 @@ class OPF:
                 address = "\n".join(block[1:first_field_index])
             # </editor-fold>
             block = block[first_field_index:]
-
+            # <editor-fold desc="3. Setting state variable.">
             state = self.get_element_from_block(block, 'State', ':')
             if state is not None and state is not '':
+                # state is set with some not empty list of characters.
                 if re.search('Mumbai', state, flags=re.IGNORECASE):
                     # Mumbai was a state in some opfs.
                     state = 'Maharashtra'
@@ -239,57 +248,107 @@ class OPF:
                 # setting maharashtra as a state.
                 if re.search('Mumbai', address, flags=re.IGNORECASE):
                     state = 'Maharashtra'
-                    # print('setting state as Maharashtra')
-                # print('state not found')
+                else:
+                    # if state is not found and it is also address not contains mumbai.
+                    # setting state to empty string to prevent errors in further processing and computations.
+                    state = ''
             if state:
+                # mapping wrongly entered cities as states to their corresponding state.
+
+                # Getting corresponding city to state mapping
                 res_state = state_mapping.get(state.lower())
+
+                # Setting state as res_state if it returned not None or not empty string
+                # else: setting state same as previous state.
                 state = res_state if res_state else state
+            # </editor-fold>
+            # <editor-fold desc="4. Setting contact person, tel and email fields.">
             contact_person = self.get_element_from_block(block, 'Contact Person', ':')
             email = self.get_element_from_block(block, 'Email', '#')
             tel = self.get_element_from_block(block, 'tel', '#')
+            # </editor-fold>
+            # <editor-fold desc="5. Handling combination of gst and pan no and setting their corresponding values.">
             if self.get_element_from_block(block, 'GST', ':') is not None:
+                # gst was found in one of the rest block elements.
+                # <editor-fold desc="Finding string in blocks which has 'gst' in it and storing it in variable i.">
                 for i in block:
                     if 'GST' in i:
                         break
-                pan = None
+                # </editor-fold>
+                # <editor-fold desc="seperating gst and pan no fields.">
                 if 'pan no' in i.lower():
+                    # if pan is found entangled with gst field,
+                    # splitting string having from pan no and storing parts as gst followed by pan no.
                     gstn, pan = re.split('PAN NO', i, flags=re.IGNORECASE)
                 else:
+                    # else means that,
+                    # gst pan no is not found in the field having gst, hence setting pan number as empty string.
                     gstn, pan = i, ''
+                # </editor-fold>
+                # <editor-fold desc="splitting both fields with their respective seperators.">
                 gstn = gstn.split(':')[-1]
                 pan = pan.split(":-")[-1]
+                # </editor-fold>
+
             else:
+                # no gst was found in the strings of block.
                 gstn = pan = ''
+            # </editor-fold>
+
+            # combining all fields and returning the resultant dict.
             return dict(
                 name=name,
-                address=address,
-                pan=pan,
-                gstn=gstn,
-                state=state,
+                address=address, state=state,
+                pan=pan, gstn=gstn,
                 contact_person=contact_person,
-                email=email,
-                tel=tel
+                email=email, tel=tel
             )
 
+        # Getting transpose of address table to make all columns as rows
+        # In order to get seperate list for
+        #      b) Delivery address and
+        #      a) Billing address.
         address_table = [list(i) for i in zip(*address_table)]
+
+        # adding prefixes to differentiate between fields of billing and delivery address.
         billing_address = {'bad' + k: v for k, v in parse_address_block(address_table[0]).items()}
         delivery_address = {'dad' + k: v for k, v in parse_address_block(address_table[1]).items()}
+
+        # updating billing address dict with items of delivery address in order to
+        # merge both of the dictionaries' contents and return the merged one.
         billing_address.update(delivery_address)
+
         return billing_address
 
     def parse_sales_data(self, sales_table):
+        # header is row having corresponding labels for cells in following table.
+        #  Sr, Description, Qty., Unit Price, Total Price
+        # above line gives the general format of the header list.
         header = sales_table.pop(0)
-        result = {}
+
+        result = {}                                               # The resultant dict which will store sales data.
         # Getting all products' details and their count
+
+        # i counts the number of products.
         i = 0
         while True:
             i += 1
+            # this is a dangerous hard coding done.
+            # I've set the sr no as first element of the flattend table.
             sr_no = sales_table[0][0]
-            if not [i for i in sr_no if i.isdigit()]: break
+
+            # checking if sr no is having any digits.
+            if not [i for i in sr_no if i.isdigit()]:
+                # If there are no digits in the sr no,
+                # Then, the list of digits [i for i in sr_no if i.isdigit()] will be empty and then breaking the loop.
+                break
+
+            # Setting the fields based on hard coded structure of the fields as described in the start of this function.
             result.update({'desc_' + sr_no: sales_table[0][1]})
             result.update({'qty_' + sr_no: sales_table[0][2]})
             result.update({'unit_price_' + sr_no: sales_table[0][3]})
             result.update({'total_price_' + sr_no: sales_table[0][1]})
+
             sales_table.pop(0)
         i -= 1
         i = max([i, 1])
