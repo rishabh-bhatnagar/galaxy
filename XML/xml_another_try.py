@@ -1,11 +1,13 @@
-import folder_duplicate
 import re
 import xml.etree.ElementTree
 from itertools import groupby
 from os import listdir
+
 from pandas import DataFrame
 from pandas import merge
 from pandas import read_csv
+
+
 def get_node_value(e, l):
     return eval('e.getroot(){}.text'.format(''.join(['[{}]'.format(i) for i in l])))
 
@@ -116,17 +118,17 @@ def parse_address_table(res1212):
             return without_state_parse(block, dict_prefix)
 
     address_table = create_address_table(res1212)
-    state=''
+    state = ''
     address_table = [list(address_table[0]), list(address_table[1])]
     gst_no1 = ''
     for index, i in enumerate(address_table[0]):
         if 'State' in i:
             state = address_table[0].pop(index).replace('State', "").replace(':', "").strip()
         elif 'tel' in i.lower():
-            if len(i.strip())  < 10:
+            if len(i.strip()) < 10:
                 address_table[0][index] = ''
         elif 'email' in i.lower():
-            if len(address_table[0][index].strip())  < 10:
+            if len(address_table[0][index].strip()) < 10:
                 address_table[0][index] = ''
         elif 'gst' in i.lower():
             address_table[0][index] = ''
@@ -299,9 +301,10 @@ def get_loose_data(res):
 
     pairs, sales_person = get_closest(pairs, 'sales person', ':')
     pairs, opf_no = get_closest(pairs, 'opf no', '.')
-    if opf_no is not None: opf_no=opf_no.replace(' ', '')
+    if opf_no is not None: opf_no = opf_no.replace(' ', '')
     pairs, customer_name = get_closest(pairs, 'customer name', ':')
-    if customer_name and'ACC' not in customer_name: customer_name = " ".join(re.sub( r"([A-Z])", r" \1", customer_name).split())
+    if customer_name and 'ACC' not in customer_name: customer_name = " ".join(
+        re.sub(r"([A-Z])", r" \1", customer_name).split())
     pairs, date = get_closest(pairs, 'date', ':')
     if date is not None: date = date.replace(' ', '')
     pairs, purch_order_no = get_closest(pairs, 'order no', ':')
@@ -318,8 +321,10 @@ def get_loose_data(res):
         pot_id=pot_id
     )
 
+
 def bring_to_front(df, *col_names):
-    return df[col_names+[i for i in df.columns.str.tolist() if i not in  col_names]]
+    return df[col_names + [i for i in df.columns.str.tolist() if i not in col_names]]
+
 
 def write_to_csv(file_name):
     e = xml.etree.ElementTree.parse(file_name)
@@ -342,7 +347,7 @@ def write_to_csv(file_name):
     return all_details
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     import traceback
 
     dicts = []
@@ -361,9 +366,6 @@ if __name__=='__main__':
         sets.extend(list(i.keys()))
     colsr = list(set(sets))
 
-
-
-
     colsr = [
                 colsr.pop(colsr.index('state')),
                 colsr.pop(colsr.index('opf_no')),
@@ -376,7 +378,7 @@ if __name__=='__main__':
                 colsr.pop(colsr.index('buyer_name')),
                 colsr.pop(colsr.index('billing_address')),
                 colsr.pop(colsr.index('gst_no_billing'))
-            ]+colsr
+            ] + colsr
     colsr[colsr.index('opf link')] = 'opf name'
     df1 = DataFrame(dicts)
 
@@ -387,13 +389,13 @@ if __name__=='__main__':
     cols = final_df.columns.tolist()
     cols.pop(cols.index('opf name'))
     cols.pop(cols.index('folder name'))
-    cols = ['folder name', 'opf name']+cols
+    cols = ['folder name', 'opf name'] + cols
 
-    desc_col = sorted([i for i in cols if 'desc' in i], key=lambda x:int(x[4:]))
-    qty_col = sorted([i for i in cols if 'qty' in i], key=lambda x:int(x[3:]))
-    total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x:int(x[11:]))
-    unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x:int(x[10:]))
-    cols = [i for i in cols if i not in desc_col+qty_col+total_price+unit_price]
+    desc_col = sorted([i for i in cols if 'desc' in i], key=lambda x: int(x[4:]))
+    qty_col = sorted([i for i in cols if 'qty' in i], key=lambda x: int(x[3:]))
+    total_price = sorted([i for i in cols if 'total_price' in i], key=lambda x: int(x[11:]))
+    unit_price = sorted([i for i in cols if 'unit_price' in i], key=lambda x: int(x[10:]))
+    cols = [i for i in cols if i not in desc_col + qty_col + total_price + unit_price]
 
     for i in list(zip(desc_col, qty_col, unit_price, total_price)):
         cols.extend(i)

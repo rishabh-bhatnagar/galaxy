@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XML/xml_another_try.py" beforeDir="false" afterPath="$PROJECT_DIR$/XML/xml_another_try.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/final_output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/final_output.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546323197410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546335707017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1545814777691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1546067126164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -22,77 +24,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XML/xml_another_try.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5712">
-              <caret line="364" selection-start-line="364" selection-end-line="364" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="335" column="21" lean-forward="true" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
+            <state relative-caret-position="128">
+              <caret line="236" column="25" lean-forward="true" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#253#351#0" />
-                <element signature="e#675#911#0" />
-                <element signature="e#700#751#0" />
-                <element signature="e#698#1004#0" />
-                <element signature="e#1015#1072#0" />
-                <element signature="e#1042#1666#0" />
-                <element signature="e#1577#1635#0" />
-                <element signature="e#1794#1839#0" />
+                <element signature="e#1014#1071#0" />
+                <element signature="e#1568#1626#0" />
+                <element signature="e#1793#1838#0" />
                 <element signature="e#1981#2018#0" />
-                <element signature="e#1726#1894#0" />
-                <element signature="e#2268#2320#0" />
-                <element signature="e#1930#2001#0" />
-                <element signature="e#2063#2344#0" />
-                <element signature="e#2718#2811#0" />
-                <element signature="e#2405#2578#0" />
-                <element signature="e#2857#2898#0" />
-                <element signature="e#3073#3114#0" />
-                <element signature="e#3836#3896#0" />
-                <element signature="e#4170#4631#0" />
-                <element signature="e#4469#4691#0" />
-                <element signature="e#4510#4615#0" />
-                <element signature="e#4560#4615#0" />
-                <element signature="e#5059#5201#0" />
-                <element signature="e#5131#5201#0" />
-                <element signature="e#5244#5442#0" />
-                <element signature="e#5318#5399#0" />
-                <element signature="e#5481#5583#0" />
-                <element signature="e#5896#6265#0" />
-                <element signature="e#5932#5976#0" />
-                <element signature="e#6993#8025#0" />
-                <element signature="e#7087#7490#0" />
-                <element signature="e#7622#8003#0" />
-                <element signature="e#7650#8003#0" />
-                <element signature="e#8725#10842#0" />
-                <element signature="e#8725#8795#0" />
-                <element signature="e#8567#8721#0" />
-                <element signature="e#8610#8721#0" />
-                <element signature="e#8672#8721#0" />
-                <element signature="e#8696#8940#0" />
-                <element signature="e#9362#9513#0" />
-                <element signature="e#10395#10459#0" />
-                <element signature="e#10629#10873#0" />
-                <element signature="e#10666#10873#0" />
-                <marker date="1546324556518" expanded="true" signature="3371:3836" ph="..." />
-                <marker date="1546324556518" expanded="false" signature="3430:3560" ph="..." />
-                <marker date="1546324556518" expanded="false" signature="3644:3802" ph="..." />
-                <marker date="1546324556518" expanded="true" signature="3905:4021" ph="..." />
-                <marker date="1546324556518" expanded="false" signature="8287:8818" ph="..." />
-                <marker date="1546324556518" expanded="false" signature="8301:8817" ph="..." />
-                <marker date="1546324556518" expanded="false" signature="8862:9277" ph="..." />
-                <marker date="1546324556518" expanded="true" signature="9420:9513" ph="..." />
-                <marker date="1546324556518" expanded="true" signature="9420:9514" ph="..." />
+                <element signature="e#2269#2321#0" />
+                <element signature="e#3256#3318#0" />
+                <element signature="e#2721#2814#0" />
+                <element signature="e#4309#4416#0" />
+                <element signature="e#4517#4609#0" />
+                <element signature="e#4794#4884#0" />
+                <element signature="e#5057#5130#0" />
+                <element signature="e#5331#5413#0" />
+                <element signature="e#5572#5683#0" />
+                <element signature="e#5627#5684#0" />
+                <element signature="e#5977#6024#0" />
+                <element signature="e#6810#6869#0" />
+                <element signature="e#7153#7214#0" />
+                <element signature="e#9017#9109#0" />
+                <element signature="e#9945#10007#0" />
+                <marker date="1546339725464" expanded="true" signature="4785:5331" ph="..." />
+                <marker date="1546339725464" expanded="true" signature="4893:5023" ph="..." />
+                <marker date="1546339725464" expanded="true" signature="5139:5297" ph="..." />
+                <marker date="1546339725464" expanded="true" signature="5422:5538" ph="..." />
+                <marker date="1546339725464" expanded="false" signature="12485:13016" ph="..." />
+                <marker date="1546339725464" expanded="false" signature="12499:13015" ph="..." />
+                <marker date="1546339725464" expanded="false" signature="13060:13475" ph="..." />
+                <marker date="1546339725464" expanded="true" signature="13618:13711" ph="..." />
+                <marker date="1546339725464" expanded="true" signature="13618:13712" ph="..." />
               </folding>
             </state>
           </provider>
@@ -109,8 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>purch_order_no</find>
-      <find>date</find>
       <find>p</find>
       <find>loose</find>
       <find>get_element</find>
@@ -139,6 +103,8 @@
       <find>state_to</find>
       <find>opf_lo</find>
       <find>name = blo</find>
+      <find>loc</find>
+      <find>location</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,8 +117,8 @@
         <option value="$PROJECT_DIR$/xmlParsing.py" />
         <option value="$PROJECT_DIR$/Docs/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/Docs/XML/delete.py" />
-        <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/xml_another_try.py" />
+        <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/pwd/doc_to_xml.py" />
       </list>
     </option>
@@ -175,6 +141,11 @@
             <path>
               <item name="19thDecember" type="b2602c69:ProjectViewProjectNode" />
               <item name="19thDecember" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="19thDecember" type="b2602c69:ProjectViewProjectNode" />
+              <item name="19thDecember" type="462c0819:PsiDirectoryNode" />
+              <item name="pwd" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="19thDecember" type="b2602c69:ProjectViewProjectNode" />
@@ -304,23 +275,23 @@
       <workItem from="1545994439399" duration="4612000" />
       <workItem from="1546055263716" duration="28446000" />
       <workItem from="1546225476050" duration="21268000" />
-      <workItem from="1546313433322" duration="11024000" />
+      <workItem from="1546313433322" duration="22046000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95012000" />
+    <option name="totallyTimeSpent" value="106034000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.17651297" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.09870317" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.37811634" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3933518" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -329,7 +300,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32963988" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32825485" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32825485" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.41135734" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -427,72 +398,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/XML/xml_another_try.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5712">
-          <caret line="364" selection-start-line="364" selection-end-line="364" />
+        <state relative-caret-position="528">
+          <caret line="81" column="28" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="28" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="335" column="21" lean-forward="true" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
+        <state relative-caret-position="128">
+          <caret line="236" column="25" lean-forward="true" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#253#351#0" />
-            <element signature="e#675#911#0" />
-            <element signature="e#700#751#0" />
-            <element signature="e#698#1004#0" />
-            <element signature="e#1015#1072#0" />
-            <element signature="e#1042#1666#0" />
-            <element signature="e#1577#1635#0" />
-            <element signature="e#1794#1839#0" />
+            <element signature="e#1014#1071#0" />
+            <element signature="e#1568#1626#0" />
+            <element signature="e#1793#1838#0" />
             <element signature="e#1981#2018#0" />
-            <element signature="e#1726#1894#0" />
-            <element signature="e#2268#2320#0" />
-            <element signature="e#1930#2001#0" />
-            <element signature="e#2063#2344#0" />
-            <element signature="e#2718#2811#0" />
-            <element signature="e#2405#2578#0" />
-            <element signature="e#2857#2898#0" />
-            <element signature="e#3073#3114#0" />
-            <element signature="e#3836#3896#0" />
-            <element signature="e#4170#4631#0" />
-            <element signature="e#4469#4691#0" />
-            <element signature="e#4510#4615#0" />
-            <element signature="e#4560#4615#0" />
-            <element signature="e#5059#5201#0" />
-            <element signature="e#5131#5201#0" />
-            <element signature="e#5244#5442#0" />
-            <element signature="e#5318#5399#0" />
-            <element signature="e#5481#5583#0" />
-            <element signature="e#5896#6265#0" />
-            <element signature="e#5932#5976#0" />
-            <element signature="e#6993#8025#0" />
-            <element signature="e#7087#7490#0" />
-            <element signature="e#7622#8003#0" />
-            <element signature="e#7650#8003#0" />
-            <element signature="e#8725#10842#0" />
-            <element signature="e#8725#8795#0" />
-            <element signature="e#8567#8721#0" />
-            <element signature="e#8610#8721#0" />
-            <element signature="e#8672#8721#0" />
-            <element signature="e#8696#8940#0" />
-            <element signature="e#9362#9513#0" />
-            <element signature="e#10395#10459#0" />
-            <element signature="e#10629#10873#0" />
-            <element signature="e#10666#10873#0" />
-            <marker date="1546324556518" expanded="true" signature="3371:3836" ph="..." />
-            <marker date="1546324556518" expanded="false" signature="3430:3560" ph="..." />
-            <marker date="1546324556518" expanded="false" signature="3644:3802" ph="..." />
-            <marker date="1546324556518" expanded="true" signature="3905:4021" ph="..." />
-            <marker date="1546324556518" expanded="false" signature="8287:8818" ph="..." />
-            <marker date="1546324556518" expanded="false" signature="8301:8817" ph="..." />
-            <marker date="1546324556518" expanded="false" signature="8862:9277" ph="..." />
-            <marker date="1546324556518" expanded="true" signature="9420:9513" ph="..." />
-            <marker date="1546324556518" expanded="true" signature="9420:9514" ph="..." />
+            <element signature="e#2269#2321#0" />
+            <element signature="e#3256#3318#0" />
+            <element signature="e#2721#2814#0" />
+            <element signature="e#4309#4416#0" />
+            <element signature="e#4517#4609#0" />
+            <element signature="e#4794#4884#0" />
+            <element signature="e#5057#5130#0" />
+            <element signature="e#5331#5413#0" />
+            <element signature="e#5572#5683#0" />
+            <element signature="e#5627#5684#0" />
+            <element signature="e#5977#6024#0" />
+            <element signature="e#6810#6869#0" />
+            <element signature="e#7153#7214#0" />
+            <element signature="e#9017#9109#0" />
+            <element signature="e#9945#10007#0" />
+            <marker date="1546339725464" expanded="true" signature="4785:5331" ph="..." />
+            <marker date="1546339725464" expanded="true" signature="4893:5023" ph="..." />
+            <marker date="1546339725464" expanded="true" signature="5139:5297" ph="..." />
+            <marker date="1546339725464" expanded="true" signature="5422:5538" ph="..." />
+            <marker date="1546339725464" expanded="false" signature="12485:13016" ph="..." />
+            <marker date="1546339725464" expanded="false" signature="12499:13015" ph="..." />
+            <marker date="1546339725464" expanded="false" signature="13060:13475" ph="..." />
+            <marker date="1546339725464" expanded="true" signature="13618:13711" ph="..." />
+            <marker date="1546339725464" expanded="true" signature="13618:13712" ph="..." />
           </folding>
         </state>
       </provider>

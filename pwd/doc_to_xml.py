@@ -23,14 +23,17 @@ billing_location_mapping = dict(
     maharashtra='maharashtra',
     bangalore='karnataka',
     chennai='tamil nadu',
-    hyderabad='andhra pradesh'
+    hyderabad='andhra pradesh',
 )
+billing_location_mapping.setdefault('')
+
 state_mapping.setdefault(None, '')
 
 
 class OPF:
     def __init__(self, path):
         self.path = path
+        self.document = None
         # <editor-fold desc="Getting file name from path">
         if '/' in self.path:
             self.file_name = self.path.split('/')[-1]
@@ -41,11 +44,19 @@ class OPF:
     def seperate_doc(self, docx_folder_name='Docxs', docs_folder_name='Docs'):
         # <editor-fold desc="Converting a doc file to docx file">
         if '.docx' not in self.path and '.doc' in self.path:
-            # file is a doc file but not a docx file
+            # Control is here means that, file is a doc file but not a docx file.
+
+            # saving current location of the doc file so that,
+            # it can be used to move it in another folder once this file is converted to docx file.
             prev_path = self.path
+
+            # saving doc as doc and updating current file location to new file location of docx file.
             self.path = self.save_as_docx()
+
+            # Moving the previous doc file to docs folder in order to remove all clutter.
             self.move_file(file_path=prev_path, to_path=docs_folder_name)
         # </editor-fold>
+        # moving the file to docx file to docx folder.
         self.move_file(to_path=docx_folder_name)
 
     def save_as_docx(self):
@@ -65,11 +76,13 @@ class OPF:
         )
         doc.Close(False)
         # </editor-fold>
+        # Returning the absoulute path of the docx file generated.
         return new_file_abs
 
     def move_file(self, to_path, file_path=None):
         # <editor-fold desc="Make Directory if not exists.">
         if file_path is None:
+            # File path is none means that, user want to move file whose location is stored in the object instance.
             file_path = self.path
         if not os.path.exists(to_path):
             os.makedirs(to_path)
@@ -77,7 +90,15 @@ class OPF:
         shutil.move(file_path, to_path)
 
     def get_tables(self):
-        self.document = Document(self.path)
+        # <editor-fold desc="setting document object if not defined.">
+        if self.document is None:
+            # Document object is not modified since the init of the object.
+
+            # setting object's document as Document object of current file's path.
+            self.document = Document(self.path)
+        # </editor-fold>
+        # Now, document object is already defined.
+        # returning the list of tables.
         return self.document.tables
 
     @staticmethod
@@ -85,6 +106,7 @@ class OPF:
         table_primitive = []
         # <editor-fold desc="Iterate over all rows and cells and append it to table_primitive list.">
         for row in docx_table.rows:
+            # new instance of list for all all the rows in table.
             table_row = []
             for cell in row.cells:
                 table_row.append(cell.text.strip('\n').strip(' ').replace('\n', ' '))
@@ -94,80 +116,127 @@ class OPF:
 
     @staticmethod
     def print_table(table_data):
+        # <editor-fold desc="getting max width of all the columns by transposing and mapping to find the lengths.">
         widths = [max(map(len, col)) for col in zip(*table_data)]
+        # </editor-fold>
+        # <editor-fold desc="printign the rows by using ljust to make every element of same width.">
         for row in table_data:
             print(" # ".join((val.ljust(width) for val, width in zip(row, widths))))
+        # </editor-fold>
 
     def extract_data(self) -> dict:
-        # <editor-fold desc="segrregate tables:">
+        # <editor-fold desc="1. Creating seperate objects for tables used for address and sales.">
         tables = self.get_tables()
         address_table = self.create_table(tables[0])
         sales_table = self.create_table(tables[1])
         # </editor-fold>
-        # <editor-fold desc="Getting all fields">
+        # <editor-fold desc="2. Extracting fields from tables and loose fields.">
         address_data = self.parse_address_tables(address_table)
         sales_data = self.parse_sales_data(sales_table)
         loose_fields = self.get_loose_fields()
         # </editor-fold>
-        # <editor-fold desc="Saving it to a final_result dict dict">
+        # <editor-fold desc="3. Combining sales, address, loose details to final result.">
         final_result = address_data.copy()
         final_result.update(sales_data)
         final_result.update(loose_fields)
-        cbs = final_result['badstate'] if final_result['badstate'] else ''
-        gbs = final_result['opf_location'] if final_result['opf_location'] else ''
-        cbs, gbs = cbs.lower(), gbs.lower()
-        type_gst = ''
+        # </editor-fold>
+        # <editor-fold desc="4. Setting the type of gst to final result based on algorithm demonstrated by Anoop Sir.">
+        # <editor-fold desc="setting galaxy and buyer's address">
+        cbs = (final_result['badstate'] if final_result['badstate'] else '').lower()
+        gbs = billing_location_mapping.get(
+            (final_result['opf_location'] if final_result['opf_location']
+                                          else ''                        # to prevent performing operations on NoneType
+            ).replace('/', '').lower()                                     # one case in which / was present in the field.
+        )
+        # </editor-fold>
+        # <editor-fold desc="Algorithmic switch case.">
         if gbs == cbs:
             type_gst = 'same state'
         elif 'sez' in cbs:
             type_gst = 'sez'
+            # if sez is present in the billing address, over writing the value of billing address state to
+            # state without parentheses.
             final_result['badstate'] = cbs.split("(")[0]
         else:
             type_gst = 'interstate'
+        # </editor-fold>
+        # Setting type of gst to the final result.
         final_result['type_gst'] = type_gst
         # </editor-fold>
-
+        # <editor-fold desc="5. Setting value of dc state as gbs.">
+        # delivery challan is state corresponding to galaxy billing location. Which is gbs.
+        final_result['dc_state'] = gbs
+        # </editor-fold>
         return final_result
 
     def get_element_from_block(self, block: list, identifier: str, split_by: str) -> str:
+        # <editor-fold desc="1. Escaping all common regex literals.">
         identifier = identifier.replace('(', '\(').replace(')', '\)').replace(" ", '\s*') + '\s*'
-        for i in block:
-            if re.search(identifier, i, flags=re.IGNORECASE):
-                probable_result = split_by.join(i.split(split_by)[1:])
+        # </editor-fold>
+        for string in block:
+            # searching presence of identifier in string.
+            if re.search(identifier, string, flags=re.IGNORECASE):
+                # if identifier is present in string, get split the string by split by character and store it .
+                probable_result = split_by.join(string.split(split_by)[1:])
+
+                # After splitting if the result is an empty string or string with only spaces means that,
+                # splitby character is not present and
+                # an other try is given to check if colon was present in the string.
                 if not probable_result.strip():
-                    probable_result = ":".join(i.split(':')[1:])
-                return probable_result.strip("-").strip(":").strip(":").strip("-").strip('_').strip()
+                    probable_result = ":".join(string.split(':')[1:])
+
+                # Stripping the result to remove all the excessive characters from the ends of the result.
+                # the weed characters must occur in increasing order defined by TCS regex given as follows:
+                # ( )* (-)* (:)* (-)* (_)* ( )*
+                return probable_result.strip("-").strip(":").strip("-").strip('_').strip()
 
     def parse_address_tables(self, address_table):
+        # This function
+        # 1) takes as an input address table,
+        # 2) splits it into billing and delivery.
+        # 3) Extract information from both blocks,
+        # 4) Return the merged information from both the block.
+
         def parse_address_block(block):
             which_address = block.pop(0)
             fields = ['State:', 'Contact Person:', "Tel#", "Email#", "GSTN NO:"]
             a = block[0]
 
-            # index before which address is present.
+            # first_field_index is the index in the block before which address is present.
             first_field_index = None
+
+            # <editor-fold desc="1. Finding the index of row in which first field identifier is found.">
             for index, element in enumerate(block):
                 for field in fields:
+                    # Fields are stored as field+split_by character.
                     if field[:-1] in element:
+                        # field is found in the element, setting the field index and breaking the loop.
                         first_field_index = index
                         break
                 if first_field_index is not None:
+                    # Sadly, one cannot do multiple breaks to break nested loops,
+                    # Hence checking if first_field_index was set in any of the inner loops and break this outer loop.
                     break
+            # </editor-fold>
             if first_field_index is None:
                 return {}  # an empty dict suggesting failure in parsing all fields.
+            # <editor-fold desc="2. setting name and address variables..">
             name = block[0]
             if first_field_index == 1:
                 address = "\n".join(block[:first_field_index])
             else:
                 address = "\n".join(block[1:first_field_index])
-
+            # </editor-fold>
             block = block[first_field_index:]
+
             state = self.get_element_from_block(block, 'State', ':')
-            if state:
+            if state is not None and state is not '':
                 if re.search('Mumbai', state, flags=re.IGNORECASE):
-                    # print('state is Mumbai??')
+                    # Mumbai was a state in some opfs.
                     state = 'Maharashtra'
             if not state:
+                # if state is not mentioned and address mentions mumbai,
+                # setting maharashtra as a state.
                 if re.search('Mumbai', address, flags=re.IGNORECASE):
                     state = 'Maharashtra'
                     # print('setting state as Maharashtra')
@@ -305,7 +374,7 @@ if __name__ == '__main__':
     all_keys = list(df.keys())
 
     header = [
-        all_keys.pop(all_keys.index('dadstate')),
+        all_keys.pop(all_keys.index('dc_state')),
         all_keys.pop(all_keys.index('opf_no')),
         all_keys.pop(all_keys.index('customer_name')),
         all_keys.pop(all_keys.index('purch_order_no')),
@@ -313,6 +382,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('payment_terms')),
         all_keys.pop(all_keys.index('dadname')),
         all_keys.pop(all_keys.index('dadaddress')),
+        all_keys.pop(all_keys.index('dadstate')),
         all_keys.pop(all_keys.index('dadgstn')),
         all_keys.pop(all_keys.index('badname')),
         all_keys.pop(all_keys.index('badaddress')),
