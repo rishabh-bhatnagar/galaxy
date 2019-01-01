@@ -316,6 +316,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('dadgstn')),
         all_keys.pop(all_keys.index('badname')),
         all_keys.pop(all_keys.index('badaddress')),
+        all_keys.pop(all_keys.index('badstate')),
         all_keys.pop(all_keys.index('badgstn')),
         all_keys.pop(all_keys.index('number_of_products')),
         all_keys.pop(all_keys.index('opf_location')),
