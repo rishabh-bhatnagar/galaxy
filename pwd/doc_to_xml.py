@@ -26,6 +26,16 @@ billing_location_mapping = dict(
 billing_location_mapping.setdefault('')
 state_mapping.setdefault(None, '')
 
+def chunkIt(seq, num):
+    avg = len(seq) / float(num)
+    out = []
+    last = 0.0
+
+    while last < len(seq):
+        out.append(seq[int(last):int(last + avg)])
+        last += avg
+
+    return out
 
 class OPF:
     def __init__(self, path):
@@ -260,9 +270,10 @@ class OPF:
             # <editor-fold desc="2. setting name and address variables..">
             name = block[0]
             if first_field_index == 1:
-                address = "\n".join(block[:first_field_index])
+                address = ",".join(block[:first_field_index])
             else:
-                address = "\n".join(block[1:first_field_index])
+                address = ",".join(block[1:first_field_index])
+            address = '\n'.join([", ".join(i) for i in chunkIt(address.split(','),3)])
             # </editor-fold>
             block = block[first_field_index:]
             # <editor-fold desc="3. Setting state variable.">
