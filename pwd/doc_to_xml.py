@@ -1,6 +1,6 @@
-from os import path, listdir, makedirs, chdir
 import re
 import shutil
+from os import path, listdir, makedirs, chdir
 
 import win32com.client as win32
 from docx import Document
@@ -24,7 +24,6 @@ billing_location_mapping = dict(
     hyderabad='andhra pradesh',
 )
 billing_location_mapping.setdefault('')
-
 state_mapping.setdefault(None, '')
 
 
@@ -135,6 +134,12 @@ class OPF:
     def extract_data(self) -> dict:
         # <editor-fold desc="1. Creating seperate objects for tables used for address and sales.">
         tables = self.get_tables()
+
+        if not tables:
+            return dict()
+        elif len(tables) == 1:
+            raise ValueError('Found only one table, cannot parse it further.')
+
         address_table = self.create_table(tables[0])
         sales_table = self.create_table(tables[1])
         # </editor-fold>
@@ -177,6 +182,18 @@ class OPF:
         # </editor-fold>
         return final_result
 
+    @staticmethod
+    def position_insensitive_strip(string, weeds):
+        # in order to remove an duplicates
+        weeds = set(weeds)
+        def lstrip(string, weeds):
+            while string and string[0] in weeds:
+                string = string[1:]
+            return string
+
+        all_stripped = lstrip(lstrip(string, weeds)[::-1], weeds)[::-1]
+        return all_stripped
+
     def get_element_from_block(self, block: list, identifier: str, split_by: str) -> str:
         # <editor-fold desc="1. Escaping all common regex literals.">
         identifier = identifier.replace('(', '\(').replace(')', '\)').replace(" ", '\s*') + '\s*'
@@ -194,9 +211,9 @@ class OPF:
                     probable_result = ":".join(string.split(':')[1:])
 
                 # Stripping the result to remove all the excessive characters from the ends of the result.
-                # the weed characters must occur in increasing order defined by TCS regex given as follows:
-                # ( )* (-)* (:)* (-)* (_)* ( )*
-                return probable_result.strip("-").strip(":").strip("-").strip('_').strip()
+                # the weed characters may occur in any order defined by TCS regex given as follows:
+                # ('-'+':'+'_'+' ')*
+                return self.position_insensitive_strip(probable_result, '-+: ')
 
     def parse_address_tables(self, address_table):
         # This function
@@ -326,7 +343,7 @@ class OPF:
         # above line gives the general format of the header list.
         header = sales_table.pop(0)
 
-        result = {}                                               # The resultant dict which will store sales data.
+        result = {}  # The resultant dict which will store sales data.
 
         # <editor-fold desc="Getting all products' details and their count">
         # i counts the number of products.
@@ -353,7 +370,6 @@ class OPF:
             # removing the current row from the table so that program always processes on the first list in nested list.
             sales_table.pop(0)
 
-
         # decreasing the count to compensate the extra increment
         # that took place before the execution came out of the while loop.
         i -= 1
@@ -366,7 +382,6 @@ class OPF:
         # updating the sales details dict with the number of products.
         result.update(dict(number_of_products=i))
         # </editor-fold>
-
 
         # <editor-fold desc="getting gst percentages.">
         for i in sales_table:
@@ -416,8 +431,10 @@ class OPF:
         for text in line_texts:
             # for each text in texts, counting max number of spaces.
             count_space = 1
-            while ' ' * count_space in text: count_space += 1
-            else: count_space -= 1
+            while ' ' * count_space in text:
+                count_space += 1
+            else:
+                count_space -= 1
 
             # count space when becomes one, it is decremented by 1 and it becomes zero.
             # in order to prevent ' '*count_spaces to become an empty seperator,
@@ -453,6 +470,12 @@ class OPF:
         )
         # result was not immediately consumed in order to debug.
         return result_dict
+
+
+def clean_all_dict_fields(dictionary: dict, all_weeds: str = ':-:;\\ .,\n') -> dict:
+    for key, value in dictionary.items():
+        dictionary[key] = OPF.position_insensitive_strip(value, weeds=all_weeds)
+    return dictionary
 
 
 if __name__ == '__main__':
