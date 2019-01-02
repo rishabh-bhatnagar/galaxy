@@ -186,6 +186,7 @@ class OPF:
     def position_insensitive_strip(string, weeds):
         # in order to remove an duplicates
         weeds = set(weeds)
+
         def lstrip(string, weeds):
             while string and string[0] in weeds:
                 string = string[1:]
@@ -474,7 +475,7 @@ class OPF:
 
 def clean_all_dict_fields(dictionary: dict, all_weeds: str = ':-:;\\ .,\n') -> dict:
     for key, value in dictionary.items():
-        dictionary[key] = OPF.position_insensitive_strip(value, weeds=all_weeds)
+        dictionary[key] = OPF.position_insensitive_strip(str(value), weeds=all_weeds)
     return dictionary
 
 
@@ -508,6 +509,9 @@ if __name__ == '__main__':
 
             # appending opf link in order it can be joined with other excel file.
             data_dict.update({'opf link': file_name.split('.')[0]})
+
+            # cleaning the data of returned dict.
+            data_dict = clean_all_dict_fields(data_dict, all_weeds=': -/;\n')
 
             # appending the extracted data to the result dict.
             result_dict_list.append(data_dict)
