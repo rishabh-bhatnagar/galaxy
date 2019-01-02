@@ -1,5 +1,6 @@
 from unittest import TestCase
-from doc_to_xml import OPF
+
+from doc_to_xml import OPF, clean_all_dict_fields
 
 
 class TestOPF(TestCase):
@@ -44,5 +45,23 @@ class TestOPF(TestCase):
             '!',
             self.opf.position_insensitive_strip('..!..', weeds='.@.')
         )
+        return
 
-
+    def test_clean_all_dict_fields(self):
+        self.assertEqual(
+            dict(
+                name='Rishabh Bhatnagar',
+                age='19',
+                mail_id='bhatnagarrishabh4@gmail.com',
+                contact='8898194854'
+            ),
+            clean_all_dict_fields(
+                dictionary=dict(
+                    name=': Rishabh Bhatnagar',
+                    age='19.',
+                    mail_id='bhatnagarrishabh4@gmail.com',
+                    contact='8898194854/'
+                ),
+                all_weeds='/.: '
+            )
+        )

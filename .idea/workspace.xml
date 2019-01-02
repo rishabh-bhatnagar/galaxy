@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pwd/Docxs/OPF 003.docx" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/Docxs/OPF 003.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/final_output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/final_output.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pwd/test_OPF.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/test_OPF.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="156">
-              <caret line="474" column="83" selection-start-line="474" selection-start-column="83" selection-end-line="474" selection-end-column="83" />
+              <caret line="474" column="25" selection-start-line="474" selection-start-column="4" selection-end-line="474" selection-end-column="25" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <element signature="e#1080#1130#0" />
@@ -56,8 +53,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/test_OPF.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+            <state relative-caret-position="364">
+              <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -120,8 +117,8 @@
         <option value="$PROJECT_DIR$/Docs/XML/delete.py" />
         <option value="$PROJECT_DIR$/xml_another_try.py" />
         <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
-        <option value="$PROJECT_DIR$/pwd/test_OPF.py" />
         <option value="$PROJECT_DIR$/pwd/doc_to_xml.py" />
+        <option value="$PROJECT_DIR$/pwd/test_OPF.py" />
       </list>
     </option>
   </component>
@@ -299,7 +296,7 @@
       <workItem from="1546055263716" duration="28446000" />
       <workItem from="1546225476050" duration="21268000" />
       <workItem from="1546313433322" duration="28111000" />
-      <workItem from="1546399106801" duration="4455000" />
+      <workItem from="1546399106801" duration="4597000" />
     </task>
     <servers />
   </component>
@@ -336,7 +333,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116554000" />
+    <option name="totallyTimeSpent" value="116696000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
@@ -347,7 +344,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26869807" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26869807" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -356,12 +353,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32963988" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.15235457" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2797784" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.41135734" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.3299712" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.3299712" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
@@ -465,7 +462,7 @@
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
-          <caret line="474" column="83" selection-start-line="474" selection-start-column="83" selection-end-line="474" selection-end-column="83" />
+          <caret line="474" column="25" selection-start-line="474" selection-start-column="4" selection-end-line="474" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <element signature="e#1080#1130#0" />
@@ -490,8 +487,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/test_OPF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        <state relative-caret-position="364">
+          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
