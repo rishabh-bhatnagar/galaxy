@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546335707017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546343755607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1545814777691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Docs/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1546067126164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -24,45 +25,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="345" column="120" selection-start-line="345" selection-start-column="120" selection-end-line="345" selection-end-column="120" />
+            <state relative-caret-position="488">
+              <caret line="356" column="10" selection-start-line="356" selection-start-column="10" selection-end-line="356" selection-end-column="10" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
-                <element signature="e#753#1043#0" />
-                <element signature="e#698#748#0" />
-                <element signature="e#1014#1411#0" />
-                <element signature="e#1014#1071#0" />
-                <element signature="e#1568#1626#0" />
-                <element signature="e#1981#2018#0" />
-                <element signature="e#3256#3318#0" />
-                <element signature="e#2721#2814#0" />
-                <element signature="e#4309#4416#0" />
-                <element signature="e#4517#4609#0" />
-                <element signature="e#4794#4884#0" />
-                <element signature="e#5057#5130#0" />
-                <element signature="e#5331#5413#0" />
-                <element signature="e#5572#5683#0" />
-                <element signature="e#5627#5684#0" />
-                <element signature="e#5977#6024#0" />
-                <element signature="e#6810#6869#0" />
-                <element signature="e#7153#7214#0" />
-                <element signature="e#9017#9109#0" />
-                <element signature="e#9945#10007#0" />
-                <element signature="e#10250#10299#0" />
-                <element signature="e#11656#11727#0" />
-                <element signature="e#11991#12095#0" />
-                <element signature="e#12255#12354#0" />
-                <element signature="e#12503#12559#0" />
-                <element signature="e#13104#13182#0" />
-                <marker date="1546342797760" expanded="true" signature="5560:6106" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="5668:5798" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="5914:6072" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="6197:6313" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="15788:16812" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="15802:16811" ph="..." />
-                <marker date="1546342797760" expanded="false" signature="16856:17271" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="17414:17507" ph="..." />
-                <marker date="1546342797760" expanded="true" signature="17414:17508" ph="..." />
+                <element signature="e#0#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -138,7 +104,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,6 +125,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -279,23 +245,24 @@
       <workItem from="1545994439399" duration="4612000" />
       <workItem from="1546055263716" duration="28446000" />
       <workItem from="1546225476050" duration="21268000" />
-      <workItem from="1546313433322" duration="25093000" />
+      <workItem from="1546313433322" duration="28111000" />
+      <workItem from="1546399106801" duration="87000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109081000" />
+    <option name="totallyTimeSpent" value="112186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.09870317" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.100144096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3933518" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.05263158" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -304,7 +271,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32963988" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32825485" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.05263158" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.41135734" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -412,45 +379,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="345" column="120" selection-start-line="345" selection-start-column="120" selection-end-line="345" selection-end-column="120" />
+        <state relative-caret-position="488">
+          <caret line="356" column="10" selection-start-line="356" selection-start-column="10" selection-end-line="356" selection-end-column="10" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <element signature="e#753#1043#0" />
-            <element signature="e#698#748#0" />
-            <element signature="e#1014#1411#0" />
-            <element signature="e#1014#1071#0" />
-            <element signature="e#1568#1626#0" />
-            <element signature="e#1981#2018#0" />
-            <element signature="e#3256#3318#0" />
-            <element signature="e#2721#2814#0" />
-            <element signature="e#4309#4416#0" />
-            <element signature="e#4517#4609#0" />
-            <element signature="e#4794#4884#0" />
-            <element signature="e#5057#5130#0" />
-            <element signature="e#5331#5413#0" />
-            <element signature="e#5572#5683#0" />
-            <element signature="e#5627#5684#0" />
-            <element signature="e#5977#6024#0" />
-            <element signature="e#6810#6869#0" />
-            <element signature="e#7153#7214#0" />
-            <element signature="e#9017#9109#0" />
-            <element signature="e#9945#10007#0" />
-            <element signature="e#10250#10299#0" />
-            <element signature="e#11656#11727#0" />
-            <element signature="e#11991#12095#0" />
-            <element signature="e#12255#12354#0" />
-            <element signature="e#12503#12559#0" />
-            <element signature="e#13104#13182#0" />
-            <marker date="1546342797760" expanded="true" signature="5560:6106" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="5668:5798" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="5914:6072" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="6197:6313" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="15788:16812" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="15802:16811" ph="..." />
-            <marker date="1546342797760" expanded="false" signature="16856:17271" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="17414:17507" ph="..." />
-            <marker date="1546342797760" expanded="true" signature="17414:17508" ph="..." />
+            <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,4 +1,4 @@
-from os import path, listdir, makedirs
+from os import path, listdir, makedirs, chdir
 import re
 import shutil
 
@@ -327,10 +327,11 @@ class OPF:
         header = sales_table.pop(0)
 
         result = {}                                               # The resultant dict which will store sales data.
-        # Getting all products' details and their count
 
+        # <editor-fold desc="Getting all products' details and their count">
         # i counts the number of products.
         i = 0
+
         while True:
             i += 1
             # this is a dangerous hard coding done.
@@ -349,55 +350,97 @@ class OPF:
             result.update({'unit_price_' + sr_no: sales_table[0][3]})
             result.update({'total_price_' + sr_no: sales_table[0][1]})
 
+            # removing the current row from the table so that program always processes on the first list in nested list.
             sales_table.pop(0)
-        i -= 1
-        i = max([i, 1])
-        result.update(dict(number_of_products=i))
 
-        # getting gst percentages.
+
+        # decreasing the count to compensate the extra increment
+        # that took place before the execution came out of the while loop.
+        i -= 1
+
+        # This is done in accordance to a case where
+        # there is only one element and then i was set to 1
+        # and then when it was decremented with one, it became zero.
+        i = max([i, 1])
+
+        # updating the sales details dict with the number of products.
+        result.update(dict(number_of_products=i))
+        # </editor-fold>
+
+
+        # <editor-fold desc="getting gst percentages.">
         for i in sales_table:
             for j in i:
+                # iterating over each cell in the remaining cells in the sales_block and searching for gst in fields:
+                # for each field having following types of gst, instead of splitting and applying lots of brains to it,
+                # I extracted all the numbers from the field and converted it to string to store it.
                 if 'CGST' in j:
                     result.update(cgst_percentage="".join([k for k in j if k.isdigit()]))
                 elif 'SGST' in j:
                     result.update(sgst_percentage="".join([k for k in j if k.isdigit()]))
                 elif 'IGST' in j:
                     result.update(igst_percentage="".join([k for k in j if k.isdigit()]))
+        # </editor-fold>
         return result
 
     def get_loose_fields(self):
         # <editor-fold desc="Getting a new object of document if not exists.">
         try:
+            # trying to access self.document to ensure that it exists.
             self.document
-        except:
+        except NameError:
+            # If document was not found, a nameError will be generated.
+            # and hance setting self.document to Document object of current file path.
             self.document = Document(self.path)
         # </editor-fold>
         paragraphs = self.document.paragraphs
+
         lines = []
+
+        # <editor-fold desc="Appending all paragraphs which are of type x    y or x\ty to lines list.">
         for paragraph in paragraphs:
             for run in paragraph.runs:
                 if '\t' in run.text or ' ' * 4 in run.text:
                     lines.append(paragraph)
                     break
-        line_texts = list()  # strings of all the
-        texts = list()
-        for line in lines:
-            line_texts.append(line.text.replace('\t', '    ').strip())
+        # </editor-fold>
+
+        # line_text is list of texts of lines which have \t replaced with 4 spaces in order to maintain homogeneity.
+        line_texts = [line.text.replace('\t', '    ').strip() for line in lines]
         line_texts = [i for i in line_texts if i]
+
+        # final list of all the fields and its values
+        # texts will be list of string in the near future.
+        texts = list()
+
         for text in line_texts:
+            # for each text in texts, counting max number of spaces.
             count_space = 1
-            while ' ' * count_space in text:
-                count_space += 1
-            else:
-                count_space -= 1
+            while ' ' * count_space in text: count_space += 1
+            else: count_space -= 1
+
+            # count space when becomes one, it is decremented by 1 and it becomes zero.
+            # in order to prevent ' '*count_spaces to become an empty seperator,
+            # count_space is set to 1 if it becomes 0.
             count_space = max([count_space, 1])
+
+            # Splitting the string based on max number of spaces and appending both the elements to the list.
             texts.extend(text.split(count_space * ' '))
+
         payment_terms = ''
+        # THis is hard coded O(n) solution which traverses over all the elements in the list and
+        # finds if payment terms is present in that run and append it's value to the final dict of sales dict.
         for i in paragraphs:
+            # Getting all the paragraphs row wise.
             if re.search('PAYMENT TERMS', i.text, flags=re.IGNORECASE):
+                # payment terms was found in the text of the paragraph.
+                # Getting payment terms splitted by :.
                 payment_terms = self.get_element_from_block([i.text], 'PAYMENT TERMS', ":")
 
+        # finding opf location that is useful to determine the state from which opf was made.
         opf_location = self.get_element_from_block(texts, 'Galaxy Billing from (Location)', ":")
+
+        # combining all the extracted elements into a single dict in order to return a packed result.
         result_dict = dict(
             sales_person=self.get_element_from_block(texts, 'Sales Person', ":"),
             pot_id=self.get_element_from_block(texts, 'POT ID', ":"),
@@ -408,28 +451,51 @@ class OPF:
             purch_order_no=self.get_element_from_block(texts, 'Purchase Order', "."),
             payment_terms=payment_terms
         )
-
+        # result was not immediately consumed in order to debug.
         return result_dict
 
 
 if __name__ == '__main__':
     docx_folder_name = 'Docxs'
-    for path in listdir():
-        if '.doc' in path:
-            OPF(abspath(path)).seperate_doc()
-    os.chdir(abspath(docx_folder_name))
+
+    # traversing all the files in the current directory.
+    for file in listdir():
+        if '.doc' in file:
+            # if file is a doc file, convert it to docx and seggregate doc and docx.
+            OPF(path.abspath(file)).seperate_doc()
+
+    # moving the control to docx folder directory
+    chdir(path.abspath(docx_folder_name))
+
+    # final list of all dicts for all files.
     result_dict_list = []
-    opf = OPF('OPF- TK-024.docx').extract_data()
+
+    # opf = OPF('OPF- TK-024.docx').extract_data()
+
     for i, file_name in enumerate(listdir()):
         if '.docx' in file_name:
+            # searching for only docx file.
             print(file_name)
+
+            # creating opf instance for all opf docx.
             opf = OPF(file_name)
+
+            # extract data.
             data_dict = opf.extract_data()
+
+            # appending opf link in order it can be joined with other excel file.
             data_dict.update({'opf link': file_name.split('.')[0]})
+
+            # appending the extracted data to the result dict.
             result_dict_list.append(data_dict)
+
+    # removing result of all the dicts which have badstate defined and is not an empty string.
     result_dict_list = [i for i in result_dict_list if i['badstate']]
+
     # result_dict_list = sorted(result_dict_list, key=lambda x:x['badstate'] if x['badstate'] is not None else '')
     df = DF(result_dict_list)
+
+    # column headers.
     all_keys = list(df.keys())
 
     header = [
