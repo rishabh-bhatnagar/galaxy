@@ -1,6 +1,7 @@
 import re
 import shutil
 from os import path, listdir, makedirs, chdir
+from typing import List, Any, Tuple
 
 import win32com.client as win32
 from docx import Document
@@ -26,16 +27,18 @@ billing_location_mapping = dict(
 billing_location_mapping.setdefault('')
 state_mapping.setdefault(None, '')
 
+
 def chunkIt(seq, num):
+    # Code credits: 
+        # https://stackoverflow.com/questions/2130016/splitting-a-list-into-n-parts-of-approximately-equal-length
     avg = len(seq) / float(num)
     out = []
     last = 0.0
-
     while last < len(seq):
         out.append(seq[int(last):int(last + avg)])
         last += avg
-
     return out
+
 
 class OPF:
     def __init__(self, path):
@@ -191,16 +194,25 @@ class OPF:
         final_result['dc_state'] = gbs
         # </editor-fold>
 
-        c, s, i = map(int, map(lambda x: int(final_result.get(x)) if final_result[x] else '0', ['cgst_percentage', 'sgst_percentage', 'igst_percentage']))
-        gst_percentage = max([2*c, 2*s, i])
+        c, s, i = map(int, map(lambda x: int(final_result.get(x)) if final_result[x] else '0',
+                               ['cgst_percentage', 'sgst_percentage', 'igst_percentage']))
+        gst_percentage = max([2 * c, 2 * s, i])
 
         if type_gst == 'interstate':
             accounting_detail = 'sales {} {}'.format(type_gst, final_result['dc_state'])
+            tax_classification = '{} sales taxable'.format(type_gst)
         elif type_gst == 'sez':
             accounting_detail = 'sales-exemption ({})-'.format(final_result['dc_state'])
+            tax_classification = 'sales to sez-lut'
         else:
             accounting_detail = 'sales-gst-{}-{}%'.format(final_result['dc_state'], gst_percentage)
-        final_result.update(dict(accounting_detail=accounting_detail))
+            tax_classification = 'sales taxable'
+        final_result.update(
+            dict(
+                accounting_detail=accounting_detail,
+                tax_classification=tax_classification
+            )
+        )
         return final_result
 
     @staticmethod
@@ -273,7 +285,7 @@ class OPF:
                 address = ",".join(block[:first_field_index])
             else:
                 address = ",".join(block[1:first_field_index])
-            address = '\n'.join([", ".join(i) for i in chunkIt(address.split(','),3)])
+            address = '\n'.join([", ".join(i) for i in chunkIt(address.split(','), 3)])
             # </editor-fold>
             block = block[first_field_index:]
             # <editor-fold desc="3. Setting state variable.">
@@ -558,7 +570,7 @@ if __name__ == '__main__':
     df = DF(result_dict_list)
 
     # column headers.
-    all_keys = list(df.keys())
+    all_keys: List[str] = list(df.keys())
 
     header = [
         all_keys.pop(all_keys.index('dc_state')),
@@ -581,7 +593,8 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('igst_percentage')),
         all_keys.pop(all_keys.index('sgst_percentage')),
         all_keys.pop(all_keys.index('cgst_percentage')),
-        all_keys.pop(all_keys.index('accounting_detail'))
+        all_keys.pop(all_keys.index('accounting_detail')),
+        all_keys.pop(all_keys.index('tax_classification')),
     ]
 
     desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
@@ -590,9 +603,10 @@ if __name__ == '__main__':
                         key=lambda x: int("".join([i for i in x[11:] if i.isdigit()])))
 
     all_keys = [i for i in all_keys if i not in desc + unit_price + qty]
-    unpacked_tuples = []
+    unpacked_tuples: List[str] = []
+    desc__qty__unit_price: Tuple[str, str, str]
     for desc__qty__unit_price in zip(desc, qty, unit_price):
         unpacked_tuples += desc__qty__unit_price
 
-    df = df[header + unpacked_tuples]
+    df = df[header+unpacked_tuples]
     df.to_excel('../final_output.xlsx')  # saving out of docx folder.
