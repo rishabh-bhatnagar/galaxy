@@ -542,10 +542,13 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('badgstn')),
         all_keys.pop(all_keys.index('number_of_products')),
         all_keys.pop(all_keys.index('opf_location')),
-        all_keys.pop(all_keys.index('type_gst'))
+        all_keys.pop(all_keys.index('type_gst')),
+        all_keys.pop(all_keys.index('igst_percentage')),
+        all_keys.pop(all_keys.index('sgst_percentage')),
+        all_keys.pop(all_keys.index('cgst_percentage')),
     ]
 
-    desc = sorted([i for i in all_keys if 'desc' in i], key=lambda x: int("".join([i for i in x[5:] if i.isdigit()])))
+    desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
     qty = sorted([i for i in all_keys if 'qty' in i], key=lambda x: int("".join([i for i in x[4:] if i.isdigit()])))
     unit_price = sorted([i for i in all_keys if 'unit_price' in i],
                         key=lambda x: int("".join([i for i in x[11:] if i.isdigit()])))
