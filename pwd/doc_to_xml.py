@@ -180,6 +180,17 @@ class OPF:
         # delivery challan is state corresponding to galaxy billing location. Which is gbs.
         final_result['dc_state'] = gbs
         # </editor-fold>
+
+        c, s, i = map(int, map(lambda x: int(final_result.get(x)) if final_result[x] else '0', ['cgst_percentage', 'sgst_percentage', 'igst_percentage']))
+        gst_percentage = max([2*c, 2*s, i])
+
+        if type_gst == 'interstate':
+            accounting_detail = 'sales {} {}'.format(type_gst, final_result['dc_state'])
+        elif type_gst == 'sez':
+            accounting_detail = 'sales-exemption ({})-'.format(final_result['dc_state'])
+        else:
+            accounting_detail = 'sales-gst-{}-{}%'.format(final_result['dc_state'], gst_percentage)
+        final_result.update(dict(accounting_detail=accounting_detail))
         return final_result
 
     @staticmethod
@@ -396,6 +407,19 @@ class OPF:
                     result.update(sgst_percentage="".join([k for k in j if k.isdigit()]))
                 elif 'IGST' in j:
                     result.update(igst_percentage="".join([k for k in j if k.isdigit()]))
+        try:
+            result['cgst_percentage']
+        except:
+            result['cgst_percentage'] = '0'
+        try:
+            result['sgst_percentage']
+        except:
+            result['sgst_percentage'] = '0'
+        try:
+            result['igst_percentage']
+        except:
+            result['igst_percentage'] = '0'
+
         # </editor-fold>
         return result
 
@@ -546,6 +570,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('igst_percentage')),
         all_keys.pop(all_keys.index('sgst_percentage')),
         all_keys.pop(all_keys.index('cgst_percentage')),
+        all_keys.pop(all_keys.index('accounting_detail'))
     ]
 
     desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
