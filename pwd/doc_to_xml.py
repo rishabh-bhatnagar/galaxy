@@ -529,6 +529,11 @@ class OPF:
                 # Getting payment terms splitted by :.
                 payment_terms = self.get_element_from_block([i.text], 'PAYMENT TERMS', ":")
 
+        payment_terms = "".join(i for i in payment_terms if i.isdigit())
+        if payment_terms:
+            payment_terms = payment_terms+' days'
+
+
         # finding opf location that is useful to determine the state from which opf was made.
         opf_location = self.get_element_from_block(texts, 'Galaxy Billing from (Location)', ":")
 
