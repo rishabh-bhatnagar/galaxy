@@ -528,10 +528,24 @@ class OPF:
                 # payment terms was found in the text of the paragraph.
                 # Getting payment terms splitted by :.
                 payment_terms = self.get_element_from_block([i.text], 'PAYMENT TERMS', ":")
+        string = []
+        if re.search('days', payment_terms, flags=re.IGNORECASE):
+            parts = payment_terms.split()
+            for index, i in enumerate(parts):
+                if re.search('days', i, flags=re.IGNORECASE):
+                    if i[0].isdigit():
+                        string = []
+                        for j in i:
+                            if j.isdigit():
+                                string.append(j)
+                            else:
+                                break
+                    else:
+                        string = [h for h in parts[index-1] if h.isdigit()]
+            payment_terms = "".join(string)
 
-        payment_terms = "".join(i for i in payment_terms if i.isdigit())
-        if payment_terms:
-            payment_terms = payment_terms+' days'
+        else:
+            payment_terms = ''
 
 
         # finding opf location that is useful to determine the state from which opf was made.
@@ -578,7 +592,7 @@ if __name__ == '__main__':
     for i, file_name in enumerate(listdir()):
         if '.docx' in file_name:
             # searching for only docx file.
-            # print(file_name)
+            print(file_name)
 
             # creating opf instance for all opf docx.
             opf = OPF(file_name)

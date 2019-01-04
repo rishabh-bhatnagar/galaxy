@@ -49,6 +49,8 @@ data[0]['res'] = data[index_state]['dc_challan_no']
 write_dicts_to_csv(file_name, data)
 for i in data:
     print(i)
+
+
 '''
 og_data = [
     dict(state='state', abbrevation='abbrevation', last_no='last_no', dc_challan_no='dc_challan_no'),
