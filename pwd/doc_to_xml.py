@@ -422,7 +422,7 @@ class OPF:
 
         # <editor-fold desc="getting gst percentages.">
         for i in sales_table:
-            for j in i:
+            for index, j in enumerate(i):
                 # iterating over each cell in the remaining cells in the sales_block and searching for gst in fields:
                 # for each field having following types of gst, instead of splitting and applying lots of brains to it,
                 # I extracted all the numbers from the field and converted it to string to store it.
@@ -432,8 +432,13 @@ class OPF:
                     result.update(sgst_percentage="".join([k for k in j if k.isdigit()]))
                 elif 'IGST' in j:
                     result.update(igst_percentage="".join([k for k in j if k.isdigit()]))
-                elif 'freight' in j:
-                    result.update(freight="".join([k for k in j if k.isdigit()]))
+                elif 'Freight' in j:
+                    if index < len(i)-1:
+                        result.update(freight=i[index+1])
+        try:
+            result['freight']
+        except:
+            result['freight'] = '0'
         try:
             result['cgst_percentage']
         except:
@@ -604,6 +609,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('accounting_detail')),
         all_keys.pop(all_keys.index('tax_classification')),
         all_keys.pop(all_keys.index('sales_person')),
+        all_keys.pop(all_keys.index('freight')),
     ]
 
     desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))

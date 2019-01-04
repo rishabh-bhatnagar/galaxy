@@ -11,6 +11,25 @@ def which_is_better(*operations: list) -> int:
 
             this will be passed as:
             which_is_better( (add, (1,2)), (sub, (1,2) ) )
+    2) Which takes executable lambda which takes no parameters and executes the required function on called.
+        for example:
+            with functions defined same as of above cases' functions:
+                which_is_better(
+                    lambda: add(1,2),
+                    lambda: sub(1,2)
+                )
     :param operations:
     """
-    pass
+    for i in operations:
+        print(i())
+
+
+def add(n1, n2):
+    return n1 + n2
+
+
+def sub(n1, n2):
+    return n1 - n2
+
+
+print(which_is_better(lambda: add(1,2),lambda: sub(1,2)))
