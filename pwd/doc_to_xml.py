@@ -597,6 +597,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('cgst_percentage')),
         all_keys.pop(all_keys.index('accounting_detail')),
         all_keys.pop(all_keys.index('tax_classification')),
+        all_keys.pop(all_keys.index('sales_person')),
     ]
 
     desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
