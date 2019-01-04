@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/final_output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/final_output.xlsx" afterDir="false" />
-    </list>
+    <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="307" column="20" selection-start-line="307" selection-start-column="20" selection-end-line="307" selection-end-column="20" />
+            <state relative-caret-position="457">
+              <caret line="615" selection-start-line="615" selection-end-line="615" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -59,7 +55,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>banga</find>
       <find>bangalore</find>
       <find>exit(</find>
       <find>customer_n ame</find>
@@ -89,6 +84,7 @@
       <find>state</find>
       <find>res_state</find>
       <find>state=</find>
+      <find>sales_person</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,7 +104,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="20" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -273,7 +269,7 @@
       <workItem from="1546225476050" duration="21268000" />
       <workItem from="1546313433322" duration="28111000" />
       <workItem from="1546399106801" duration="19871000" />
-      <workItem from="1546574855978" duration="58000" />
+      <workItem from="1546574855978" duration="368000" />
     </task>
     <servers />
   </component>
@@ -310,18 +306,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132028000" />
+    <option name="totallyTimeSpent" value="132338000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="20" width="1400" height="816" extended-state="0" />
+    <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.16119403" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49380165" visible="true" weight="0.15561959" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1966759" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1966759" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -330,7 +326,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32963988" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.27839336" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24238227" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.41135734" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -429,8 +425,8 @@
     <entry file="file://$PROJECT_DIR$/XML/xml_another_try.py" />
     <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="307" column="20" selection-start-line="307" selection-start-column="20" selection-end-line="307" selection-end-column="20" />
+        <state relative-caret-position="457">
+          <caret line="615" selection-start-line="615" selection-end-line="615" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
