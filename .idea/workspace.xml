@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3cf7c1df-a533-4bae-8976-601772c8fa12" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd/challan_number.csv" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/challan_number.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pwd/dc_challan_number.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/dc_challan_number.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/doc_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/doc_to_xml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd/final_output.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pwd/final_output.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +15,8 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/19thDecember$Unittests_for_test_OPF_TestOPF.coverage" NAME="Unittests for test_OPF.TestOPF Coverage Results" MODIFIED="1546404853005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
-    <SUITE FILE_PATH="coverage/19thDecember$dc_challan_number.coverage" NAME="dc_challan_number Coverage Results" MODIFIED="1546596446621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
-    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546587781275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$dc_challan_number.coverage" NAME="dc_challan_number Coverage Results" MODIFIED="1546597243237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
+    <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml_pwd.coverage" NAME="doc_to_xml_pwd Coverage Results" MODIFIED="1546597566466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$delete.coverage" NAME="delete Coverage Results" MODIFIED="1546585817949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pwd" />
     <SUITE FILE_PATH="coverage/19thDecember$xml_another_try.coverage" NAME="xml_another_try Coverage Results" MODIFIED="1546067126164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XML" />
     <SUITE FILE_PATH="coverage/19thDecember$doc_to_xml.coverage" NAME="doc_to_xml Coverage Results" MODIFIED="1545798901663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -25,20 +26,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
+            <state relative-caret-position="210">
+              <caret line="455" column="48" lean-forward="true" selection-start-line="455" selection-start-column="48" selection-end-line="455" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pwd/dc_challan_number.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="28" column="53" lean-forward="true" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+            <state relative-caret-position="112">
+              <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -81,7 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>, unit_price</find>
       <find>inters</find>
       <find>cgst_percentage</find>
       <find>exempt</find>
@@ -99,18 +102,19 @@
       <find>igst</find>
       <find>same st</find>
       <find>parse_sales</find>
-      <find>parse_sales</find>
       <find>igst_percentage</find>
       <find>purc</find>
       <find>cgst</find>
       <find>frei</find>
       <find>extract_data</find>
-      <find>print</find>
       <find>\[i for i in</find>
       <find>\[[a-zA-Z0-9_]* for i in</find>
       <find>\[*_*</find>
       <find>\[</find>
       <find>\[[a-zA-Z0-9_]*</find>
+      <find>freight</find>
+      <find>clean</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,8 +131,8 @@
         <option value="$PROJECT_DIR$/XML/xml_another_try.py" />
         <option value="$PROJECT_DIR$/pwd/test_OPF.py" />
         <option value="$PROJECT_DIR$/pwd/delete.py" />
-        <option value="$PROJECT_DIR$/pwd/doc_to_xml.py" />
         <option value="$PROJECT_DIR$/pwd/dc_challan_number.py" />
+        <option value="$PROJECT_DIR$/pwd/doc_to_xml.py" />
       </list>
     </option>
   </component>
@@ -181,7 +185,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.dc_challan_number">
+  <component name="RunManager" selected="Python.doc_to_xml_pwd">
     <configuration name="dc_challan_number" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="19thDecember" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -321,7 +325,7 @@
       <workItem from="1546313433322" duration="28111000" />
       <workItem from="1546399106801" duration="19871000" />
       <workItem from="1546574855978" duration="12482000" />
-      <workItem from="1546593283189" duration="3194000" />
+      <workItem from="1546593283189" duration="4309000" />
     </task>
     <servers />
   </component>
@@ -358,7 +362,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147646000" />
+    <option name="totallyTimeSpent" value="148761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1448" height="864" extended-state="6" />
@@ -369,7 +373,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.50619835" side_tool="true" weight="0.27161384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32409972" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.56232685" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -482,13 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pwd/delete.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="704">
@@ -511,10 +508,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pwd/dc_challan_number.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="28" column="53" lean-forward="true" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+        <state relative-caret-position="112">
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pwd/doc_to_xml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="455" column="48" lean-forward="true" selection-start-line="455" selection-start-column="48" selection-end-line="455" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

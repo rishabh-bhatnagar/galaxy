@@ -1,5 +1,19 @@
 from csv import DictWriter, DictReader
 from sys import argv
+
+
+def increment_col(dictionary, current_year):
+    prev_number = dictionary['last_no']
+    next_number = str(int(prev_number)+1).zfill(len(prev_number))
+    return "{}-{}-".format(dictionary['abbrevation'], next_number, )
+
+
+
+
+
+
+
+
 current_year = int(str(__import__('datetime').datetime.now().year)[-2:])
 
 
@@ -12,9 +26,8 @@ file_name = 'challan_number.csv'
 
 og_data = [
     dict(state='state', abbrevation='abbrevation', last_no='last_no'),
-
     dict(state='telangana', abbrevation='hy', last_no='2'),
-dict(state='maharashtra', abbrevation='mh', last_no='1'),
+    dict(state='maharashtra', abbrevation='mh', last_no='1'),
     dict(state='chennai', abbrevation='mh', last_no='1')
 ]
 
