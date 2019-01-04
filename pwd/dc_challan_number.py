@@ -19,7 +19,7 @@ def get_data_from_csv(file_name):
 def write_dicts_to_csv(file_name, data):
     # additional res header of column is appended.
     with open(file_name, 'w', newline='') as file:
-        writer = DictWriter(file, fieldnames=list(data[index_state].keys()) + ['res'])
+        writer = DictWriter(file, fieldnames=list(data[0].keys()) + ['res'])
         writer.writeheader()
         writer.writerows(data)
 

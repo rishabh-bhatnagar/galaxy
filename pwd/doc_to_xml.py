@@ -542,7 +542,7 @@ class OPF:
                                 break
                     else:
                         string = [h for h in parts[index-1] if h.isdigit()]
-            payment_terms = "".join(string)
+            payment_terms = "".join(string)+' days'
 
         else:
             payment_terms = ''
