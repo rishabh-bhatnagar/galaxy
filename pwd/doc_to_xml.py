@@ -626,9 +626,9 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('freight')),
     ]
 
-    desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
-    qty = sorted([i for i in all_keys if 'qty' in i], key=lambda x: int("".join([i for i in x[4:] if i.isdigit()])))
-    unit_price = sorted([i for i in all_keys if 'unit_price' in i],
+    desc = sorted((i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])), key=lambda x: int(x[5:]))
+    qty = sorted((i for i in all_keys if 'qty' in i), key=lambda x: int("".join([i for i in x[4:] if i.isdigit()])))
+    unit_price = sorted((i for i in all_keys if 'unit_price' in i),
                         key=lambda x: int("".join([i for i in x[11:] if i.isdigit()])))
 
     all_keys = [i for i in all_keys if i not in desc + unit_price + qty]
