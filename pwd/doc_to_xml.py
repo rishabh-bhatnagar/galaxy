@@ -300,9 +300,11 @@ class OPF:
                 # setting maharashtra as a state.
                 if re.search('Mumbai', address, flags=re.IGNORECASE):
                     state = 'Maharashtra'
-                else:
+                elif (re.search('tamil', address, flags=re.IGNORECASE) and re.search('nadu', address, flags=re.IGNORECASE)) or re.search('chennai', address, flags=re.IGNORECASE):
                     # if state is not found and it is also address not contains mumbai.
+                        state = 'tamilnadu'
                     # setting state to empty string to prevent errors in further processing and computations.
+                else:
                     state = ''
             if state:
                 # mapping wrongly entered cities as states to their corresponding state.
@@ -564,7 +566,7 @@ if __name__ == '__main__':
             result_dict_list.append(data_dict)
 
     # removing result of all the dicts which have badstate defined and is not an empty string.
-    result_dict_list = [i for i in result_dict_list if i['badstate']]
+    # result_dict_list = [i for i in result_dict_list if i['badstate']]
 
     # result_dict_list = sorted(result_dict_list, key=lambda x:x['badstate'] if x['badstate'] is not None else '')
     df = DF(result_dict_list)
@@ -595,6 +597,7 @@ if __name__ == '__main__':
         all_keys.pop(all_keys.index('cgst_percentage')),
         all_keys.pop(all_keys.index('accounting_detail')),
         all_keys.pop(all_keys.index('tax_classification')),
+        all_keys.pop(all_keys.index('sales_person'))
     ]
 
     desc = sorted([i for i in all_keys if 'desc' in i and all([d.isdigit() for d in i[5:]])], key=lambda x: int(x[5:]))
