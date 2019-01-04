@@ -1,5 +1,6 @@
 import re
 import shutil
+from time import time_ns as time
 from os import path, listdir, makedirs, chdir
 from typing import List, Any, Tuple
 
@@ -38,6 +39,16 @@ def chunkIt(seq, num):
         out.append(seq[int(last):int(last + avg)])
         last += avg
     return out
+
+times = []
+def store_execution_time(function):
+    def wrapper(*args):
+        t1 = time()
+        result = function(*args)
+        t2 = time()
+        times.append(t2-t1)
+        return result
+    return wrapper
 
 
 class OPF:
@@ -144,6 +155,7 @@ class OPF:
             print(" # ".join((val.ljust(width) for val, width in zip(row, widths))))
         # </editor-fold>
 
+    @store_execution_time
     def extract_data(self) -> dict:
         # <editor-fold desc="1. Creating seperate objects for tables used for address and sales.">
         tables = self.get_tables()
@@ -555,7 +567,7 @@ if __name__ == '__main__':
     for i, file_name in enumerate(listdir()):
         if '.docx' in file_name:
             # searching for only docx file.
-            print(file_name)
+            # print(file_name)
 
             # creating opf instance for all opf docx.
             opf = OPF(file_name)
@@ -625,3 +637,5 @@ if __name__ == '__main__':
 
     df = df[header+unpacked_tuples]
     df.to_excel('../final_output.xlsx')  # saving out of docx folder.
+    print(times)
+rt_current = [62400100, 62400100, 78000100, 78000200, 46800000, 62400200, 15600000, 31200000, 31200100, 62400100, 31200100, 31200000, 46800100, 109200200, 124800200, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 62400200, 15600000, 46800100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200100, 15600000, 31200000, 31200100, 46800100, 31200000, 31200100, 31200000, 62400200, 31200000, 46800100, 31200000, 31200100, 31200100, 31200000, 46800100, 31200000, 31200100, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 31200100, 31200000, 46800100, 31200100, 62400100, 46800100, 31200000, 62400100, 46800100, 31200100, 31200000, 46800100, 31200100, 31200000, 15600100, 31200000, 124800200, 31200100, 46800100, 31200000, 46800100, 46800100, 31200000, 46800100, 62400100, 46800100, 46800100, 46800100, 46800100, 62400100, 46800100, 46800000, 46800100, 62400100, 46800100, 46800100, 62400100, 46800100, 46800100, 46800000, 62400200, 46800000, 46800100, 62400100, 46800100, 46800100, 46800100, 46800100, 46800000, 46800100, 46800100, 46800100, 46800100, 46800100, 46800000, 46800100, 46800100, 31200100, 46800000, 31200100, 31200000, 31200100, 46800100, 46800100, 62400100, 46800100, 46800000, 46800100, 31200100]
