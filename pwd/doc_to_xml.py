@@ -177,7 +177,7 @@ class OPF:
         # </editor-fold>
         # <editor-fold desc="Algorithmic switch case.">
         if gbs == cbs:
-            type_gst = 'same state'
+            type_gst = 'intrastate'
         elif 'sez' in cbs:
             type_gst = 'sez'
             # if sez is present in the billing address, over writing the value of billing address state to
@@ -432,6 +432,8 @@ class OPF:
                     result.update(sgst_percentage="".join([k for k in j if k.isdigit()]))
                 elif 'IGST' in j:
                     result.update(igst_percentage="".join([k for k in j if k.isdigit()]))
+                elif 'freight' in j:
+                    result.update(freight="".join([k for k in j if k.isdigit()]))
         try:
             result['cgst_percentage']
         except:
@@ -570,6 +572,10 @@ if __name__ == '__main__':
 
     # result_dict_list = sorted(result_dict_list, key=lambda x:x['badstate'] if x['badstate'] is not None else '')
     df = DF(result_dict_list)
+    df['igst_percentage'] = "igst " + df['igst_percentage'].astype(str)+"%"
+    df['cgst_percentage'] = "cgst " + df['cgst_percentage'].astype(str) + "%"
+    df['sgst_percentage'] = "sgst " + df['sgst_percentage'].astype(str) + "%"
+
 
     # column headers.
     all_keys: List[str] = list(df.keys())
