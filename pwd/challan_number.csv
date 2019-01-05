@@ -1,4 +1,12 @@
-state,abbrevation,last_no,dc_challan_no,res,res
-telangana,hy,3,hy-3-18-19,hy-3-18-19,hy-3-18-19
-maharashtra,mh,11,mh-11-18-19,,
-chennai,mh,1,,,
+state,abbrevation,last_no,dc_challan_no,res
+gujrat,guj,054,,HY-0122-18-19
+maharashtra,mh,02901,,
+karnataka,b,0434,,
+delhi,d,0148,,
+tamil nadu,ch,0171,,
+tamilnadu,ch,0171,,
+pune,mh-p,353,,
+telangana,hy,0122,HY-0122-18-19,
+west bengal,k,0077,,
+westbengal,k,0077,,
+telangana,hy,0118,,

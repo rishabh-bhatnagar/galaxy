@@ -249,7 +249,6 @@ class OPF:
             if re.search(identifier, string, flags=re.IGNORECASE):
                 # if identifier is present in string, get split the string by split by character and store it .
                 probable_result = split_by.join(string.split(split_by)[1:])
-
                 # After splitting if the result is an empty string or string with only spaces means that,
                 # splitby character is not present and
                 # an other try is given to check if colon was present in the string.
@@ -490,11 +489,10 @@ class OPF:
         # <editor-fold desc="Appending all paragraphs which are of type x    y or x\ty to lines list.">
         for paragraph in paragraphs:
             for run in paragraph.runs:
-                if '\t' in run.text or ' ' * 4 in run.text:
+                if '\t' in run.text or ' ' * 4 in run.text or 'galaxy' in run.text.lower():
                     lines.append(paragraph)
                     break
         # </editor-fold>
-
         # line_text is list of texts of lines which have \t replaced with 4 spaces in order to maintain homogeneity.
         line_texts = [line.text.replace('\t', '    ').strip() for line in lines]
         line_texts = (i for i in line_texts if i)
@@ -517,7 +515,11 @@ class OPF:
             count_space = max([count_space, 1])
 
             # Splitting the string based on max number of spaces and appending both the elements to the list.
-            texts.extend(text.split(count_space * ' '))
+            two_fields = text.split(count_space * ' ')
+            if len(two_fields) > 2 and 'galaxy' in text.lower():
+                two_fields = re.split('galaxy', text, flags=re.IGNORECASE)
+                two_fields[-1] = 'galaxy'+two_fields[-1]
+            texts.extend(two_fields)
 
         payment_terms = ''
         # THis is hard coded O(n) solution which traverses over all the elements in the list and
@@ -546,10 +548,8 @@ class OPF:
 
         else:
             payment_terms = ''
-
-
         # finding opf location that is useful to determine the state from which opf was made.
-        opf_location = self.get_element_from_block(texts, 'Galaxy Billing from (Location)', ":")
+        opf_location = self.get_element_from_block(texts, 'Galaxy Billing from', ":")
 
         # combining all the extracted elements into a single dict in order to return a packed result.
         result_dict = dict(
@@ -587,8 +587,8 @@ if __name__ == '__main__':
     # final list of all dicts for all files.
     result_dict_list = []
 
-    # opf = OPF('OPF- TK-024.docx').extract_data()
-
+    # OPF('OPF-AC-D-001.docx').extract_data()
+    # exit(0)
     for i, file_name in enumerate(listdir()):
         if '.docx' in file_name:
             # searching for only docx file.
