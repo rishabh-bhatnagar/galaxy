@@ -1,7 +1,7 @@
 from csv import DictWriter, DictReader
-from sys import argv
 from datetime import datetime
 from os.path import exists
+import argparse as ap
 
 current_year = __import__('datetime').datetime.now().year
 april_date = datetime(current_year, 4, 1)
@@ -39,26 +39,8 @@ def increment_col(dictionary, current_year):
     return res
 
 
-def main():
-    if len(argv) < 2:
-        print("Cannot process request. Expected exactly 1 field.")
-        data = get_data_from_csv(file_name)
-        data[0]['res'] = ''
-        write_dicts_to_csv(file_name, data)
-        exit(0)
-
-    state = argv[1].lower()
-    print(state)
-
-    data = get_data_from_csv(file_name)
-    index_state = [i['state'] for i in data].index(state)
-    data[index_state] = increment_col(data[index_state], current_year)
-    data[0]['res'] = data[index_state]['dc_challan_no']
-    write_dicts_to_csv(file_name, data)
-
-
-def populate_csv():
-    og_data = [
+def populate_csv(bypass=False):
+    populate_csv.og_data = [
         dict(state='state',       abbrevation='abbrevation', last_no='last_no', dc_challan_no='dc_challan_no'),
         dict(state='gujrat',      abbrevation='guj',         last_no='054',     dc_challan_no=''),
         dict(state='maharashtra', abbrevation='mh',          last_no='02901',   dc_challan_no=''),
@@ -73,13 +55,33 @@ def populate_csv():
         dict(state='telangana',   abbrevation='hy',          last_no='0118',    dc_challan_no=''),
     ]
 
+    if bypass:
+        return
+
     with open(file_name, 'w', newline='') as file:
-        writer = DictWriter(file, fieldnames=og_data[0].keys())
-        writer.writerows(og_data)
+        writer = DictWriter(file, fieldnames=populate_csv.og_data[0].keys())
+        writer.writerows(populate_csv.og_data)
+
+
+def main(state):
+    data = get_data_from_csv(file_name)
+    index_state = [i['state'] for i in data].index(state)
+    data[index_state] = increment_col(data[index_state], current_year)
+    data[0]['res'] = data[index_state]['dc_challan_no']
+    write_dicts_to_csv(file_name, data)
 
 
 if __name__ == '__main__':
     if not exists(file_name):
         print('FileNotFoundError: "{}" not found, populating hard coded data.'.format(file_name))
         populate_csv()
-    main()
+    parser = ap.ArgumentParser()
+
+    populate_csv(bypass=True)
+    parser.add_argument(
+        'state', help="Enter the state for which you want to increment it's dc number.",
+        choices=[dictionary['state'] for dictionary in populate_csv.og_data][1:], # [1:] to remove word state from the list of choices.
+        type=str
+    )
+    args = parser.parse_args()
+    main(args.state)
