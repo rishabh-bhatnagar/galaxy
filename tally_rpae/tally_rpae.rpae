@@ -16,7 +16,7 @@
     <variable name="frieght_status" type="NUMBER" value="0"/>
     <variable name="dc_no" type="STRING" value=""/>
   </variables>
-  <actions xsi:type="recorder:OpenSpreadsheetAction" active="true" actionDetails="(&quot;C:\Users\risha...al_output.xlsx&quot;)" delay="0" filePath="C:\Users\rishabh\Desktop\rpa projects\rpae_project\19thDecember\pwd\final_output.xlsx" autoSaveFile="true">
+  <actions xsi:type="recorder:OpenSpreadsheetAction" active="true" actionDetails="(&quot;C:\Users\Shrut...al_output.xlsx&quot;)" delay="0" filePath="C:\Users\Shruti\Desktop\OPF file downloads and Python file extraction\final_output.xlsx" autoSaveFile="true">
     <actions xsi:type="recorder:ExcelGetRangeAction" active="true" actionDetails="(B2:END to 'table')" delay="0" targetVariable="table" coordinateFrom="B2"/>
   </actions>
   <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(row) in (table)" delay="0" varName="table" pointerName="row">
@@ -76,9 +76,12 @@
     </actions>
     <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(&quot;1&quot; = &quot;1&quot;)" delay="0" comment="Delivery Challan filling section" leftOperand="1" rightOperand="1" leftOperandType="NUMBER" rightOperandType="NUMBER">
       <ifBlock active="true">
-        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(Alt+{F3})" delay="0" modifiers="8" text="{F3}" rawCode="114" keyCode="61" keyLocation="1"/>
-        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Type the company name" varName="row" arrayIndex="1" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Alt+{F3})" delay="0" modifiers="8" text="{F3}" rawCode="114" keyCode="61" keyLocation="1"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Type the company name" varName="row" arrayIndex="1" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(600000 ms)" delay="0" imageName="1546684776081-anchor.apng" fullImageName="1546684776037.png" waitTimeout="600000"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" comment="Display - Statement of Accounts - Statistics" text="dss" type="KEY_TYPE"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Alt+{F12})" delay="0" comment="Find for" modifiers="8" text="{F12}" rawCode="123" keyCode="88" keyLocation="1"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
@@ -96,11 +99,11 @@
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" comment="d is for getting the focus to december month." text="d&#xD;&#xA;" type="KEY_TYPE"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Alt+a)" delay="0" comment="creating  a new delivery challan." modifiers="8" text="a" rawCode="65" keyCode="30" keyChar="97" keyLocation="1" type="HOT_KEY_PRESS"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Win+r)" delay="0" comment="challan number here." modifiers="4" text="r" rawCode="82" keyCode="19" keyChar="114" keyLocation="1" type="HOT_KEY_PRESS"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="cmd&#xD;&#xA;cd C:\Users\rishabh\Desktop\rpa projects\rpae_project\19thDecember\pwd&#xD;&#xA;python dc_challan_number.py " type="KEY_TYPE"/>
+        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="cmd&#xD;&#xA;cd C:\Users\Shruti\Desktop\OPF file downloads and Python file extraction&#xD;&#xA;python dc_challan_number.py " type="KEY_TYPE"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" varName="row" arrayIndex="1" type="TEXT_FROM_VAR"/>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="&#xD;&#xA;" type="KEY_TYPE"/>
         <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 500 ms" delay="500"/>
-        <actions xsi:type="recorder:OpenSpreadsheetAction" active="true" actionDetails="" delay="0">
+        <actions xsi:type="recorder:OpenSpreadsheetAction" active="true" actionDetails="(&quot;C:\Users\Shrut...an_number.xlsx&quot;)" delay="0" filePath="C:\Users\Shruti\Desktop\OPF file downloads and Python file extraction\challan_number.xlsx">
           <actions xsi:type="recorder:GetCellValueAction" varName="dc_no" active="true" actionDetails="(E2)" delay="0" useCellCoordinates="true" cellCoordinates="E2"/>
         </actions>
         <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
@@ -163,250 +166,250 @@
       </ifBlock>
       <elseBlock active="true"/>
     </actions>
-    <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(&quot;1&quot; = &quot;1&quot;)" delay="0" comment="Product filling section" leftOperand="1" rightOperand="1" leftOperandType="NUMBER" rightOperandType="NUMBER">
-      <ifBlock active="true">
-        <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'j' = 0) - NUMBER" delay="0" varName="j" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
-        <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (product_details)" delay="0" varName="product_details" pointerName="element">
-          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'j')" delay="0" varName="j">
+    <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(&quot;1&quot; = &quot;1&quot;)" delay="0" comment="Product filling section" leftOperand="1" rightOperand="1" leftOperandType="NUMBER" rightOperandType="NUMBER">
+      <ifBlock active="false">
+        <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'j' = 0) - NUMBER" delay="0" varName="j" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
+        <actions xsi:type="recorder:ForeachAction" active="false" actionDetails="(element) in (product_details)" delay="0" varName="product_details" pointerName="element">
+          <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'j')" delay="0" varName="j">
             <bigDecimalExpressionHandler expression="${j} % 3"/>
             <listExpressionHandler operationType="PUSH"/>
             <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
           </actions>
-          <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(j = &quot;0&quot;)" delay="0" leftOperand="${j}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-            <ifBlock active="true">
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'element')" delay="0" comment="Product name" varName="element" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(50 ms)" delay="0" imageName="1546402026668-anchor.apng" fullImageName="1546402026596.png" varName="image_found" waitTimeout="50"/>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(image_found = &quot;true&quot;)" delay="0" leftOperand="${image_found}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(3 times)" delay="0" repeatsNumber="3">
-                    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+          <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(j = &quot;0&quot;)" delay="0" leftOperand="${j}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+            <ifBlock active="false">
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'element')" delay="0" comment="Product name" varName="element" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:WaitForImageAction" active="false" actionDetails="(50 ms)" delay="0" imageName="1546402026668-anchor.apng" fullImageName="1546402026596.png" varName="image_found" waitTimeout="50"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(image_found = &quot;true&quot;)" delay="0" leftOperand="${image_found}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(3 times)" delay="0" repeatsNumber="3">
+                    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
                   </actions>
                 </ifBlock>
-                <elseBlock active="true" actions=""/>
+                <elseBlock active="false" actions=""/>
               </actions>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'dc_no')" delay="0" comment="1" varName="dc_no" text="1" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="10" comment="" text="Not Applicable" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" comment="Order no. [always NA]" text="" rawCode="40" keyCode="57424" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" comment="Order no. [always NA]" text="" rawCode="40" keyCode="57424" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Opf billing state" varName="row" arrayIndex="16" text="Andheri Office" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="." rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" comment="Batch/Lot. no" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 200 ms" delay="200"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'dc_no')" delay="0" comment="1" varName="dc_no" text="1" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="10" comment="" text="Not Applicable" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" comment="Order no. [always NA]" text="" rawCode="40" keyCode="57424" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" comment="Order no. [always NA]" text="" rawCode="40" keyCode="57424" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Opf billing state" varName="row" arrayIndex="16" text="Andheri Office" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" text="." rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" comment="Batch/Lot. no" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:WaitAction" active="false" actionDetails="for 200 ms" delay="200"/>
             </ifBlock>
-            <elseBlock active="true" actions=""/>
+            <elseBlock active="false" actions=""/>
           </actions>
-          <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(j = &quot;1&quot;)" delay="0" leftOperand="${j}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-            <ifBlock active="true">
-              <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 2000 ms" delay="2000"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'element')" delay="0" comment="Enter quantity" varName="element" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'k' = 1) - NUMBER" delay="0" varName="k" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
-              <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(6 times)" delay="0" repeatsNumber="6">
-                <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+          <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(j = &quot;1&quot;)" delay="0" leftOperand="${j}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+            <ifBlock active="false">
+              <actions xsi:type="recorder:WaitAction" active="false" actionDetails="for 2000 ms" delay="2000"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'element')" delay="0" comment="Enter quantity" varName="element" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'k' = 1) - NUMBER" delay="0" varName="k" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
+              <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(6 times)" delay="0" repeatsNumber="6">
+                <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
               </actions>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(k = &quot;1&quot;)" delay="0" leftOperand="${k}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(4 times)" delay="0" repeatsNumber="4">
-                    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(k = &quot;1&quot;)" delay="0" leftOperand="${k}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(4 times)" delay="0" repeatsNumber="4">
+                    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
                   </actions>
-                  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+                  <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
                 </ifBlock>
-                <elseBlock active="true"/>
+                <elseBlock active="false"/>
               </actions>
-              <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'k' = 0) - NUMBER" delay="0" varName="k" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
+              <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'k' = 0) - NUMBER" delay="0" varName="k" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
             </ifBlock>
-            <elseBlock active="true"/>
+            <elseBlock active="false"/>
           </actions>
-          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'j')" delay="0" varName="j">
+          <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'j')" delay="0" varName="j">
             <bigDecimalExpressionHandler expression="${j} +1"/>
             <listExpressionHandler operationType="PUSH"/>
             <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
           </actions>
-          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 3000 ms" delay="3000"/>
+          <actions xsi:type="recorder:WaitAction" active="false" actionDetails="for 3000 ms" delay="3000"/>
         </actions>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(7 times)" delay="0" repeatsNumber="7">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(7 times)" delay="0" repeatsNumber="7">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
         </actions>
       </ifBlock>
-      <elseBlock active="true"/>
+      <elseBlock active="false"/>
     </actions>
-    <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(&quot;1&quot; = &quot;1&quot;)" delay="0" comment="Duplication and Invoice making part" leftOperand="1" rightOperand="1" leftOperandType="NUMBER" rightOperandType="NUMBER">
-      <ifBlock active="true">
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Ctrl+q)" delay="0" comment="Exit the current dc" modifiers="2" text="q" rawCode="81" keyCode="16" keyChar="113" keyLocation="1" type="HOT_KEY_PRESS"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Alt+{F12})" delay="0" modifiers="8" text="{F12}" rawCode="123" keyCode="88" keyLocation="1"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="Voucher Number" type="KEY_TYPE"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="equal to" type="KEY_TYPE"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'dc_no')" delay="0" varName="dc_no" text="1" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(&quot;1&quot; = &quot;1&quot;)" delay="0" comment="Duplication and Invoice making part" leftOperand="1" rightOperand="1" leftOperandType="NUMBER" rightOperandType="NUMBER">
+      <ifBlock active="false">
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(Ctrl+q)" delay="0" comment="Exit the current dc" modifiers="2" text="q" rawCode="81" keyCode="16" keyChar="113" keyLocation="1" type="HOT_KEY_PRESS"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(Alt+{F12})" delay="0" modifiers="8" text="{F12}" rawCode="123" keyCode="88" keyLocation="1"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" text="Voucher Number" type="KEY_TYPE"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" text="equal to" type="KEY_TYPE"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'dc_no')" delay="0" varName="dc_no" text="1" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
         </actions>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Alt+2)" delay="0" comment="Duplicate the DC" modifiers="8" text="2" rawCode="50" keyCode="3" keyChar="50" keyLocation="1" type="HOT_KEY_PRESS"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({F8})" delay="0" comment="Open voucher type option" text="{F8}" rawCode="119" keyCode="66" keyLocation="1"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="Sales-GST-" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="DC state" varName="row" arrayIndex="1" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="ISR Team" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(4 times)" delay="0" comment="To scroll to first product" repeatsNumber="4">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(Alt+2)" delay="0" comment="Duplicate the DC" modifiers="8" text="2" rawCode="50" keyCode="3" keyChar="50" keyLocation="1" type="HOT_KEY_PRESS"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({F8})" delay="0" comment="Open voucher type option" text="{F8}" rawCode="119" keyCode="66" keyLocation="1"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" text="Sales-GST-" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="DC state" varName="row" arrayIndex="1" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" text="ISR Team" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="KEY_TYPE"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(4 times)" delay="0" comment="To scroll to first product" repeatsNumber="4">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
         </actions>
-        <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'j' = 0) - NUMBER" delay="0" varName="j" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
-        <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'product_details')" delay="0" varName="product_details">
+        <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'j' = 0) - NUMBER" delay="0" varName="j" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
+        <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'product_details')" delay="0" varName="product_details">
           <bigDecimalExpressionHandler/>
           <listExpressionHandler operationType="GET_SIZE" targetVarName="no_of_products"/>
           <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
         </actions>
-        <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'test' = 1) - NUMBER" delay="0" varName="test" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
-        <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (product_details)" delay="0" varName="product_details" pointerName="element">
-          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'j')" delay="0" varName="j">
+        <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'test' = 1) - NUMBER" delay="0" varName="test" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
+        <actions xsi:type="recorder:ForeachAction" active="false" actionDetails="(element) in (product_details)" delay="0" varName="product_details" pointerName="element">
+          <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'j')" delay="0" varName="j">
             <bigDecimalExpressionHandler expression="${j} % 3"/>
             <listExpressionHandler operationType="PUSH"/>
             <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
           </actions>
-          <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(j = &quot;0&quot;)" delay="0" leftOperand="${j}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-            <ifBlock active="true">
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'image_found' = false) - BOOLEAN" delay="0" varName="image_found" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
-              <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(300 ms)" delay="0" imageName="1546428307381-anchor.apng" fullImageName="1546428307357.png" varName="image_found" waitTimeout="300"/>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(image_found = &quot;true&quot;)" delay="0" leftOperand="${image_found}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+          <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(j = &quot;0&quot;)" delay="0" leftOperand="${j}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+            <ifBlock active="false">
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'image_found' = false) - BOOLEAN" delay="0" varName="image_found" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
+              <actions xsi:type="recorder:WaitForImageAction" active="false" actionDetails="(300 ms)" delay="0" imageName="1546428307381-anchor.apng" fullImageName="1546428307357.png" varName="image_found" waitTimeout="300"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(image_found = &quot;true&quot;)" delay="0" leftOperand="${image_found}" rightOperand="true" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
                 </ifBlock>
-                <elseBlock active="true"/>
+                <elseBlock active="false"/>
               </actions>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(test = &quot;1&quot;)" delay="0" leftOperand="${test}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(5 times)" delay="0" comment="parses through product details till Rate" repeatsNumber="5">
-                    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(test = &quot;1&quot;)" delay="0" leftOperand="${test}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(5 times)" delay="0" comment="parses through product details till Rate" repeatsNumber="5">
+                    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
                   </actions>
                 </ifBlock>
-                <elseBlock active="true">
-                  <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(7 times)" delay="0" comment="parses through product details till Rate" repeatsNumber="7">
-                    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+                <elseBlock active="false">
+                  <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(7 times)" delay="0" comment="parses through product details till Rate" repeatsNumber="7">
+                    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
                   </actions>
                 </elseBlock>
               </actions>
             </ifBlock>
-            <elseBlock active="true"/>
+            <elseBlock active="false"/>
           </actions>
-          <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(j = &quot;2&quot;)" delay="0" leftOperand="${j}" rightOperand="2" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-            <ifBlock active="true">
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'element')" delay="3000" comment="Rate - Unit price" varName="element" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(5 times)" delay="0" repeatsNumber="5">
-                <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+          <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(j = &quot;2&quot;)" delay="0" leftOperand="${j}" rightOperand="2" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+            <ifBlock active="false">
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'element')" delay="3000" comment="Rate - Unit price" varName="element" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(5 times)" delay="0" repeatsNumber="5">
+                <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
               </actions>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" varName="row" arrayIndex="21" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 1500 ms" delay="1500"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
-              <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-                <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" varName="row" arrayIndex="21" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:WaitAction" active="false" actionDetails="for 1500 ms" delay="1500"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
+              <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+                <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
               </actions>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(no_of_products > &quot;3&quot;)" delay="0" leftOperand="${no_of_products}" rightOperand="3" operator="GREATER_THAN" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'k' = 1) - NUMBER" delay="0" varName="k" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(no_of_products > &quot;3&quot;)" delay="0" leftOperand="${no_of_products}" rightOperand="3" operator="GREATER_THAN" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'k' = 1) - NUMBER" delay="0" varName="k" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
                 </ifBlock>
-                <elseBlock active="true"/>
+                <elseBlock active="false"/>
               </actions>
-              <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(k = &quot;1&quot;)" delay="0" leftOperand="${k}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-                <ifBlock active="true">
-                  <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(3 times)" delay="0" repeatsNumber="3">
-                    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+              <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(k = &quot;1&quot;)" delay="0" leftOperand="${k}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+                <ifBlock active="false">
+                  <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(3 times)" delay="0" repeatsNumber="3">
+                    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
                   </actions>
-                  <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'k' = 0) - NUMBER" delay="0" varName="k" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
+                  <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'k' = 0) - NUMBER" delay="0" varName="k" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false"/>
                 </ifBlock>
-                <elseBlock active="true"/>
+                <elseBlock active="false"/>
               </actions>
             </ifBlock>
-            <elseBlock active="true"/>
+            <elseBlock active="false"/>
           </actions>
-          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'j')" delay="0" varName="j">
+          <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'j')" delay="0" varName="j">
             <bigDecimalExpressionHandler expression="${j}+1"/>
             <listExpressionHandler operationType="PUSH"/>
             <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
           </actions>
-          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'test')" delay="0" varName="test">
+          <actions xsi:type="recorder:ExpressionValueAction" active="false" actionDetails="(to 'test')" delay="0" varName="test">
             <bigDecimalExpressionHandler expression="${test}+1"/>
             <listExpressionHandler operationType="PUSH"/>
             <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
           </actions>
         </actions>
       </ifBlock>
-      <elseBlock active="true"/>
+      <elseBlock active="false"/>
     </actions>
-    <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" comment="" repeatsNumber="2">
-      <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" comment="" repeatsNumber="2">
+      <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
     </actions>
-    <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(gst_type[1] = &quot;intrastate&quot;)" delay="0" leftOperand="${gst_type[1]}" rightOperand="intrastate" leftOperandType="EXPRESSION" rightOperandType="STRING">
-      <ifBlock active="true">
-        <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(frieght_status = &quot;1&quot;)" delay="0" leftOperand="${frieght_status}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-          <ifBlock active="true">
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" comment="Freight Charges" varName="row" arrayIndex="24" text="Freight Charges" type="KEY_TYPE"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
-            <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(gst_type[1] = &quot;intrastate&quot;)" delay="0" leftOperand="${gst_type[1]}" rightOperand="intrastate" leftOperandType="EXPRESSION" rightOperandType="STRING">
+      <ifBlock active="false">
+        <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(frieght_status = &quot;1&quot;)" delay="0" leftOperand="${frieght_status}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+          <ifBlock active="false">
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" comment="Freight Charges" varName="row" arrayIndex="24" text="Freight Charges" type="KEY_TYPE"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+            <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
             </actions>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types Freight Charges" varName="row" arrayIndex="24" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types Freight Charges" varName="row" arrayIndex="24" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
           </ifBlock>
-          <elseBlock active="true"/>
+          <elseBlock active="false"/>
         </actions>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types cgst" varName="row" arrayIndex="20" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" comment="Selects CGST 9%" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types cgst" varName="row" arrayIndex="20" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" comment="Selects CGST 9%" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
         </actions>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
         </actions>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types sgst" varName="row" arrayIndex="19" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types sgst" varName="row" arrayIndex="19" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
         </actions>
-        <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-          <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+          <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
         </actions>
       </ifBlock>
-      <elseBlock active="true">
-        <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(frieght_status = &quot;1&quot;)" delay="0" leftOperand="${frieght_status}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
-          <ifBlock active="true">
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" comment="Freight Charges" varName="row" arrayIndex="24" text="Freight Charges" type="KEY_TYPE"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
-            <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(2 times)" delay="0" repeatsNumber="2">
-              <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+      <elseBlock active="false">
+        <actions xsi:type="recorder:IfElseAction" active="false" actionDetails="(frieght_status = &quot;1&quot;)" delay="0" leftOperand="${frieght_status}" rightOperand="1" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+          <ifBlock active="false">
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" comment="Freight Charges" varName="row" arrayIndex="24" text="Freight Charges" type="KEY_TYPE"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({DOWN})" delay="0" text="{DOWN}" rawCode="40" keyCode="57424" keyLocation="4"/>
+            <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(2 times)" delay="0" repeatsNumber="2">
+              <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
             </actions>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types Freight Charges" varName="row" arrayIndex="24" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Types tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
-            <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types Freight Charges" varName="row" arrayIndex="24" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4" type="TEXT_FROM_VAR"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Types tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
+            <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
           </ifBlock>
-          <elseBlock active="true"/>
+          <elseBlock active="false"/>
         </actions>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="IGST " varName="row" arrayIndex="18" type="TEXT_FROM_VAR"/>
-        <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Tax_classification" varName="row" arrayIndex="22" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="IGST " varName="row" arrayIndex="18" type="TEXT_FROM_VAR"/>
+        <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
       </elseBlock>
     </actions>
-    <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'gst_type' = []) - LIST" delay="0" varName="gst_type" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false" listValue="[]"/>
-    <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(5 times)" delay="0" repeatsNumber="5">
-      <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:ConstantValueAction" active="false" actionDetails="(to 'gst_type' = []) - LIST" delay="0" varName="gst_type" stringValue="" numberValue="0" booleanValue="false" useCurrentDate="false" listValue="[]"/>
+    <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(5 times)" delay="0" repeatsNumber="5">
+      <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
     </actions>
-    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" varName="row" arrayIndex="23" text="1" type="KEY_TYPE"/>
-    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'row')" delay="0" comment="Payment terms" varName="row" arrayIndex="6" type="TEXT_FROM_VAR"/>
-    <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(6 times)" delay="0" comment="Invoice made" repeatsNumber="6">
-      <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(typed text)" delay="0" varName="row" arrayIndex="23" text="1" type="KEY_TYPE"/>
+    <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="(from variable 'row')" delay="0" comment="Payment terms" varName="row" arrayIndex="6" type="TEXT_FROM_VAR"/>
+    <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(6 times)" delay="0" comment="Invoice made" repeatsNumber="6">
+      <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
     </actions>
-    <actions xsi:type="recorder:RepeatAction" active="true" actionDetails="(8 times)" delay="0" comment="Exit to the first page of tally" repeatsNumber="8">
-      <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ESCAPE})" delay="0" text="{ESCAPE}" rawCode="27" keyCode="1" keyChar="27" keyLocation="1"/>
+    <actions xsi:type="recorder:RepeatAction" active="false" actionDetails="(8 times)" delay="0" comment="Exit to the first page of tally" repeatsNumber="8">
+      <actions xsi:type="recorder:KeyboardAction" active="false" actionDetails="({ESCAPE})" delay="0" text="{ESCAPE}" rawCode="27" keyCode="1" keyChar="27" keyLocation="1"/>
     </actions>
   </actions>
 </recorder:ActionFlow>

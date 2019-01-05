@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recorder:ActionFlow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:recorder="http://www.workfusion.com/recorder/v2.0.3" ignoreDelays="false">
+  <variables>
+    <variable name="login_username" type="SECRET" value="login_credentials.VALUE"/>
+    <variable name="login_password" type="SECRET" value="login_credentials.KEY"/>
+    <variable name="folder_counter" type="NUMBER" value="0"/>
+    <variable name="temp_folder_links_list" type="LIST" value="[]"/>
+    <variable name="i" type="NUMBER" value="1"/>
+    <variable name="per_folder_opf_file_href_list" type="LIST" value="[]"/>
+    <variable name="opf_file_counter" type="NUMBER" value="0"/>
+    <variable name="opf_files_href_list" type="LIST" value="[]"/>
+    <variable name="n_opf_per_folder" type="NUMBER" value="0"/>
+    <variable name="n_opf_in_total" type="LIST" value="[]"/>
+    <variable name="n_opf_per_folder_string" type="STRING" value=""/>
+    <variable name="temp_folder_names" type="LIST" value="[]"/>
+    <variable name="per_folder_opf_file_names_list" type="LIST" value="[]"/>
+    <variable name="opf_files_names_list" type="LIST" value="[]"/>
+    <variable name="j" type="NUMBER" value="1"/>
+    <variable name="excel_opf_href_links" type="LIST" value="[]"/>
+    <variable name="no_of_pages" type="NUMBER" value="1"/>
+    <variable name="x" type="NUMBER" value="0"/>
+    <variable name="folder_links_list" type="LIST" value="[]"/>
+    <variable name="folder_names" type="LIST" value="[]"/>
+    <variable name="temp_folder_count" type="NUMBER" value="0"/>
+    <variable name="image_found" type="BOOLEAN" value="false"/>
+    <variable name="scroll_condition" type="NUMBER" value="1"/>
+    <variable name="doc_files" type="LIST" value="[]"/>
+  </variables>
+  <actions xsi:type="recorder:OpenURLAction" active="true" actionDetails="(http://192.168.0.224:8080/share/page)" delay="0" comment="To open the website. Waiting 10seconds for the website to load" url="http://192.168.0.224:8080/share/page" type="CHROME" waitTimeout="100000">
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'login_username')" delay="0" comment="To enter the login username" varName="login_username" type="TEXT_FROM_VAR"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({TAB})" delay="0" comment="To get to next field" text="{TAB}" rawCode="9" keyCode="15" keyChar="9" keyLocation="1"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(from variable 'login_password')" delay="0" comment="To enter the password" varName="login_password" type="TEXT_FROM_VAR"/>
+    <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" comment="Login button click aka enter" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+    <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(30000 ms)" delay="0" imageName="1546659328085-anchor.apng" fullImageName="1546659328070.png" waitTimeout="30000"/>
+  </actions>
+  <actions xsi:type="recorder:OpenURLAction" active="true" actionDetails="(http://192.168.0.224:8080/share/page/site/opf-2-inv/documentlibrary#filter=path%7C%2FAccounts%2FDC%2520Preparation%2520Fresh%7C&amp;page=1)" delay="0" comment="Open Fresh DC preparation page" url="http://192.168.0.224:8080/share/page/site/opf-2-inv/documentlibrary#filter=path%7C%2FAccounts%2FDC%2520Preparation%2520Fresh%7C&amp;page=1" type="CHROME" waitTimeout="50000">
+    <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(30000 ms)" delay="0" imageName="1546659362267-anchor.apng" fullImageName="1546659362260.png" waitTimeout="30000"/>
+    <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[contains(@class, 'yui-pg-page')] xpath)" delay="0" comment="To extract number of pages" varName="no_of_pages" webElementLocator="//*[contains(@class, 'yui-pg-page')]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+    <actions xsi:type="recorder:WhileAction" active="true" actionDetails="(x &lt; no_of_pages)" delay="0" leftOperand="${x}" rightOperand="${no_of_pages}" operator="LESS_THAN" leftOperandType="VARIABLE" rightOperandType="VARIABLE">
+      <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(x = &quot;0&quot;)" delay="0" leftOperand="${x}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+        <ifBlock active="true">
+          <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1546669894523-anchor-1546669894535.apng" fullImageName="1546669894523.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+          <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1546669916109-anchor-1546669916121.apng" fullImageName="1546669916109.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+          <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[4]/div/h3/span[2]/a[text()]  xpath)" delay="0" comment="Gives folder names in the form of list" varName="temp_folder_names" webElementLocator="//*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[4]/div/h3/span[2]/a[text()] " searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+          <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[3]/div/span/a xpath)" delay="0" comment="By Xpath get the &quot;rel&quot; attribute of a tag in span - div - 3rd td - tr - second tbody - table body&#xD;&#xA;and output those value to &quot;folder_links_list&quot; [LIST]" varName="temp_folder_links_list" webElementLocator="//*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[3]/div/span/a" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="true" elementAttribute="rel"/>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_names')" delay="0" varName="folder_names">
+            <bigDecimalExpressionHandler/>
+            <listExpressionHandler operationType="PUSH" targetVarName="temp_folder_names"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_links_list')" delay="0" varName="folder_links_list">
+            <bigDecimalExpressionHandler/>
+            <listExpressionHandler operationType="PUSH" targetVarName="temp_folder_links_list"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+          <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (temp_folder_links_list)" delay="0" comment="This for loop is used to get the &quot;folder_counter&quot; value for every &quot;folder_links_list&quot;" varName="temp_folder_links_list" pointerName="element">
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_counter')" delay="0" comment="Iterates by 1" varName="folder_counter">
+              <bigDecimalExpressionHandler expression="${folder_counter}+1"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+          </actions>
+          <actions xsi:type="recorder:WhileAction" active="true" actionDetails="(i &lt;= folder_counter)" delay="0" comment="To traverse through folders" leftOperand="${i}" rightOperand="${folder_counter}" operator="LESS_THAN_OR_EQUALS" leftOperandType="VARIABLE" rightOperandType="VARIABLE">
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'scroll_condition')" delay="0" varName="scroll_condition">
+              <bigDecimalExpressionHandler expression="${i} % 4"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(scroll_condition = &quot;0&quot;)" delay="0" leftOperand="${scroll_condition}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+              <ifBlock active="true">
+                <actions xsi:type="recorder:MouseScrollAction" active="true" actionDetails="(3 lines down)" delay="0" imageName="1546659753066-anchor-1546660447383.apng" fullImageName="1546659753066.png" type="IMAGE" notches="3"/>
+              </ifBlock>
+              <elseBlock active="true"/>
+            </actions>
+            <actions xsi:type="recorder:MouseMoveAction" active="true" actionDetails="" delay="0" imageName="1546659731034-anchor-1546662142175.apng" fullImageName="1546659731034.png" type="IMAGE"/>
+            <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="5000" comment="Find the ith folder and click on it" type="WEB_ELEMENT" webElementLocator="//*[@id='yuievtautoid-0']/tbody[2]/tr[${i}]/td[4]/div/h3/span[2]/a" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'i')" delay="500" comment="Iterate i" varName="i">
+              <bigDecimalExpressionHandler expression="${i}+1"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(3000 ms)" delay="0" imageName="1546659401157-anchor.apng" fullImageName="1546659401148.png" waitTimeout="3000"/>
+            <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+            <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id='yuievtautoid-0']/tbody[2]/tr/td[4]/div/h3/span[2]/a[contains(text(),'OPF') and contains(text(),'doc')] xpath)" delay="0" comment="Gets you the file names of OPF files" varName="per_folder_opf_file_names_list" webElementLocator="//*[@id='yuievtautoid-0']/tbody[2]/tr/td[4]/div/h3/span[2]/a[contains(text(),'OPF') and contains(text(),'doc')]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+            <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //a[contains(text(),'OPF') and not(contains(text(),'OPF 2 INV')) and contains(text(),'doc')] xpath)" delay="2000" comment="To find the string OPF" varName="per_folder_opf_file_href_list" webElementLocator="//a[contains(text(),'OPF') and not(contains(text(),'OPF 2 INV')) and contains(text(),'doc')]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="true" elementAttribute="href"/>
+            <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (per_folder_opf_file_href_list)" delay="0" varName="per_folder_opf_file_href_list" pointerName="element">
+              <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_file_counter')" delay="0" varName="opf_file_counter">
+                <bigDecimalExpressionHandler expression="${opf_file_counter}+1"/>
+                <listExpressionHandler operationType="PUSH"/>
+                <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+              </actions>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'per_folder_opf_file_href_list')" delay="0" varName="per_folder_opf_file_href_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="GET_SIZE" targetVarName="n_opf_per_folder"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_files_names_list')" delay="0" varName="opf_files_names_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="per_folder_opf_file_names_list"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_files_href_list')" delay="0" varName="opf_files_href_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="per_folder_opf_file_href_list"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:NumberFormatAction" active="true" actionDetails="" delay="0" targetVariable="n_opf_per_folder_string" direction="TYPE_TO_STRING" inputLocale="en-US" outputLocale="en-US" input="n_opf_per_folder"/>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'n_opf_in_total')" delay="0" varName="n_opf_in_total">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="n_opf_per_folder_string"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" awaitTimeout="3000" imageName="1546662079179-anchor-1546662079188.apng" fullImageName="1546662079179.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+            <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(30000 ms)" delay="0" imageName="1546659731038-anchor.apng" fullImageName="1546659731034.png" waitTimeout="30000"/>
+          </actions>
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'x')" delay="0" varName="x">
+            <bigDecimalExpressionHandler expression="${x}+1"/>
+            <listExpressionHandler operationType="PUSH"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+        </ifBlock>
+        <elseBlock active="true">
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 500 ms" delay="500"/>
+          <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" comment="Clicks on next page number" awaitTimeout="100000" type="WEB_ELEMENT" webElementLocator="//*[@id=&quot;yui-pg0-1-pages57&quot;]/a[${x}]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+          <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(1000 ms)" delay="0" imageName="1546659439367-anchor.apng" fullImageName="1546659328070.png" varName="image_found" waitTimeout="1000"/>
+          <actions xsi:type="recorder:WhileAction" active="true" actionDetails="(image_found = &quot;false&quot;)" delay="0" leftOperand="${image_found}" rightOperand="false" leftOperandType="VARIABLE" rightOperandType="BOOLEAN">
+            <actions xsi:type="recorder:MouseScrollAction" active="true" actionDetails="(25 lines up)" delay="0" comment="Scrolls up to the top" imageName="1546659731034-anchor-1546659848289.apng" fullImageName="1546659731034.png" type="IMAGE" notches="-25"/>
+            <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(200 ms)" delay="0" imageName="1546659783575-anchor.apng" fullImageName="1546659328070.png" varName="image_found" waitTimeout="200"/>
+          </actions>
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 500 ms" delay="500" comment="Don't change this"/>
+          <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[4]/div/h3/span[2]/a[text()]  xpath)" delay="0" comment="Gives folder names in the form of list" varName="temp_folder_names" webElementLocator="//*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[4]/div/h3/span[2]/a[text()] " searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+          <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //h3/span/a xpath)" delay="0" comment="Gives folder names in the form of list" varName="temp_folder_names" webElementLocator="//h3/span/a" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+          <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[3]/div/span/a xpath)" delay="0" comment="By Xpath get the &quot;rel&quot; attribute of a tag in span - div - 3rd td - tr - second tbody - table body&#xD;&#xA;and output those value to &quot;folder_links_list&quot; [LIST]" varName="temp_folder_links_list" webElementLocator="//*[@id=&quot;yuievtautoid-0&quot;]/tbody[2]/tr/td[3]/div/span/a" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="true" elementAttribute="rel"/>
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 10000 ms" delay="10000"/>
+          <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'i' = 1) - NUMBER" delay="0" comment="Resetting I for pages" varName="i" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
+          <actions xsi:type="recorder:ConstantValueAction" active="true" actionDetails="(to 'temp_folder_count' = 1) - NUMBER" delay="0" comment="Resetting temp_folder_count for pages" varName="temp_folder_count" stringValue="" numberValue="1" booleanValue="false" useCurrentDate="false"/>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_names')" delay="0" comment="Append to the list of all folder names" varName="folder_names">
+            <bigDecimalExpressionHandler/>
+            <listExpressionHandler operationType="PUSH" targetVarName="temp_folder_names"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_links_list')" delay="0" comment="Append href of folders to the main list of folders" varName="folder_links_list">
+            <bigDecimalExpressionHandler/>
+            <listExpressionHandler operationType="PUSH" targetVarName="temp_folder_links_list"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+          <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (temp_folder_links_list)" delay="0" comment="This for loop is used to get the &quot;folder_counter&quot; value for every &quot;temp_folder_links_list&quot; as well as &quot;temp_folder_counter&quot;" varName="temp_folder_links_list" pointerName="element">
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'temp_folder_count')" delay="0" varName="temp_folder_count">
+              <bigDecimalExpressionHandler expression="${temp_folder_count}+1"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'folder_counter')" delay="0" comment="Iterates by 1" varName="folder_counter">
+              <bigDecimalExpressionHandler expression="${folder_counter}+1"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+          </actions>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'scroll_condition')" delay="0" varName="scroll_condition">
+            <bigDecimalExpressionHandler expression="${i} % 4"/>
+            <listExpressionHandler operationType="PUSH"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+          <actions xsi:type="recorder:IfElseAction" active="true" actionDetails="(scroll_condition = &quot;0&quot;)" delay="0" leftOperand="${scroll_condition}" rightOperand="0" leftOperandType="VARIABLE" rightOperandType="NUMBER">
+            <ifBlock active="true">
+              <actions xsi:type="recorder:MouseScrollAction" active="true" actionDetails="(5 lines down)" delay="0" imageName="1546659731034-anchor-1546659868033.apng" fullImageName="1546659731034.png" type="IMAGE" notches="5"/>
+            </ifBlock>
+            <elseBlock active="true"/>
+          </actions>
+          <actions xsi:type="recorder:WhileAction" active="true" actionDetails="(i &lt; temp_folder_count)" delay="0" comment="To traverse through folders" leftOperand="${i}" rightOperand="${temp_folder_count}" operator="LESS_THAN" leftOperandType="VARIABLE" rightOperandType="VARIABLE">
+            <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="5000" comment="Find the ith folder and click on it" type="WEB_ELEMENT" webElementLocator="//*[@id='yuievtautoid-0']/tbody[2]/tr[${i}]/td[4]/div/h3/span[2]/a" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'i')" delay="500" comment="Iterate i" varName="i">
+              <bigDecimalExpressionHandler expression="${i}+1"/>
+              <listExpressionHandler operationType="PUSH"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(5000 ms)" delay="0" imageName="1546659889595-anchor.apng" fullImageName="1546659401148.png" waitTimeout="5000"/>
+            <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //*[@id='yuievtautoid-0']/tbody[2]/tr/td[4]/div/h3/span[2]/a[contains(text(),'OPF') and contains(text(),'doc')] xpath)" delay="0" comment="Gets you the file names of OPF files" varName="per_folder_opf_file_names_list" webElementLocator="//*[@id='yuievtautoid-0']/tbody[2]/tr/td[4]/div/h3/span[2]/a[contains(text(),'OPF') and contains(text(),'doc')]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="false"/>
+            <actions xsi:type="recorder:WebElementAction" active="true" actionDetails="(get by //a[contains(text(),'OPF') and not(contains(text(),'OPF 2 INV')) and contains(text(),'doc')] xpath)" delay="2000" comment="To find the string OPF" varName="per_folder_opf_file_href_list" webElementLocator="//a[contains(text(),'OPF') and not(contains(text(),'OPF 2 INV')) and contains(text(),'doc')]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" useElementAttribute="true" elementAttribute="href"/>
+            <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (per_folder_opf_file_href_list)" delay="0" varName="per_folder_opf_file_href_list" pointerName="element">
+              <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_file_counter')" delay="0" varName="opf_file_counter">
+                <bigDecimalExpressionHandler expression="${opf_file_counter}+1"/>
+                <listExpressionHandler operationType="PUSH"/>
+                <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+              </actions>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'per_folder_opf_file_href_list')" delay="0" varName="per_folder_opf_file_href_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="GET_SIZE" targetVarName="n_opf_per_folder"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:WhileAction" active="true" actionDetails="(j &lt;= n_opf_per_folder)" delay="0" leftOperand="${j}" rightOperand="${n_opf_per_folder}" operator="LESS_THAN_OR_EQUALS" leftOperandType="VARIABLE" rightOperandType="VARIABLE">
+              <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" awaitTimeout="30000" type="WEB_ELEMENT" webElementLocator="(//*[@id='yuievtautoid-0']/tbody[2]/tr/td[4]/div/h3/span[2]/a[text()[contains(.,'OPF') and contains(.,'doc')]])[${j}]" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+              <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(5000 ms)" delay="0" imageName="1546659910842-anchor.apng" fullImageName="1546659657972.png" waitTimeout="5000"/>
+              <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+              <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545383707722-anchor-1545383707833.apng" fullImageName="1545383707722.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+              <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1545383734124-anchor-1545383734146.apng" fullImageName="1545383734124.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+              <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+              <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" awaitTimeout="5000" imageName="1545212372079-anchor-1545212372090.apng" fullImageName="1545212372079.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+              <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(0 ms)" delay="0" imageName="1546659921651-anchor.apng" fullImageName="1546659401148.png"/>
+              <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'j')" delay="0" varName="j">
+                <bigDecimalExpressionHandler expression="${j}+1"/>
+                <listExpressionHandler operationType="PUSH"/>
+                <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+              </actions>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_files_names_list')" delay="0" varName="opf_files_names_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="per_folder_opf_file_names_list"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'opf_files_href_list')" delay="0" varName="opf_files_href_list">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="per_folder_opf_file_href_list"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:NumberFormatAction" active="true" actionDetails="" delay="0" targetVariable="n_opf_per_folder_string" direction="TYPE_TO_STRING" inputLocale="en-US" outputLocale="en-US" input="n_opf_per_folder"/>
+            <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'n_opf_in_total')" delay="0" varName="n_opf_in_total">
+              <bigDecimalExpressionHandler/>
+              <listExpressionHandler operationType="PUSH" targetVarName="n_opf_per_folder_string"/>
+              <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+            </actions>
+            <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" awaitTimeout="3000" imageName="1545212372079-anchor-1545212372090.apng" fullImageName="1545212372079.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+            <actions xsi:type="recorder:WaitForImageAction" active="true" actionDetails="(30000 ms)" delay="0" imageName="1546660033860-anchor.apng" fullImageName="1546659731034.png" waitTimeout="30000"/>
+          </actions>
+          <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 10000 ms" delay="10000"/>
+          <actions xsi:type="recorder:ExpressionValueAction" active="true" actionDetails="(to 'x')" delay="0" varName="x">
+            <bigDecimalExpressionHandler expression="${x}+1"/>
+            <listExpressionHandler operationType="PUSH"/>
+            <tableExpressionHandler operationType="PUSH" tablePushType="AS_ROW"/>
+          </actions>
+        </elseBlock>
+      </actions>
+      <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 10000 ms" delay="10000"/>
+    </actions>
+  </actions>
+  <actions xsi:type="recorder:OpenSpreadsheetAction" active="true" actionDetails="(&quot;C:\Users\Shrut...tion\File.xlsx&quot;)" delay="0" filePath="C:\Users\Shruti\Desktop\rpae_project\rpae_project\OPF downloading and extraction\File.xlsx" autoSaveFile="true">
+    <actions xsi:type="recorder:GetColumnAction" active="true" actionDetails="(A)" delay="0" useIdx="true" idx="A"/>
+    <actions xsi:type="recorder:ExcelSetActiveCellAction" active="true" actionDetails="(A1)" delay="0" useCellCoordinates="true" cellCoordinates="A1"/>
+    <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (opf_files_href_list)" delay="0" varName="opf_files_href_list" pointerName="element">
+      <actions xsi:type="recorder:SetCellValueAction" varName="element" active="true" actionDetails="(Cell below)" delay="0" cellPosition="CELL_BELOW"/>
+    </actions>
+    <actions xsi:type="recorder:GetColumnAction" varName="excel_opf_href_links" active="true" actionDetails="(A)" delay="0" useIdx="true" idx="A"/>
+  </actions>
+  <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (excel_opf_href_links)" delay="0" varName="excel_opf_href_links" pointerName="element">
+    <actions xsi:type="recorder:OpenURLAction" active="true" actionDetails="(${element})" delay="0" url="${element}" type="CHROME" waitTimeout="100000000"/>
+    <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+    <actions xsi:type="recorder:MouseClickAction" active="true" actionDetails="(click left button)" delay="0" imageName="1546665220407-anchor-1546665220420.apng" fullImageName="1546665220407.png" type="IMAGE" searchInFrames="false" webElementLocatorType="XPATH" exactMatch="true" button="1"/>
+    <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 5000 ms" delay="5000"/>
+  </actions>
+  <actions xsi:type="recorder:FileListFolderAction" active="true" actionDetails="('C:\Users\Shruti\Downloads' to ${doc_files})" delay="0" targetVariable="doc_files" path="C:\Users\Shruti\Downloads" type="FILES" includeSubFolders="false" filterBySize="false" filterByDates="false" dateFilterType="FIXED" to="2019-01-05 05:06:20" dateFormat="yyyy-MM-dd HH:mm:ss" unit="DAYS" filterByPattern="false" pattern=""/>
+  <actions xsi:type="recorder:ForeachAction" active="true" actionDetails="(element) in (doc_files)" delay="0" varName="doc_files" pointerName="element">
+    <actions xsi:type="recorder:FileCopyAction" active="true" actionDetails="(move '${element}' to 'C:\Users\Shrut...le extraction', overwrite if present)" delay="0" targetVariable="" resourcePath="${element}" targetPath="C:\Users\Shruti\Desktop\OPF file downloads and Python file extraction" move="true" resolution="OVERWRITE"/>
+  </actions>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(Win+r)" delay="0" modifiers="4" text="r" rawCode="82" keyCode="19" keyChar="114" keyLocation="1" type="HOT_KEY_PRESS"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="cmd" type="KEY_TYPE"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="cd C:\Users\Shruti\Desktop\OPF file downloads and Python file extraction&#xD;&#xA;python doc_to_xml.py" type="KEY_TYPE"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+  <actions xsi:type="recorder:WaitAction" active="true" actionDetails="for 15000 ms" delay="15000"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="(typed text)" delay="0" text="exit" type="KEY_TYPE"/>
+  <actions xsi:type="recorder:KeyboardAction" active="true" actionDetails="({ENTER})" delay="0" text="{ENTER}" rawCode="10" keyCode="28" keyChar="13" keyLocation="4"/>
+</recorder:ActionFlow>
