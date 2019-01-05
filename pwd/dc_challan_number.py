@@ -2,6 +2,8 @@ from csv import DictWriter, DictReader
 from datetime import datetime
 from os.path import exists
 import argparse as ap
+from pyautogui import click, hotkey, typewrite
+
 
 current_year = __import__('datetime').datetime.now().year
 april_date = datetime(current_year, 4, 1)
@@ -19,6 +21,12 @@ def get_data_from_csv(file_name):
         reader = DictReader(file)
         data = [dict(i) for i in reader]
         return data
+
+
+def type(challan_number):
+    hotkey('alt', 'tab')
+    typewrite(challan_number)
+
 
 
 def write_dicts_to_csv(file_name, data):
@@ -69,6 +77,7 @@ def main(state):
     data[index_state] = increment_col(data[index_state], current_year)
     data[0]['res'] = data[index_state]['dc_challan_no']
     write_dicts_to_csv(file_name, data)
+    type(data[index_state]['dc_challan_no'])
 
 
 if __name__ == '__main__':
@@ -85,3 +94,5 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
     main(args.state)
+# cd C:\Users\rishabh\Desktop\rpa projects\rpae_project\19thDecember\pwd
+# python dc_challan_number.py maharashtra

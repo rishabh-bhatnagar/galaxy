@@ -9,13 +9,6 @@ import win32com.client as win32
 from docx import Document
 from win32com.client import constants
 
-state_mapping = dict({
-    'mumbai': 'maharashtra',
-    "bangalore": "Karnataka",
-    'tamil nadu': 'tamilnadu',
-    'hyderabad': 'andhra pradesh'
-})
-
 billing_location_mapping = dict(
     mumbai='maharashtra',
     andheri='maharashtra',
@@ -26,7 +19,6 @@ billing_location_mapping = dict(
     hyderabad='andhra pradesh',
 )
 billing_location_mapping.setdefault('')
-state_mapping.setdefault(None, '')
 
 
 def chunkIt(seq, num):
@@ -327,7 +319,7 @@ class OPF:
                 # mapping wrongly entered cities as states to their corresponding state.
 
                 # Getting corresponding city to state mapping
-                res_state = state_mapping.get(state.lower())
+                res_state = billing_location_mapping.get(state.lower())
 
                 # Setting state as res_state if it returned not None or not empty string
                 # else: setting state same as previous state.
