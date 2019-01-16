@@ -1,0 +1,6 @@
+openpyxl
+python-docx
+pyautogui
+pydocx
+pywin32
+pandas
